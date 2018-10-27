@@ -894,7 +894,7 @@ module.exports = "h1 {font-size: 20px; }\nh2 {font-size: 15px;}\n\n/*# sourceMap
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Challenge</h1>\n\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Choose an Opponent</h2>\n      <select id=\"opponent\">\n        <option value=\"Patrick\">Patrick</option>\n        <option value=\"David\">David</option>\n        <option value=\"Paul\">Paul</option>\n        <option value=\"Dennis\">Dennis</option>\n      </select>\n      <h2>Message</h2>\n      <input type=\"text\" id=\"message\" [(ngModel)]=\"newMessage\" (keyup)=\"doCrypt(true)\">\n      <div>\n        <h2>Encryption Key</h2>\n        <!-- <input id=\"encryptionKey\"> -->\n        <select id=\"encryptionKey\" (click)=\"doCrypt(true)\">\n          <option value=\"0\">0</option>\n          <option value=\"1\">1</option>\n          <option value=\"2\">2</option>\n          <option value=\"3\">3</option>\n          <option value=\"4\">4</option>\n          <option value=\"5\">5</option>\n          <option value=\"6\">6</option>\n          <option value=\"7\">7</option>\n          <option value=\"8\">8</option>\n          <option value=\"9\">9</option>\n          <option value=\"10\">10</option>\n          <option value=\"11\">11</option>\n          <option value=\"12\">12</option>\n          <option value=\"13\">13</option>\n          <option value=\"14\">14</option>\n          <option value=\"15\">15</option>\n          <option value=\"16\">16</option>\n          <option value=\"17\">17</option>\n          <option value=\"18\">18</option>\n          <option value=\"19\">19</option>\n          <option value=\"20\">20</option>\n          <option value=\"21\">21</option>\n          <option value=\"22\">22</option>\n          <option value=\"23\">23</option>\n          <option value=\"24\">24</option>\n          <option value=\"25\">25</option>\n        </select>\n      </div>\n      \n      <div>\n        <h2>Encrypted Message</h2>\n        <p type=\"text\" id=\"encMessage\">{{encMessage}}</p>\n      </div>\n      <div>\n        <button class=\"btn btn-sm btn-success\" (click)=\"createChallenge()\">BuildMessage</button>\n      </div>\n      \n    </div>\n  </div>\n</div>\n"
+module.exports = "<h1>Challenge</h1>\n\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Choose an Opponent</h2>\n      <select id=\"opponent\">\n        <option value=\"Patrick\">Patrick</option>\n        <option value=\"David\">David</option>\n        <option value=\"Paul\">Paul</option>\n        <option value=\"Dennis\">Dennis</option>\n      </select>\n      <h2>Cypher</h2>\n        <select id=\"cypher\" (click)=\"doCrypt(true)\">\n            <option value=\"cCrypt\">Caesar Cypher</option>\n            <option value=\"cCrypt2\">Reverse Caesar</option>\n        </select>\n      <h2>Message</h2>\n      <input type=\"text\" id=\"message\" [(ngModel)]=\"newMessage\" (keyup)=\"doCrypt(true)\">\n      <!-- <p id=\"isEng\">Valid English</p>\n      <p id=\"nonEng\">Not Valid English</p> -->\n      <div>\n        <h2>Encryption Key</h2>\n        <!-- <input id=\"encryptionKey\"> -->\n        <select id=\"encryptionKey\" (click)=\"doCrypt(true)\">\n          <option value=\"0\">0</option>\n          <option value=\"1\">1</option>\n          <option value=\"2\">2</option>\n          <option value=\"3\">3</option>\n          <option value=\"4\">4</option>\n          <option value=\"5\">5</option>\n          <option value=\"6\">6</option>\n          <option value=\"7\">7</option>\n          <option value=\"8\">8</option>\n          <option value=\"9\">9</option>\n          <option value=\"10\">10</option>\n          <option value=\"11\">11</option>\n          <option value=\"12\">12</option>\n          <option value=\"13\">13</option>\n          <option value=\"14\">14</option>\n          <option value=\"15\">15</option>\n          <option value=\"16\">16</option>\n          <option value=\"17\">17</option>\n          <option value=\"18\">18</option>\n          <option value=\"19\">19</option>\n          <option value=\"20\">20</option>\n          <option value=\"21\">21</option>\n          <option value=\"22\">22</option>\n          <option value=\"23\">23</option>\n          <option value=\"24\">24</option>\n          <option value=\"25\">25</option>\n        </select>\n      </div>\n      \n      <div>\n        <h2>Encrypted Message</h2>\n        <p type=\"text\" id=\"encMessage\">{{encMessage}}</p>\n      </div>\n      <div>\n        <button class=\"btn btn-sm btn-success\" (click)=\"createChallenge()\">BuildMessage</button>\n      </div>\n      \n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -931,6 +931,16 @@ var ChallengeComponent = /** @class */ (function () {
     ChallengeComponent.prototype.ngOnInit = function () {
     };
     ChallengeComponent.prototype.doCrypt = function (isDecrypt) {
+        // console.log(lngDetector.detect('This is a test.'));
+        var chooseCypher = document.getElementById("cypher").value;
+        if (chooseCypher === "cCrypt") {
+            this.cCrypt(isDecrypt);
+        }
+        if (chooseCypher === "cCrypt2") {
+            this.cCrypt2(isDecrypt);
+        }
+    };
+    ChallengeComponent.prototype.cCrypt = function (isDecrypt) {
         var shiftText = document.getElementById("encryptionKey").value;
         if (!/^-?\d+$/.test(shiftText)) {
             alert("Shift is not an integer");
@@ -943,6 +953,24 @@ var ChallengeComponent = /** @class */ (function () {
         }
         if (isDecrypt)
             shift = (26 + shift) % 26;
+        var textElem = document.getElementById("message");
+        var encMessage = document.getElementById("encMessage");
+        encMessage.textContent = this.caesarShift(textElem.value, shift);
+        console.log("text element: " + textElem.value + "--> Encrypted Element: " + encMessage.textContent);
+    };
+    ChallengeComponent.prototype.cCrypt2 = function (isDecrypt) {
+        var shiftText = document.getElementById("encryptionKey").value;
+        if (!/^-?\d+$/.test(shiftText)) {
+            alert("Shift is not an integer");
+            return;
+        }
+        var shift = parseInt(shiftText, 10);
+        if (shift < 0 || shift >= 26) {
+            alert("Shift is out of range");
+            return;
+        }
+        if (isDecrypt)
+            shift = (26 - shift) % 26;
         var textElem = document.getElementById("message");
         var encMessage = document.getElementById("encMessage");
         encMessage.textContent = this.caesarShift(textElem.value, shift);
@@ -961,9 +989,9 @@ var ChallengeComponent = /** @class */ (function () {
         }
         return result;
     };
-    ChallengeComponent.prototype.newMessageTest = function () {
-        console.log(this.newMessage);
-    };
+    // expoCipher(text, shift){
+    //   var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
+    // }
     ChallengeComponent.prototype.createChallenge = function () {
         var text = document.getElementById("message").value;
         var to = document.getElementById("opponent").value;
@@ -1587,7 +1615,9 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/dennis/Desktop/class_work/DCrypt/src/main.ts */"./src/main.ts");
+
+module.exports = __webpack_require__(/*! C:\Users\miran\Desktop\Dcrypt\DCrypt\src\main.ts */"./src/main.ts");
+
 
 
 /***/ })
