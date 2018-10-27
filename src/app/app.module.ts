@@ -31,6 +31,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatFormFieldModule } from "@angular/material";
+import { SolveComponent } from './solve/solve.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
   { path: 'messages', component: MessagesComponent },
   { path: 'challenge', component: ChallengeComponent },
   { path: 'leaderboard', component: LeaderboardComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent },
+  { path: 'solve', component: SolveComponent}
   // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] }
 ];  
 
@@ -57,7 +59,8 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    SolveComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

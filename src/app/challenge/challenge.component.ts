@@ -1,10 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-
-
-
-
-
 class Challenge {
   text: string;
   from: string;
@@ -24,8 +18,7 @@ export class ChallengeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-      
-  }
+    }
   
   doCrypt(isDecrypt){
     // console.log(lngDetector.detect('This is a test.'));
