@@ -12,11 +12,11 @@ var ctrlProfile = require('../controllers/profile');
 var ctrlAuth = require('../controllers/authentication');
 
 // profile
-router.get('/profile', auth, ctrlProfile.profileRead);
+router.get('/', auth, ctrlProfile.profileRead);
 
 // authentication
-router.post('/register', ctrlAuth.register);
-router.post('/login', ctrlAuth.login);
+router.post('/', ctrlAuth.register);
+router.post('/', ctrlAuth.login);
 
 // leaderboard display
 // router.get('/leaderboard', function (req, res) {
