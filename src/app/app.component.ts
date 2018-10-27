@@ -10,4 +10,5 @@ export class AppComponent {
   title = 'mean-angular6';
   
   constructor(public auth: AuthenticationService) {}
+  
 }

@@ -29,7 +29,7 @@ module.exports = [[module.i, "/*!\n * Bootstrap v4.1.3 (https://getbootstrap.com
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = [[module.i, "body{background: rgba(5, 22, 11, 0.75);font-family: 'Droid', sans-serif;font-size:7pt;color:#d8c99e;font-weight:700;text-transform:uppercase;}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9zdHlsZXMuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLEtBQUssa0NBQWtDLGlDQUFpQyxjQUFjLGNBQWMsZ0JBQWdCLHlCQUF5QixDQUFDIiwiZmlsZSI6InNyYy9zdHlsZXMuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYm9keXtiYWNrZ3JvdW5kOiByZ2JhKDUsIDIyLCAxMSwgMC43NSk7Zm9udC1mYW1pbHk6ICdEcm9pZCcsIHNhbnMtc2VyaWY7Zm9udC1zaXplOjdwdDtjb2xvcjojZDhjOTllO2ZvbnQtd2VpZ2h0OjcwMDt0ZXh0LXRyYW5zZm9ybTp1cHBlcmNhc2U7fVxuIl19 */", '', '']]
+module.exports = [[module.i, "\nbody{background: rgba(5, 22, 11, 0.75);font-family: 'Droid', sans-serif;font-size:7pt;color:#d8c99e;font-weight:700;text-transform:uppercase;}\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9zdHlsZXMuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQSxLQUFLLGtDQUFrQyxpQ0FBaUMsY0FBYyxjQUFjLGdCQUFnQix5QkFBeUIsQ0FBQyIsImZpbGUiOiJzcmMvc3R5bGVzLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuYm9keXtiYWNrZ3JvdW5kOiByZ2JhKDUsIDIyLCAxMSwgMC43NSk7Zm9udC1mYW1pbHk6ICdEcm9pZCcsIHNhbnMtc2VyaWY7Zm9udC1zaXplOjdwdDtjb2xvcjojZDhjOTllO2ZvbnQtd2VpZ2h0OjcwMDt0ZXh0LXRyYW5zZm9ybTp1cHBlcmNhc2U7fVxuXG4iXX0= */", '', '']]
 
 /***/ }),
 
@@ -637,11 +637,9 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-
 __webpack_require__(/*! C:\Users\miran\Desktop\Dcrypt\DCrypt\node_modules\@angular\material\prebuilt-themes\purple-green.css */"./node_modules/@angular/material/prebuilt-themes/purple-green.css");
 __webpack_require__(/*! C:\Users\miran\Desktop\Dcrypt\DCrypt\src\styles.css */"./src/styles.css");
 module.exports = __webpack_require__(/*! C:\Users\miran\Desktop\Dcrypt\DCrypt\node_modules\bootstrap\dist\css\bootstrap.css */"./node_modules/bootstrap/dist/css/bootstrap.css");
-
 
 
 /***/ })
