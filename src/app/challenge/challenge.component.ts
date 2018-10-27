@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 
+
+
+
+
 class Challenge {
   text: string;
   from: string;
@@ -10,7 +14,6 @@ class Challenge {
   attempts: number;
   solved: boolean;
 }
-
 @Component({
   selector: 'app-challenge',
   templateUrl: './challenge.component.html',
@@ -23,7 +26,19 @@ export class ChallengeComponent implements OnInit {
   ngOnInit() {
       
   }
-   doCrypt(isDecrypt) {
+  
+  doCrypt(isDecrypt){
+    // console.log(lngDetector.detect('This is a test.'));
+    const chooseCypher = (<HTMLInputElement>document.getElementById("cypher")).value;
+    if(chooseCypher === "cCrypt"){
+      this.cCrypt(isDecrypt);
+    }
+    if(chooseCypher === "cCrypt2"){
+      this.cCrypt2(isDecrypt);
+    }
+  }
+
+   cCrypt(isDecrypt) {
     var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
     if (!/^-?\d+$/.test(shiftText)) {
       alert("Shift is not an integer");
@@ -41,6 +56,24 @@ export class ChallengeComponent implements OnInit {
     encMessage.textContent = this.caesarShift(textElem.value, shift);
     console.log("text element: " + textElem.value + "--> Encrypted Element: " + encMessage.textContent)
   }
+   cCrypt2(isDecrypt) {
+    var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
+    if (!/^-?\d+$/.test(shiftText)) {
+      alert("Shift is not an integer");
+      return;
+    }
+    var shift = parseInt(shiftText, 10);
+    if (shift < 0 || shift >= 26) {
+      alert("Shift is out of range");
+      return;
+    }
+    if (isDecrypt)
+      shift = (26 - shift) % 26;
+    var textElem = (<HTMLInputElement>document.getElementById("message"));
+    var encMessage = (<HTMLElement>document.getElementById("encMessage"));
+    encMessage.textContent = this.caesarShift(textElem.value, shift);
+    console.log("text element: " + textElem.value + "--> Encrypted Element: " + encMessage.textContent)
+  }
 
   caesarShift(text, shift) {
     var result = "";
@@ -53,9 +86,10 @@ export class ChallengeComponent implements OnInit {
     return result;
   }
 
-  newMessageTest(){
-    console.log(this.newMessage);
-  }
+  // expoCipher(text, shift){
+  //   var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
+
+  // }
   createChallenge(){
     var text = (<HTMLInputElement>document.getElementById("message")).value;
     var to = (<HTMLInputElement>document.getElementById("opponent")).value;

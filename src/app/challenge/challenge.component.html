@@ -10,8 +10,15 @@
         <option value="Paul">Paul</option>
         <option value="Dennis">Dennis</option>
       </select>
+      <h2>Cypher</h2>
+        <select id="cypher" (click)="doCrypt(true)">
+            <option value="cCrypt">Caesar Cypher</option>
+            <option value="cCrypt2">Reverse Caesar</option>
+        </select>
       <h2>Message</h2>
       <input type="text" id="message" [(ngModel)]="newMessage" (keyup)="doCrypt(true)">
+      <!-- <p id="isEng">Valid English</p>
+      <p id="nonEng">Not Valid English</p> -->
       <div>
         <h2>Encryption Key</h2>
         <!-- <input id="encryptionKey"> -->
