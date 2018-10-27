@@ -1,0 +1,1 @@
+{"_id":{"$oid":"5bd29c1c2cca5222f9cadfe6"},"Sender_id":"12345","SentTo_id":"67890","SemtTo_alias":"testAlias","DecryptedMsg":"decrypted message","EncryptedMsg":"sent message"}
