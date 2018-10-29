@@ -6,12 +6,12 @@ var jwtKey = require("../keys");
 var userSchema = new mongoose.Schema({
   username: {
     type: String,
-    unique: true,
+    unique: false,
     required: false
   },
   alias: {
     type: String,
-    unique: true,
+    unique: false,
     required: false
   },
   email: {

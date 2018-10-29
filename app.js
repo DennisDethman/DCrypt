@@ -15,7 +15,9 @@ var apiGameStats = require('./routes/gamestats');
 var apiProfile = require('./routes/users');
 var apiRcvdRouter = require('./routes/receivedmessages');
 
+require('./models/db');
 require('./api/config/passport');
+
 var routesApi = require('./api/routes/index');
 
 var app = express();
@@ -59,8 +61,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.send(err.status);
 });
-
-require('./models/db');
 
 // var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/mean-angular6', { promiseLibrary: require('bluebird'), useNewUrlParser: true })
