@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
+
 class Challenge {
   text: string;
   from: string;
@@ -15,7 +18,7 @@ class Challenge {
 })
 export class ChallengeComponent implements OnInit {
   newMessage: string = ""
-  constructor() { }
+  constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit() {
     }
@@ -31,7 +34,7 @@ export class ChallengeComponent implements OnInit {
     }
   }
 
-   cCrypt(isDecrypt) {
+  cCrypt(isDecrypt) {
     var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
     if (!/^-?\d+$/.test(shiftText)) {
       alert("Shift is not an integer");
@@ -44,12 +47,14 @@ export class ChallengeComponent implements OnInit {
     }
     if (isDecrypt)
       shift = (26 + shift) % 26;
+    
     var textElem = (<HTMLInputElement>document.getElementById("message"));
     var encMessage = (<HTMLElement>document.getElementById("encMessage"));
     encMessage.textContent = this.caesarShift(textElem.value, shift);
     console.log("text element: " + textElem.value + "--> Encrypted Element: " + encMessage.textContent)
   }
-   cCrypt2(isDecrypt) {
+   
+  cCrypt2(isDecrypt) {
     var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
     if (!/^-?\d+$/.test(shiftText)) {
       alert("Shift is not an integer");
@@ -62,6 +67,7 @@ export class ChallengeComponent implements OnInit {
     }
     if (isDecrypt)
       shift = (26 - shift) % 26;
+
     var textElem = (<HTMLInputElement>document.getElementById("message"));
     var encMessage = (<HTMLElement>document.getElementById("encMessage"));
     encMessage.textContent = this.caesarShift(textElem.value, shift);
@@ -89,15 +95,30 @@ export class ChallengeComponent implements OnInit {
     var encText = (<HTMLElement>document.getElementById("encMessage")).textContent;
     var key = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
 
-    var newChallenge = {
-      text: text,
-      to : to, 
-      encText: encText, 
-      key: key,
-      attempts: 10, 
-      solved: false
+    var challenge = {
+      Sender_id: 'test sender id',
+      SentTo_id: 'test SentTo',
+      SentTo_Alias: 'test alias',
+      DecryptedMsg: text,
+      EncryptedMsg: encText,
+      EncryptionKey: key,
+      AttemptsAllowed: 10,
+      AttemptsRemaining: 10,
+      Solved: false,
+      MessageScore: 0
+    }
+
+    this.postTheMessage(challenge)
+    console.log(challenge)
   }
-    console.log(newChallenge)
-   }
+
+  postTheMessage(challenge) {
+    this.api.postMsg(challenge).subscribe(() => {
+      this.router.navigateByUrl('/profile');
+    }, (err) => {
+      console.error(err);
+    }); 
+  }
+    
 }
 

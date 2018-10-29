@@ -54,6 +54,14 @@ export class ApiService {
       catchError(this.handleError));
   }
 
+  postMsg(data): Observable<any> {
+    console.log(data)
+    return this.http.post('/getmsgsapi', data, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   getStats(): Observable<any> {
     return this.http.get('/statsapi', httpOptions).pipe(
       map(this.extractData),

@@ -13,7 +13,7 @@ var sentMsgSchema = new mongoose.Schema({
     },
     SentTo_Alias: {
       type: String,
-      unique: true,
+      unique: false,
       required: true
     },
     DecryptedMsg: {

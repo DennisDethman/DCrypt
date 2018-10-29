@@ -8,7 +8,7 @@ var receivedMsgSchema = new mongoose.Schema({
   },
   ReceivedFrom_Alias: {
     type: String,
-    unique: true,
+    unique: false,
     required: true
   },
   DecryptedMsg: {
