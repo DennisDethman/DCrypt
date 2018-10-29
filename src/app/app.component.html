@@ -8,11 +8,13 @@
           <div class="scan"></div>
 
           <nav>
-            <span class="info1" routerLink="/profile"></span>
-            <span class="info2" routerLink="/challenge"></span>
-            <span class="info3"  routerLink="/messages"></span>
-            <span class="info4" routerLink="/leaderboard"></span>
-            <!-- <span class="info5"></span> -->
+            <span class="info1" (click)="buttonSound()" routerLink="/profile"></span>
+            <span class="info2" (click)="buttonSound()" routerLink="/challenge"></span>
+            <span class="info3" (click)="buttonSound()" routerLink="/messages"></span>
+            <span class="info4" (click)="buttonSound()" routerLink="/leaderboard"></span>
+            <span class="info5" (click)="buttonSound()" routerLink="/login"></span>
+            <span class=" info6" (click)="bgMusic()"></span> 
+          
             <p>
               <span class="line2"></span>
             </p>
@@ -67,6 +69,6 @@
   </div>
 </div>
 <app-navbar></app-navbar>
-
+<script src="/src/app/app.component.js"></script>
 
 

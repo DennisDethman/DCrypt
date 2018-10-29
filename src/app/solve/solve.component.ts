@@ -28,13 +28,16 @@ export class SolveComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    let message1 = new Message("Paul", "abc", "bcd", 1 );
+    let message1 = new Message("Paul", "ABC", "BCD", 1 );
       this.messages.push(message1);
     }
-
+    
     doCrypt(isDecrypt){
       // console.log(lngDetector.detect('This is a test.'));
+      
+      const solution = (<HTMLElement>document.getElementById("message")).textContent;
       const chooseCypher = (<HTMLInputElement>document.getElementById("cypher")).value;
+      
       if(chooseCypher === "cCrypt"){
         this.cCrypt(isDecrypt);
       }
@@ -42,6 +45,14 @@ export class SolveComponent implements OnInit {
         this.cCrypt2(isDecrypt);
       }
       this.messages[0].attempts--
+      console.log( solution + " " + this.messages[0].message)
+      if (solution === this.messages[0].message){
+        console.log("You Win!");
+      }
+
+      // if (solution !== this.messages[0].message){
+      //   alert("You lOOSE!");
+      // }
     }
   
      cCrypt(isDecrypt) {
@@ -62,6 +73,7 @@ export class SolveComponent implements OnInit {
         textElem.textContent = this.caesarShift(encMessage.textContent, shift);
         console.log("text element: " + textElem.textContent + "--> Encrypted Element: " + encMessage.textContent)
     }
+    
      cCrypt2(isDecrypt) {
       var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
       if (!/^-?\d+$/.test(shiftText)) {
