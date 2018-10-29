@@ -16,7 +16,7 @@
             <option value="cCrypt2">Reverse Caesar</option>
         </select>
       <h2>Message</h2>
-      <input type="text" id="message" [(ngModel)]="newMessage" (keyup)="doCrypt(true)">
+      <input type="text" id="message" [(ngModel)]="newMessage" (keyup)="doCrypt(true)" maxlength="20">
       <!-- <p id="isEng">Valid English</p>
       <p id="nonEng">Not Valid English</p> -->
       <div>

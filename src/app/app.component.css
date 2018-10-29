@@ -1,6 +1,6 @@
 
-::-moz-selection{background:lightgreen;}
-::selection{background:lightgreen;}
+/* ::-moz-selection{background:lightgreen;}
+::selection{background:lightgreen;} */
 
 
 /*MAIN CONSOLE**************************************/
@@ -31,7 +31,8 @@
 .info2:before{content:"Challenge";}
 .info3:before{content:"Messages";}
 .info4:before{content:"Leader Board";}
-/* .info5:before{content:"agent"} */
+.info5:before{content:"Logout"}
+.info6:before{content:"Sound"}
 /*.line2:before{content:"line2";}*/
 .tab-names{position:absolute;left:-40px;top:10px;}
 .tab-names li{list-style-type:none;text-align:right;padding:3.5px 0 3.5px 0;}
