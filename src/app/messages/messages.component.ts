@@ -33,7 +33,7 @@ export class MessagesComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ngOnInit() {
-    this.api.getMsgs()
+    this.dataSource.connect()
     .subscribe(res => {
       console.log('messages');
       console.log(res);
