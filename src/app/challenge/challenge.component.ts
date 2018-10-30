@@ -2,24 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
 
-class Challenge {
-  text: string;
-  from: string;
-  to: string;
-  encryptionKey: number; 
-  encryptedText: string; 
-  attempts: number;
-  solved: boolean;
-}
 @Component({
   selector: 'app-challenge',
   templateUrl: './challenge.component.html',
   styleUrls: ['./challenge.component.css']
 })
 export class ChallengeComponent implements OnInit {
-  newMessage: string = ""
+  
   constructor(private api: ApiService, private router: Router) { }
-
+  
   ngOnInit() {
     }
     keySound(){
