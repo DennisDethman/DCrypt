@@ -182,7 +182,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var AppComponent = /** @class */ (function () {
     function AppComponent(auth) {
         this.auth = auth;
-        this.title = 'mean-angular6';
+        this.title = 'dcrypt';
     }
     AppComponent.prototype.buttonSound = function () {
         var buttonAudio = new Audio;
@@ -1600,7 +1600,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; margin-bottom: 30px}\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h1>Register</h1>\n      <p class=\"lead\">Already a member? Please <a routerLink=\"/login\" class=\"menu1\"> Log In </a> instead.</p>\n      <form (submit)=\"register()\" class=\"row\">\n        <div class=\"form-group col-6\">\n          <label for=\"name\">Name</label>\n          <input type=\"text\" class=\"form-control menu1\" name=\"name\" placeholder=\"Enter your Name\" [(ngModel)]=\"credentials.name\" required>\n        </div>\n        <div class=\"form-group col-6\">\n          <label for=\"name\">Alias</label>\n          <input type=\"text\" class=\"form-control menu2\" name=\"name\" placeholder=\"Enter your Alias\" [(ngModel)]=\"credentials.name\" required>\n        </div>\n        <div class=\"form-group col-12\">\n          <label for=\"email\">Email address</label>\n          <input type=\"email\" class=\"form-control menu\" name=\"email\" placeholder=\"Enter Email\" [(ngModel)]=\"credentials.email\" required>\n        </div>\n        <div class=\"form-group col-12\">\n          <label for=\"password\">Password</label>\n          <input type=\"password\" class=\"form-control menu\" name=\"password\" placeholder=\"Password\" [(ngModel)]=\"credentials.password\" required>\n        </div>\n        <button type=\"submit\" class=\"btn btn-outline-success btn-sm\" id=\"clearButton\">Register!</button>\n      </form>\n    </div>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"container\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h1>Register</h1>\n      <p class=\"lead\">Already a member? Please <a routerLink=\"/login\" class=\"menu1\"> Log In </a> instead.</p>\n      <form (submit)=\"register()\" class=\"row\">\n        <div class=\"form-group col-6\">\n          <label for=\"name\">Name</label>\n          <input type=\"text\" class=\"form-control menu1\" name=\"name\" placeholder=\"Enter your Name\" [(ngModel)]=\"credentials.name\" required>\n        </div>\n        <div class=\"form-group col-6\">\n          <label for=\"alias\">Alias</label>\n          <input type=\"text\" class=\"form-control menu2\" name=\"alias\" placeholder=\"Enter your Alias\" [(ngModel)]=\"credentials.alias\" required>\n        </div>\n        <div class=\"form-group col-12\">\n          <label for=\"email\">Email address</label>\n          <input type=\"email\" class=\"form-control menu\" name=\"email\" placeholder=\"Enter Email\" [(ngModel)]=\"credentials.email\" required>\n        </div>\n        <div class=\"form-group col-12\">\n          <label for=\"password\">Password</label>\n          <input type=\"password\" class=\"form-control menu\" name=\"password\" placeholder=\"Password\" [(ngModel)]=\"credentials.password\" required>\n        </div>\n        <button type=\"submit\" class=\"btn btn-outline-success btn-sm\" id=\"clearButton\">Register!</button>\n      </form>\n    </div>\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -1636,7 +1636,8 @@ var RegisterComponent = /** @class */ (function () {
         this.credentials = {
             email: '',
             name: '',
-            password: ''
+            password: '',
+            alias: ''
         };
     }
     RegisterComponent.prototype.register = function () {
