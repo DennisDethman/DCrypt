@@ -47,9 +47,12 @@ userSchema.methods.validPassword = function(password) {
   return this.hash === hash;
 };
 
-userSchema.methods.generateJwt = function() {
+userSchema.methods.generateJwt = function(req) {
   var expiry = new Date();
   expiry.setDate(expiry.getDate() + 7);
+
+  console.log('req :')
+  console.log(req);
 
   return jwt.sign({
     _id: this._id,

@@ -33,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'dist/mean-angular6')));
 app.use('/', express.static(path.join(__dirname, 'dist/mean-angular6')));
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 //app.use('/api', apiRouter);
 app.use('/registerapi', routesApi);

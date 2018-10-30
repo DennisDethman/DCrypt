@@ -15,8 +15,8 @@ var ctrlAuth = require('../controllers/authentication');
 router.get('/', auth, ctrlProfile.profileRead);
 
 // authentication
-router.post('/', ctrlAuth.register);
-router.post('/', ctrlAuth.login);
+router.post('/register', ctrlAuth.register);
+router.post('/login', ctrlAuth.login);
 
 // leaderboard display
 // router.get('/leaderboard', function (req, res) {
