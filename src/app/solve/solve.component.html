@@ -7,14 +7,14 @@
         <div class="row">
             <div class="col-sm-6">
                 <h6>Choose Cipher</h6>
-                    <select id="cypher">
+                    <select class="menu" id="cypher">
                         <option value="cCrypt">Caesar Cipher</option>
                         <option value="cCrypt2">Reverse Caesar</option>
                     </select>
             </div>
             <div class="col-sm-6">
                 <h6>Choose Key</h6>
-                    <select id="encryptionKey">
+                    <select class="menu" id="encryptionKey">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -48,7 +48,7 @@
             </div>
         </div>
          <br/>
-            <button class="btn btn-sm btn-success" id="runCrypt" (click)="doCrypt(true)">Decrypt</button>
+            <button class="btn btn-outline-success btn-sm"  id="runCrypt" (click)="doCrypt(true)">Decrypt</button>
             <h6>Solution: </h6>
             <p id="message"></p>
 
