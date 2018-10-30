@@ -87,9 +87,14 @@ var ApiService = /** @class */ (function () {
     ApiService.prototype.getRecvdMsgs = function () {
         return this.http.get('/recvdmsgsapi', httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
-    ApiService.prototype.postMsg = function (data) {
+    ApiService.prototype.postSentMsg = function (data) {
         console.log(data);
         return this.http.post('/getmsgsapi', data, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    };
+    ApiService.prototype.postRecvdMsg = function (data) {
+        console.log(data);
+        return this.http.post('/recvdmsgsapi', data, httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     ApiService.prototype.getStats = function () {
@@ -444,7 +449,7 @@ var AuthenticationService = /** @class */ (function () {
         var base;
         if (method === 'post') {
             console.log('made it to request post');
-            base = this.http.post("/" + type + "api", user);
+            base = this.http.post("/" + type + "api/" + type, user);
         }
         else {
             base = this.http.get("/" + type + "api", { headers: { Authorization: "Bearer " + this.getToken() } });
@@ -928,7 +933,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChallengeComponent", function() { return ChallengeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../authentication.service */ "./src/app/authentication.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -941,16 +947,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var Challenge = /** @class */ (function () {
     function Challenge() {
     }
     return Challenge;
 }());
 var ChallengeComponent = /** @class */ (function () {
-    function ChallengeComponent(api, router) {
+    function ChallengeComponent(auth, api, router) {
+        this.auth = auth;
         this.api = api;
         this.router = router;
-        this.newMessage = "";
     }
     ChallengeComponent.prototype.ngOnInit = function () {
     };
@@ -1021,10 +1028,11 @@ var ChallengeComponent = /** @class */ (function () {
         var to = document.getElementById("opponent").value;
         var encText = document.getElementById("encMessage").textContent;
         var key = document.getElementById("encryptionKey").value;
-        var challenge = {
-            Sender_id: 'test sender id',
-            SentTo_id: 'test SentTo',
-            SentTo_Alias: 'test alias',
+        var user = this.auth.getUserDetails();
+        var sendChallenge = {
+            Sender_id: user._id,
+            SentTo_id: 'test SentTo _id',
+            SentTo_Alias: 'test sent alias',
             DecryptedMsg: text,
             EncryptedMsg: encText,
             EncryptionKey: key,
@@ -1033,12 +1041,31 @@ var ChallengeComponent = /** @class */ (function () {
             Solved: false,
             MessageScore: 0
         };
-        this.postTheMessage(challenge);
-        console.log(challenge);
+        this.postTheSentMessage(sendChallenge);
+        var recvdChallenge = {
+            ReceivedFrom_id: user._id,
+            ReceivedFrom_Alias: 'test received alias',
+            DecryptedMsg: text,
+            EncryptedMsg: encText,
+            EncryptionKey: key,
+            AttemptsAllowed: 10,
+            AttemptsRemaining: 10,
+            Solved: false,
+            MessageScore: 0
+        };
+        this.postTheRecvdMessage(recvdChallenge);
     };
-    ChallengeComponent.prototype.postTheMessage = function (challenge) {
+    ChallengeComponent.prototype.postTheSentMessage = function (challenge) {
         var _this = this;
-        this.api.postMsg(challenge).subscribe(function () {
+        this.api.postSentMsg(challenge).subscribe(function () {
+            _this.router.navigateByUrl('/profile');
+        }, function (err) {
+            console.error(err);
+        });
+    };
+    ChallengeComponent.prototype.postTheRecvdMessage = function (challenge) {
+        var _this = this;
+        this.api.postRecvdMsg(challenge).subscribe(function () {
             _this.router.navigateByUrl('/profile');
         }, function (err) {
             console.error(err);
@@ -1050,7 +1077,7 @@ var ChallengeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./challenge.component.html */ "./src/app/challenge/challenge.component.html"),
             styles: [__webpack_require__(/*! ./challenge.component.css */ "./src/app/challenge/challenge.component.css")]
         }),
-        __metadata("design:paramtypes", [_api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        __metadata("design:paramtypes", [_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"], _api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], ChallengeComponent);
     return ChallengeComponent;
 }());
@@ -1448,6 +1475,10 @@ var NavbarComponent = /** @class */ (function () {
         this.router = router;
     }
     NavbarComponent.prototype.ngOnInit = function () {
+        console.log('getUserDetails');
+        console.log(this.auth.getUserDetails);
+        console.log('tokenpayload');
+        console.log(this.tokenpayload);
     };
     NavbarComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1482,7 +1513,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n     <div class=\"col-md-6\">\n\n      <h1 class=\"form-signin-heading\">Your dCrypt Profile</h1>\n      <hr>\n\n      <div class=\"form-horizontal\">\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Full name</label>\n          <p class=\"form-control-static\">{{ details?.name }}</p>\n        </div>\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Email</label>\n          <p class=\"form-control-static\">{{ details?.email }}</p>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n     <div class=\"col-md-6\">\n\n      <h1 class=\"form-signin-heading\">Your dCrypt Profile</h1>\n      <hr>\n\n      <div class=\"form-horizontal\">\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Full name</label>\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.name }}</p>\n        </div>\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Email</label>\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.email }}</p>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1517,6 +1548,7 @@ var ProfileComponent = /** @class */ (function () {
         var _this = this;
         console.log('hit profile');
         this.auth.profile().subscribe(function (user) {
+            console.log('profile read');
             console.log(user);
             _this.details = user;
         }, function (err) {

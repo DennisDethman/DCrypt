@@ -78,7 +78,7 @@ export class AuthenticationService {
 
     if (method === 'post') {
       console.log('made it to request post')
-      base = this.http.post(`/${type}api`, user);
+      base = this.http.post(`/${type}api/${type}`, user);
     } else {
       base = this.http.get(`/${type}api`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }

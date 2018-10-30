@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { AuthenticationService } from '../authentication.service'
 import { Router } from '@angular/router';
 
 class Challenge {
@@ -17,8 +18,8 @@ class Challenge {
   styleUrls: ['./challenge.component.css']
 })
 export class ChallengeComponent implements OnInit {
-  newMessage: string = ""
-  constructor(private api: ApiService, private router: Router) { }
+
+  constructor(private auth: AuthenticationService, private api: ApiService, private router: Router) { }
 
   ngOnInit() {
     }
@@ -89,16 +90,18 @@ export class ChallengeComponent implements OnInit {
   //   var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
 
   // }
+
   createChallenge(){
     var text = (<HTMLInputElement>document.getElementById("message")).value;
     var to = (<HTMLInputElement>document.getElementById("opponent")).value;
     var encText = (<HTMLElement>document.getElementById("encMessage")).textContent;
     var key = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
 
-    var challenge = {
-      Sender_id: 'test sender id',
-      SentTo_id: 'test SentTo',
-      SentTo_Alias: 'test alias',
+    const user = this.auth.getUserDetails();
+    var sendChallenge = {
+      Sender_id: user._id,
+      SentTo_id: 'test SentTo _id',
+      SentTo_Alias: 'test sent alias',
       DecryptedMsg: text,
       EncryptedMsg: encText,
       EncryptionKey: key,
@@ -107,13 +110,32 @@ export class ChallengeComponent implements OnInit {
       Solved: false,
       MessageScore: 0
     }
+    this.postTheSentMessage(sendChallenge);
 
-    this.postTheMessage(challenge)
-    console.log(challenge)
+    var recvdChallenge = {
+      ReceivedFrom_id: user._id,
+      ReceivedFrom_Alias: 'test received alias',
+      DecryptedMsg: text,
+      EncryptedMsg: encText,
+      EncryptionKey: key,
+      AttemptsAllowed: 10,
+      AttemptsRemaining: 10,
+      Solved: false,
+      MessageScore: 0
+    }
+    this.postTheRecvdMessage(recvdChallenge);
   }
 
-  postTheMessage(challenge) {
-    this.api.postMsg(challenge).subscribe(() => {
+  postTheSentMessage(challenge) {
+    this.api.postSentMsg(challenge).subscribe(() => {
+      this.router.navigateByUrl('/profile');
+    }, (err) => {
+      console.error(err);
+    }); 
+  }
+
+  postTheRecvdMessage(challenge) {
+    this.api.postRecvdMsg(challenge).subscribe(() => {
       this.router.navigateByUrl('/profile');
     }, (err) => {
       console.error(err);

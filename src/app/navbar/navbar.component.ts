@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService, TokenPayload } from '../authentication.service';
+import { AuthenticationService, UserDetails, TokenPayload } from '../authentication.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,11 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  details: UserDetails;
+  tokenpayload: TokenPayload;
   //constructor() { }
   constructor(private auth: AuthenticationService, private router: Router) {}
   
   ngOnInit() {
+    console.log('getUserDetails')
+    console.log(this.auth.getUserDetails)
+    console.log('tokenpayload')
+    console.log(this.tokenpayload)
   }
 
 }
