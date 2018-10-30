@@ -4,18 +4,18 @@
   <div class="row">
     <div class="col-md-12">
       <h2>Choose an Opponent</h2>
-      <select id="opponent">
+      <select class="menu" id="opponent">
         <option value="Patrick">Patrick</option>
         <option value="David">David</option>
         <option value="Paul">Paul</option>
         <option value="Dennis">Dennis</option>
       </select>
       <h2>Message</h2>
-      <input type="text" id="message" [(ngModel)]="newMessage" (keyup)="doCrypt(true)">
+      <input type="text" class="menu" id="message" [(ngModel)]="newMessage" (keyup)="doCrypt(true)">
       <div>
         <h2>Encryption Key</h2>
         <!-- <input id="encryptionKey"> -->
-        <select id="encryptionKey" (click)="doCrypt(true)">
+        <select class="menu" id="encryptionKey" (click)="doCrypt(true)">
           <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
