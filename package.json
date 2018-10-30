@@ -3,11 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-<<<<<<< HEAD
     "start": "ng serve --open",
-=======
-    "start": "ng build && nodemon ./bin/www",
->>>>>>> 1d1f27bfdb755acb9ebc2ec31197743853289638
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

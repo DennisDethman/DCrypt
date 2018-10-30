@@ -1,3 +1,5 @@
-h1 {font-size: 20px; }
+h1 {font-size: 30px; text-align: center; margin-bottom: 15px;}
 h2 {font-size: 15px;}
 .menu{color: lightgreen; font-size: 12px; background: rgba(0,0,0,0.8); border: #9daaa3 1px solid; border-radius: 0px; max-width: 480px}
+select option{color: lightgreen; font-size: 12px; background-color: rgba(0,0,0,0.8);}
+.btn{margin-left: 100px; margin-top: 10px; border-color: #9daaa3; color: #7ff12a; text-shadow: 2px 2px 2px black, 0 0 1em lightgreen, 0 0 0.2em lightgreen;}
