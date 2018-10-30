@@ -4,25 +4,28 @@
   <div class="row">
     <div class="col-md-12">
       <h2>Choose an Opponent</h2>
-      <select id="opponent">
+      <select class="menu" id="opponent">
         <option value="Patrick">Patrick</option>
         <option value="David">David</option>
         <option value="Paul">Paul</option>
         <option value="Dennis">Dennis</option>
       </select>
       <h2>Cypher</h2>
-        <select id="cypher" (click)="doCrypt(true)">
+        <select class="menu" id="cypher" (click)="doCrypt(true)">
             <option value="cCrypt">Caesar Cypher</option>
             <option value="cCrypt2">Reverse Caesar</option>
         </select>
       <h2>Message</h2>
-      <input type="text" id="message" [(ngModel)]="newMessage" (keyup)="doCrypt(true)" maxlength="20">
+
+
+      <input type="text" class="menu" id="message" [(ngModel)]="newMessage" (keyup)="doCrypt(true)" maxlength="20">
       <!-- <p id="isEng">Valid English</p>
       <p id="nonEng">Not Valid English</p> -->
+
       <div>
         <h2>Encryption Key</h2>
         <!-- <input id="encryptionKey"> -->
-        <select id="encryptionKey" (click)="doCrypt(true)">
+        <select class="menu" id="encryptionKey" (click)="doCrypt(true)">
           <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -57,7 +60,7 @@
         <p type="text" id="encMessage">{{encMessage}}</p>
       </div>
       <div>
-        <button class="btn btn-sm btn-success" (click)="createChallenge()">BuildMessage</button>
+        <button class="btn btn-outline-success btn-sm" id="clearButton" (click)="createChallenge()">BuildMessage</button>
       </div>
       
     </div>
