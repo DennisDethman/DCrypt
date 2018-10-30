@@ -109,8 +109,8 @@ export class ChallengeComponent implements OnInit {
     const user = this.auth.getUserDetails();
     var sendChallenge = {
       Sender_id: user._id,
-      SentTo_id: 'test SentTo _id',
-      SentTo_Alias: 'test sent alias',
+      SentTo_id: '#SentTo _id',
+      SentTo_Alias: '#alias',
       DecryptedMsg: text,
       EncryptedMsg: encText,
       EncryptionKey: key,
@@ -123,7 +123,7 @@ export class ChallengeComponent implements OnInit {
 
     var recvdChallenge = {
       ReceivedFrom_id: user._id,
-      ReceivedFrom_Alias: 'test received alias',
+      ReceivedFrom_Alias: user.alias,
       DecryptedMsg: text,
       EncryptedMsg: encText,
       EncryptionKey: key,

@@ -41,7 +41,7 @@ const appRoutes: Routes = [
   { path: 'challenge', component: ChallengeComponent },
   { path: 'leaderboard', component: LeaderboardComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'solve', component: SolveComponent}
+  { path: 'solve/:id', component: SolveComponent}
   // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] }
 ];  
 

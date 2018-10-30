@@ -83,7 +83,7 @@ var ApiService = /** @class */ (function () {
     };
     ApiService.prototype.getUsers = function () {
     };
-    ApiService.prototype.getMsgs = function () {
+    ApiService.prototype.getSentMsgs = function () {
         return this.http.get('/getmsgsapi', httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     ApiService.prototype.getRecvdMsgs = function () {
@@ -286,7 +286,7 @@ var appRoutes = [
     { path: 'challenge', component: _challenge_challenge_component__WEBPACK_IMPORTED_MODULE_8__["ChallengeComponent"] },
     { path: 'leaderboard', component: _leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_9__["LeaderboardComponent"] },
     { path: 'profile', component: _profile_profile_component__WEBPACK_IMPORTED_MODULE_7__["ProfileComponent"] },
-    { path: 'solve', component: _solve_solve_component__WEBPACK_IMPORTED_MODULE_22__["SolveComponent"] }
+    { path: 'solve/:id', component: _solve_solve_component__WEBPACK_IMPORTED_MODULE_22__["SolveComponent"] }
     // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] }
 ];
 var AppModule = /** @class */ (function () {
@@ -1051,8 +1051,8 @@ var ChallengeComponent = /** @class */ (function () {
         var user = this.auth.getUserDetails();
         var sendChallenge = {
             Sender_id: user._id,
-            SentTo_id: 'test SentTo _id',
-            SentTo_Alias: 'test sent alias',
+            SentTo_id: '#SentTo _id',
+            SentTo_Alias: '#alias',
             DecryptedMsg: text,
             EncryptedMsg: encText,
             EncryptionKey: key,
@@ -1064,7 +1064,7 @@ var ChallengeComponent = /** @class */ (function () {
         this.postTheSentMessage(sendChallenge);
         var recvdChallenge = {
             ReceivedFrom_id: user._id,
-            ReceivedFrom_Alias: 'test received alias',
+            ReceivedFrom_Alias: user.alias,
             DecryptedMsg: text,
             EncryptedMsg: encText,
             EncryptionKey: key,
@@ -1329,7 +1329,7 @@ module.exports = "li {color: green; font-size: 12px; background-color:black; bor
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Messages</h1>\n\n  <!-- ng-repeat loops through data to build list -->\n  <ul>\n    <li *ngFor=\"let message of messages; let i = index\" class=\"list-group-item d-flex justify-content-between align-items-center\" >\n      <p>{{i + 1 }}: </p>\n      <p>From: {{message.from}}</p>\n      <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" routerLink=\"/solve\">Solve</button><br>\n    </li>\n  </ul>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <h1>Messages</h1>\n\n  <!-- ng-repeat loops through data to build list -->\n  <ul>\n    <li *ngFor=\"let message of messages; index as i\" class=\"list-group-item d-flex justify-content-between align-items-center\" >\n      <p>{{i + 1 }}: </p>\n      <p>From: {{message.ReceivedFrom_Alias}}</p>\n      <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" [routerLink]=\"['/solve', message._id]\">Solve</button><br>\n    </li>\n  </ul>\n</div>\n"
 
 /***/ }),
 
@@ -1372,44 +1372,38 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var Message = /** @class */ (function () {
-    //  timeSent: Date; 
-    function Message(from, message, encMessage, key) {
-        this.from = from;
-        this.completed = false;
-        this.message = message;
-        this.encMessage = encMessage;
-        this.key = key;
-        this.attempts = 10;
-    }
-    return Message;
-}());
+//  class Message {
+//    from: string;
+//    completed: boolean;
+//    message: string; 
+//    encMessage: string; 
+//    key: number;
+//    attempts: number;
+//   //  timeSent: Date; 
+//     constructor(from: string, message: string, encMessage: string,
+//       key: number){
+//         this.from = from;
+//         this.completed = false;
+//         this.message = message;
+//         this.encMessage = encMessage;
+//         this.key = key;  
+//         this.attempts = 10;
+//     }
+//  }
 var MessagesComponent = /** @class */ (function () {
     function MessagesComponent(api) {
         this.api = api;
-        this.messages = [];
         this.dataSource = new MsgDataSource(this.api);
     }
     MessagesComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.dataSource.connect()
             .subscribe(function (res) {
-            //console.log('messages');
-            //console.log(res);
             _this.messages = res;
+            console.log(_this.messages);
         }, function (err) {
             console.log(err);
         });
-        var message1 = new Message("Paul", "abc", "bcd", 1);
-        this.messages.push(message1);
-        var message2 = new Message("Terry", "abc", "bcd", 1);
-        this.messages.push(message2);
-        var message3 = new Message("Jerry", "abc", "bcd", 1);
-        this.messages.push(message3);
-        var message4 = new Message("Jerrys", "abc", "bcd", 1);
-        this.messages.push(message4);
-        var message5 = new Message("Jerry6", "abc", "bcd", 1);
-        this.messages.push(message5);
     };
     MessagesComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1430,7 +1424,7 @@ var MsgDataSource = /** @class */ (function (_super) {
         return _this;
     }
     MsgDataSource.prototype.connect = function () {
-        return this.api.getMsgs();
+        return this.api.getRecvdMsgs();
     };
     MsgDataSource.prototype.disconnect = function () {
     };
@@ -1459,7 +1453,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <a class=\"navbar-brand\" href=\"#\">Test</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"!auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/login\">Login <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"!auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/register\">Register <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/login\">Login <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/register\">Register <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/messages\">Messages <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/challenge\">Challenges <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/leaderboard\">Leaderboard <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li  class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/profile\">Profile <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/profile\">{{ auth.getUserDetails()?.name }}<span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" (click)=\"auth.logout()\" routerLink=\"/\"> Logout<span class=\"sr-only\">(current)</span></a>\n      </li>\n    </ul>\n\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <a class=\"navbar-brand\" href=\"#\">Test</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"!auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/login\">Login <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"!auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/register\">Register <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/login\">Login <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/register\">Register <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/messages\">Messages <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/challenge\">Challenges <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/leaderboard\">Leaderboard <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"!auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/profile\">Profile <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/profile\">{{ auth.getUserDetails()?.name }}<span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" (click)=\"auth.logout()\" routerLink=\"/\"> Logout<span class=\"sr-only\">(current)</span></a>\n      </li>\n    </ul>\n\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1696,6 +1690,8 @@ module.exports = "<h5>Decrypt the Message</h5>\n<form *ngFor=\"let message of me
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SolveComponent", function() { return SolveComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1705,6 +1701,8 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
 
 var Message = /** @class */ (function () {
     //  timeSent: Date; 
@@ -1719,12 +1717,23 @@ var Message = /** @class */ (function () {
     return Message;
 }());
 var SolveComponent = /** @class */ (function () {
-    function SolveComponent() {
+    function SolveComponent(activeRoute, router, apiService) {
+        this.activeRoute = activeRoute;
+        this.router = router;
+        this.apiService = apiService;
         this.messages = [];
     }
     SolveComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activeRoute.params.subscribe(function (params) {
+            _this.id = params['id'];
+            console.log(_this.id);
+        });
         var message1 = new Message("Paul", "ABC", "BCD", 1);
         this.messages.push(message1);
+    };
+    SolveComponent.prototype.onBack = function () {
+        this.router.navigate(['messages']);
     };
     SolveComponent.prototype.doCrypt = function (isDecrypt) {
         // console.log(lngDetector.detect('This is a test.'));
@@ -1800,7 +1809,9 @@ var SolveComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./solve.component.html */ "./src/app/solve/solve.component.html"),
             styles: [__webpack_require__(/*! ./solve.component.css */ "./src/app/solve/solve.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]])
     ], SolveComponent);
     return SolveComponent;
 }());

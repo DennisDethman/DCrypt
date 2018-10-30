@@ -45,7 +45,7 @@ export class ApiService {
     
   }
 
-  getMsgs(): Observable<any> {
+  getSentMsgs(): Observable<any> {
     return this.http.get('/getmsgsapi', httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
