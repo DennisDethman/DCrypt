@@ -36,13 +36,16 @@ export class ApiService {
     return body || { };
   }
 
-  getUser(): Observable<any> {
-    return this.http.get('/userapi', httpOptions).pipe(
+  // getUser(): Observable<any> {
+  //   return this.http.get('/userapi', httpOptions).pipe(
+  //     map(this.extractData),
+  //     catchError(this.handleError));
+  // }
+
+  getUsers(){
+      return this.http.get('/userapi', httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
-  }
-  getUsers(){
-    
   }
 
   getSentMsgs(): Observable<any> {
