@@ -11,7 +11,8 @@ export class RegisterComponent {
   credentials: TokenPayload = {
     email: '',
     name: '',
-    password: ''
+    password: '',
+    alias: ''
   };
 
   constructor(private auth: AuthenticationService, private router: Router) {}

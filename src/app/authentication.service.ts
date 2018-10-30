@@ -23,6 +23,7 @@ export interface TokenPayload {
   email: string;
   password: string;
   name?: string;
+  alias?: string
 }
 
 const httpOptions = {

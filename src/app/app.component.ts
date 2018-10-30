@@ -8,7 +8,7 @@ import { AuthenticationService } from './authentication.service';
   
 })
 export class AppComponent {
-  title = 'mean-angular6';
+  title = 'dcrypt';
   
   constructor(public auth: AuthenticationService) {}
   buttonSound(){
