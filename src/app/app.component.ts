@@ -17,16 +17,31 @@ export class AppComponent {
     buttonAudio.load();
     buttonAudio.play();
   }
+  
   bgMusic(){
     var isPlaying = true;
     let bgAudio = new Audio();
     bgAudio.src = "././assets/audio/bgmusic.mp3";
     bgAudio.load();
-   bgAudio.play();
-    
+    bgAudio.play();
     bgAudio.loop = true;
+
+
   }
  ngOnInit(){
    this.bgMusic();
  }
+//  togglePlay() {
+//   if (isPlaying) {
+//     bgAudio.pause()
+//   } else {
+//     myAudio.play();
+//   }
+// };
+// myAudio.onplaying = function() {
+//   isPlaying = true;
+// };
+// myAudio.onpause = function() {
+//   isPlaying = false;
+// };
 }
