@@ -4,11 +4,15 @@
   <div class="row">
     <div class="col-md-12">
       <h2>Choose an Opponent</h2>
-      <select class="menu" id="opponent">
+      <!-- <select class="menu" id="opponent">
         <option value="Patrick">Patrick</option>
         <option value="David">David</option>
         <option value="Paul">Paul</option>
         <option value="Dennis">Dennis</option>
+      </select> -->
+      <select class="menu" id="opponent" #t (change)="getIdVal(t.value)">
+        <option [value]="null">Select Alias</option>
+        <option *ngFor="let user of users" [value]=[user._id]>{{user.alias}}</option>
       </select>
       <h2>Cypher</h2>
         <select class="menu" id="cypher" (click)="doCrypt(true)">

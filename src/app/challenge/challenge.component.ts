@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { AuthenticationService } from '../authentication.service'
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { HttpBackend } from '@angular/common/http';
 
 @Component({
@@ -11,25 +12,38 @@ import { HttpBackend } from '@angular/common/http';
 })
 export class ChallengeComponent implements OnInit {
 
+  users: any;
+  sentTo_id: any;
+
   constructor(private auth: AuthenticationService, private api: ApiService, private router: Router) { }
 
   ngOnInit() {
-    this.api.getUser().subscribe(res => {
-      // console.log(res);
+
+    //this.api.getUsers().subscribe(res => {
+    this.api.getUsers()
+    .subscribe(res => {
+      this.users = res;
+      //console.log(this.users);
     })
-    }
-    keySound(){
-      let keyAudio = new Audio;
-      keyAudio.src = "./././assets/audio/key.mp3";
-      keyAudio.load();
-      keyAudio.play();
-    }
-    greenSound(){
-      let greenAudio = new Audio;
-      greenAudio.src = "./././assets/audio/function.mp3";
-      greenAudio.load();
-      greenAudio.play();
-    }
+  }
+
+  getIdVal(value) {
+    this.sentTo_id = value;
+  }
+
+  keySound(){
+    let keyAudio = new Audio;
+    keyAudio.src = "./././assets/audio/key.mp3";
+    keyAudio.load();
+    keyAudio.play();
+  }
+
+  greenSound(){
+    let greenAudio = new Audio;
+    greenAudio.src = "./././assets/audio/function.mp3";
+    greenAudio.load();
+    greenAudio.play();
+  }
 
   doCrypt(isDecrypt){
     this.keySound();
@@ -109,7 +123,7 @@ export class ChallengeComponent implements OnInit {
     const user = this.auth.getUserDetails();
     var sendChallenge = {
       Sender_id: user._id,
-      SentTo_id: '#SentTo _id',
+      SentTo_id: this.sentTo_id,
       SentTo_Alias: '#alias',
       DecryptedMsg: text,
       EncryptedMsg: encText,
@@ -151,4 +165,3 @@ export class ChallengeComponent implements OnInit {
     }); 
   }
 }
-
