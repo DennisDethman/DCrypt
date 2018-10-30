@@ -7,7 +7,6 @@ var RecvdMsgs = require('../models/ReceivedMessages.js');
 router.get('/', function(req, res, next) {
   RecvdMsgs.find(function (err, messages) {
     if (err) return next(err);
-    console.log('get all sentmsgs');
     res.json(messages);
   });
 });
