@@ -41,6 +41,9 @@ export class ApiService {
       map(this.extractData),
       catchError(this.handleError));
   }
+  getUsers(){
+    
+  }
 
   getMsgs(): Observable<any> {
     return this.http.get('/getmsgsapi', httpOptions).pipe(
