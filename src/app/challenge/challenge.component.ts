@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+import { HttpBackend } from '@angular/common/http';
 
 @Component({
   selector: 'app-challenge',
@@ -12,6 +13,9 @@ export class ChallengeComponent implements OnInit {
   constructor(private api: ApiService, private router: Router) { }
   
   ngOnInit() {
+    this.api.getUser().subscribe(res => {
+      // console.log(res);
+    })
     }
     keySound(){
       let keyAudio = new Audio;
@@ -115,7 +119,7 @@ export class ChallengeComponent implements OnInit {
     }
 
     this.postTheMessage(challenge)
-    console.log(challenge)
+    // console.log(challenge)
   }
 
   postTheMessage(challenge) {
