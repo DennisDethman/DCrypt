@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+<<<<<<< HEAD
     "start": "ng serve --open",
+=======
+    "start": "ng build && nodemon ./bin/www",
+>>>>>>> 1d1f27bfdb755acb9ebc2ec31197743853289638
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -33,9 +37,11 @@
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
     "hammerjs": "^2.0.8",
+    "howler": "^2.0.15",
     "http-errors": "^1.7.1",
     "mongoose": "^5.3.6",
     "morgan": "^1.9.1",
+    "ng-audio": "0.0.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "rxjs": "~6.3.3",

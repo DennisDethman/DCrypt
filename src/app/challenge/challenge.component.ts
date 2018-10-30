@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 class Challenge {
   text: string;
@@ -10,7 +11,6 @@ class Challenge {
   attempts: number;
   solved: boolean;
 }
-
 @Component({
   selector: 'app-challenge',
   templateUrl: './challenge.component.html',
@@ -18,12 +18,36 @@ class Challenge {
 })
 export class ChallengeComponent implements OnInit {
   newMessage: string = ""
-  constructor() { }
+  constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit() {
-      
+    }
+    keySound(){
+      let keyAudio = new Audio;
+      keyAudio.src = "./././assets/audio/key.mp3";
+      keyAudio.load();
+      keyAudio.play();
+    }
+    greenSound(){
+      let greenAudio = new Audio;
+      greenAudio.src = "./././assets/audio/function.mp3";
+      greenAudio.load();
+      greenAudio.play();
+    }
+
+  doCrypt(isDecrypt){
+    this.keySound();
+    // console.log(lngDetector.detect('This is a test.'));
+    const chooseCypher = (<HTMLInputElement>document.getElementById("cypher")).value;
+    if(chooseCypher === "cCrypt"){
+      this.cCrypt(isDecrypt);
+    }
+    if(chooseCypher === "cCrypt2"){
+      this.cCrypt2(isDecrypt);
+    }
   }
-   doCrypt(isDecrypt) {
+
+  cCrypt(isDecrypt) {
     var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
     if (!/^-?\d+$/.test(shiftText)) {
       alert("Shift is not an integer");
@@ -36,6 +60,27 @@ export class ChallengeComponent implements OnInit {
     }
     if (isDecrypt)
       shift = (26 + shift) % 26;
+    
+    var textElem = (<HTMLInputElement>document.getElementById("message"));
+    var encMessage = (<HTMLElement>document.getElementById("encMessage"));
+    encMessage.textContent = this.caesarShift(textElem.value, shift);
+    console.log("text element: " + textElem.value + "--> Encrypted Element: " + encMessage.textContent)
+  }
+   
+  cCrypt2(isDecrypt) {
+    var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
+    if (!/^-?\d+$/.test(shiftText)) {
+      alert("Shift is not an integer");
+      return;
+    }
+    var shift = parseInt(shiftText, 10);
+    if (shift < 0 || shift >= 26) {
+      alert("Shift is out of range");
+      return;
+    }
+    if (isDecrypt)
+      shift = (26 - shift) % 26;
+
     var textElem = (<HTMLInputElement>document.getElementById("message"));
     var encMessage = (<HTMLElement>document.getElementById("encMessage"));
     encMessage.textContent = this.caesarShift(textElem.value, shift);
@@ -53,24 +98,41 @@ export class ChallengeComponent implements OnInit {
     return result;
   }
 
-  newMessageTest(){
-    console.log(this.newMessage);
-  }
+  // expoCipher(text, shift){
+  //   var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
+
+  // }
   createChallenge(){
+    this.greenSound();
     var text = (<HTMLInputElement>document.getElementById("message")).value;
     var to = (<HTMLInputElement>document.getElementById("opponent")).value;
     var encText = (<HTMLElement>document.getElementById("encMessage")).textContent;
     var key = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
 
-    var newChallenge = {
-      text: text,
-      to : to, 
-      encText: encText, 
-      key: key,
-      attempts: 10, 
-      solved: false
+
+    var challenge = {
+      Sender_id: 'test sender id',
+      SentTo_id: 'test SentTo',
+      SentTo_Alias: 'test alias',
+      DecryptedMsg: text,
+      EncryptedMsg: encText,
+      EncryptionKey: key,
+      AttemptsAllowed: 10,
+      AttemptsRemaining: 10,
+      Solved: false,
+      MessageScore: 0
+    }
+
+    this.postTheMessage(challenge)
+    console.log(challenge)
   }
-    console.log(newChallenge)
-   }
+
+  postTheMessage(challenge) {
+    this.api.postMsg(challenge).subscribe(() => {
+      this.router.navigateByUrl('/profile');
+    }, (err) => {
+      console.error(err);
+    }); 
+  }
 }
 

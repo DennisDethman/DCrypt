@@ -12,25 +12,25 @@ var ctrlProfile = require('../controllers/profile');
 var ctrlAuth = require('../controllers/authentication');
 
 // profile
-router.get('/profile', auth, ctrlProfile.profileRead);
+router.get('/', auth, ctrlProfile.profileRead);
 
 // authentication
-router.post('/register', ctrlAuth.register);
-router.post('/login', ctrlAuth.login);
+router.post('/', ctrlAuth.register);
+router.post('/', ctrlAuth.login);
 
 // leaderboard display
-router.get('/leaderboard', function (req, res) {
-  console.log('I received a GET request');
-  user.find({ "user":"score" }, function(err, users) {
-    if(!err){
-      res.send(users);
-    }
-    else{
-        res.send('could not retrived data');
-  }
-  });
+// router.get('/leaderboard', function (req, res) {
+//   console.log('I received a GET request');
+//   user.find({ "user":"score" }, function(err, users) {
+//     if(!err){
+//       res.send(users);
+//     }
+//     else{
+//         res.send('could not retrived data');
+//   }
+//   });
 
-});
+// });
 
 // // get user messages
 // router.get('/messages', function (req, res) {
