@@ -2,16 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { AuthenticationService } from '../authentication.service'
 import { Router } from '@angular/router';
+import { HttpBackend } from '@angular/common/http';
 
-class Challenge {
-  text: string;
-  from: string;
-  to: string;
-  encryptionKey: number; 
-  encryptedText: string; 
-  attempts: number;
-  solved: boolean;
-}
 @Component({
   selector: 'app-challenge',
   templateUrl: './challenge.component.html',
@@ -22,9 +14,25 @@ export class ChallengeComponent implements OnInit {
   constructor(private auth: AuthenticationService, private api: ApiService, private router: Router) { }
 
   ngOnInit() {
+    this.api.getUser().subscribe(res => {
+      // console.log(res);
+    })
     }
-  
+    keySound(){
+      let keyAudio = new Audio;
+      keyAudio.src = "./././assets/audio/key.mp3";
+      keyAudio.load();
+      keyAudio.play();
+    }
+    greenSound(){
+      let greenAudio = new Audio;
+      greenAudio.src = "./././assets/audio/function.mp3";
+      greenAudio.load();
+      greenAudio.play();
+    }
+
   doCrypt(isDecrypt){
+    this.keySound();
     // console.log(lngDetector.detect('This is a test.'));
     const chooseCypher = (<HTMLInputElement>document.getElementById("cypher")).value;
     if(chooseCypher === "cCrypt"){
@@ -92,6 +100,7 @@ export class ChallengeComponent implements OnInit {
   // }
 
   createChallenge(){
+    this.greenSound();
     var text = (<HTMLInputElement>document.getElementById("message")).value;
     var to = (<HTMLInputElement>document.getElementById("opponent")).value;
     var encText = (<HTMLElement>document.getElementById("encMessage")).textContent;
@@ -141,6 +150,5 @@ export class ChallengeComponent implements OnInit {
       console.error(err);
     }); 
   }
-    
 }
 
