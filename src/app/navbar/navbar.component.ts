@@ -14,10 +14,7 @@ export class NavbarComponent implements OnInit {
   constructor(private auth: AuthenticationService, private router: Router) {}
   
   ngOnInit() {
-    console.log('getUserDetails')
-    console.log(this.auth.getUserDetails)
-    console.log('tokenpayload')
-    console.log(this.tokenpayload)
+
   }
 
 }

@@ -63,9 +63,4 @@ app.use(function(err, req, res, next) {
   res.send(err.status);
 });
 
-// var mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/mean-angular6', { promiseLibrary: require('bluebird'), useNewUrlParser: true })
-//   .then(() =>  console.log('connection successful'))
-//   .catch((err) => console.error(err));
-
 module.exports = app;

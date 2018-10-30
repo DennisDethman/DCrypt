@@ -58,7 +58,6 @@ export class ApiService {
   }
 
   postSentMsg(data): Observable<any> {
-    console.log(data)
     return this.http.post('/getmsgsapi', data, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -66,7 +65,6 @@ export class ApiService {
   }
 
   postRecvdMsg(data): Observable<any> {
-    console.log(data)
     return this.http.post('/recvdmsgsapi', data, httpOptions)
       .pipe(
         catchError(this.handleError)

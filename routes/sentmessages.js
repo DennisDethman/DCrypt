@@ -7,7 +7,6 @@ var SentMsgs = require('../models/SentMessages.js');
 router.get('/', function(req, res, next) {
   SentMsgs.find(function (err, messages) {
     if (err) return next(err);
-    console.log('get all sentmsgs');
     res.json(messages);
   });
 });

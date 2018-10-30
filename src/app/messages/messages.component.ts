@@ -35,8 +35,8 @@ export class MessagesComponent implements OnInit {
   ngOnInit() {
     this.dataSource.connect()
     .subscribe(res => {
-      console.log('messages');
-      console.log(res);
+      //console.log('messages');
+      //console.log(res);
       this.messages = res;
     }, err => {
       console.log(err);

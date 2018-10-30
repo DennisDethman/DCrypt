@@ -28,8 +28,7 @@ module.exports.register = function(req, res) {
 
   user.save(function(err) {
     var token;
-    console.log('register JWT: ')
-    console.log(user)
+
     token = user.generateJwt();
     res.status(200);
     res.json({
@@ -60,8 +59,7 @@ module.exports.login = function(req, res) {
     // If a user is found
     if (user) {
       token = user.generateJwt();
-      console.log('login JWT:')
-      console.log(user)
+
       res.status(200);
       res.json({
         "token" : token

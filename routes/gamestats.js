@@ -7,7 +7,6 @@ var GameStats = require('../models/GameStats.js');
 router.get('/', function(req, res, next) {
   GameStats.find(function (err, messages) {
     if (err) return next(err);
-    console.log('get all sentmsgs');
     res.json(messages);
   });
 });
