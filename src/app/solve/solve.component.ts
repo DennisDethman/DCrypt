@@ -3,46 +3,30 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 import { CLEAN_PROMISE } from '@angular/core/src/render3/instructions';
 
-class Message {
-  from: string;
-  completed: boolean;
-  message: string; 
-  encMessage: string; 
-  key: number;
-  attempts: number;
- //  timeSent: Date; 
-   constructor(from: string, message: string, encMessage: string,
-     key: number){
-       this.from = from;
-       this.completed = false;
-       this.message = message;
-       this.encMessage = encMessage;
-       this.key = key;  
-       this.attempts = 10;
-   }
-}
 @Component({
   selector: 'app-solve',
   templateUrl: './solve.component.html',
   styleUrls: ['./solve.component.css']
 })
 export class SolveComponent implements OnInit {
-  messages: Message[] = [];
+
   id: any;
   message: any;
 
   constructor(private activeRoute: ActivatedRoute,
               private router: Router,
-              private apiService: ApiService) { }
+              private api: ApiService) { }
 
   ngOnInit() {
     this.activeRoute.params.subscribe(params => {
       this.id = params['id'];
-      console.log(this.id);
     });
 
-    let message1 = new Message("Paul", "ABC", "BCD", 1 );
-      this.messages.push(message1);
+    this.api.getRecvdMsg(this.id)
+    .subscribe(res => {
+      this.message = res;
+      console.log(this.message)
+    })
   }
 
   onBack(): void {
@@ -61,12 +45,14 @@ export class SolveComponent implements OnInit {
     if(chooseCypher === "cCrypt2"){
       this.cCrypt2(isDecrypt);
     }
-    this.messages[0].attempts--
-    console.log( solution + " " + this.messages[0].message)
-    if (solution === this.messages[0].message){
+    this.message.AttemptsRemaining--
+    console.log( solution + " " + this.message.DecryptedMessage)
+    if (solution === this.message.DecryptedMessage){
+      this.message.Solved = true;
+      //this.message.MessageScore = 100;
       console.log("You Win!");
     }
-
+    this.api.updateRecvdMsg(this.id, this.message);
     // if (solution !== this.messages[0].message){
     //   alert("You lOOSE!");
     // }

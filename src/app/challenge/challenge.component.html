@@ -16,8 +16,9 @@
       </select>
       <h2>Cypher</h2>
         <select class="menu" id="cypher" (click)="doCrypt(true)">
-            <option value="cCrypt">Caesar Cypher</option>
-            <option value="cCrypt2">Reverse Caesar</option>
+          <option [value]="null">Select Cypher</option>  
+          <option value="cCrypt">Caesar Cypher</option>
+          <option value="cCrypt2">Reverse Caesar</option>
         </select>
       <h2>Message</h2>
 

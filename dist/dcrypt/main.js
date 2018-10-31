@@ -89,6 +89,9 @@ var ApiService = /** @class */ (function () {
     ApiService.prototype.getSentMsgs = function () {
         return this.http.get('/getmsgsapi', httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
+    ApiService.prototype.getRecvdMsg = function (msg) {
+        return this.http.get('/recvdmsgsapi/' + msg, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    };
     ApiService.prototype.getRecvdMsgs = function () {
         return this.http.get('/recvdmsgsapi', httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
@@ -98,6 +101,10 @@ var ApiService = /** @class */ (function () {
     };
     ApiService.prototype.postRecvdMsg = function (data) {
         return this.http.post('/recvdmsgsapi', data, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    };
+    ApiService.prototype.updateRecvdMsg = function (id, data) {
+        return this.http.put('/recvdmsgsapi' + id, data, httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     ApiService.prototype.getStats = function () {
@@ -928,7 +935,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; margin-bottom: 15px;}
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Challenge</h1>\n\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Choose an Opponent</h2>\n      <!-- <select class=\"menu\" id=\"opponent\">\n        <option value=\"Patrick\">Patrick</option>\n        <option value=\"David\">David</option>\n        <option value=\"Paul\">Paul</option>\n        <option value=\"Dennis\">Dennis</option>\n      </select> -->\n      <select class=\"menu\" id=\"opponent\" #t (change)=\"getIdVal(t.value)\">\n        <option [value]=\"null\">Select Alias</option>\n        <option *ngFor=\"let user of users\" [value]=[user._id]>{{user.alias}}</option>\n      </select>\n      <h2>Cypher</h2>\n        <select class=\"menu\" id=\"cypher\" (click)=\"doCrypt(true)\">\n            <option value=\"cCrypt\">Caesar Cypher</option>\n            <option value=\"cCrypt2\">Reverse Caesar</option>\n        </select>\n      <h2>Message</h2>\n\n\n      <input type=\"text\" class=\"menu\" id=\"message\" [(ngModel)]=\"newMessage\" (keyup)=\"doCrypt(true)\" maxlength=\"20\">\n      <!-- <p id=\"isEng\">Valid English</p>\n      <p id=\"nonEng\">Not Valid English</p> -->\n\n      <div>\n        <h2>Encryption Key</h2>\n        <!-- <input id=\"encryptionKey\"> -->\n        <select class=\"menu\" id=\"encryptionKey\" (click)=\"doCrypt(true)\">\n          <option value=\"0\">0</option>\n          <option value=\"1\">1</option>\n          <option value=\"2\">2</option>\n          <option value=\"3\">3</option>\n          <option value=\"4\">4</option>\n          <option value=\"5\">5</option>\n          <option value=\"6\">6</option>\n          <option value=\"7\">7</option>\n          <option value=\"8\">8</option>\n          <option value=\"9\">9</option>\n          <option value=\"10\">10</option>\n          <option value=\"11\">11</option>\n          <option value=\"12\">12</option>\n          <option value=\"13\">13</option>\n          <option value=\"14\">14</option>\n          <option value=\"15\">15</option>\n          <option value=\"16\">16</option>\n          <option value=\"17\">17</option>\n          <option value=\"18\">18</option>\n          <option value=\"19\">19</option>\n          <option value=\"20\">20</option>\n          <option value=\"21\">21</option>\n          <option value=\"22\">22</option>\n          <option value=\"23\">23</option>\n          <option value=\"24\">24</option>\n          <option value=\"25\">25</option>\n        </select>\n      </div>\n      \n      <div>\n        <h2>Encrypted Message</h2>\n        <p type=\"text\" id=\"encMessage\">{{encMessage}}</p>\n      </div>\n      <div>\n        <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" (click)=\"createChallenge()\">BuildMessage</button>\n      </div>\n      \n    </div>\n  </div>\n</div>\n"
+module.exports = "<h1>Challenge</h1>\n\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Choose an Opponent</h2>\n      <!-- <select class=\"menu\" id=\"opponent\">\n        <option value=\"Patrick\">Patrick</option>\n        <option value=\"David\">David</option>\n        <option value=\"Paul\">Paul</option>\n        <option value=\"Dennis\">Dennis</option>\n      </select> -->\n      <select class=\"menu\" id=\"opponent\" #t (change)=\"getIdVal(t.value)\">\n        <option [value]=\"null\">Select Alias</option>\n        <option *ngFor=\"let user of users\" [value]=[user._id]>{{user.alias}}</option>\n      </select>\n      <h2>Cypher</h2>\n        <select class=\"menu\" id=\"cypher\" (click)=\"doCrypt(true)\">\n          <option [value]=\"null\">Select Cypher</option>  \n          <option value=\"cCrypt\">Caesar Cypher</option>\n          <option value=\"cCrypt2\">Reverse Caesar</option>\n        </select>\n      <h2>Message</h2>\n\n\n      <input type=\"text\" class=\"menu\" id=\"message\" [(ngModel)]=\"newMessage\" (keyup)=\"doCrypt(true)\" maxlength=\"20\">\n      <!-- <p id=\"isEng\">Valid English</p>\n      <p id=\"nonEng\">Not Valid English</p> -->\n\n      <div>\n        <h2>Encryption Key</h2>\n        <!-- <input id=\"encryptionKey\"> -->\n        <select class=\"menu\" id=\"encryptionKey\" (click)=\"doCrypt(true)\">\n          <option value=\"0\">0</option>\n          <option value=\"1\">1</option>\n          <option value=\"2\">2</option>\n          <option value=\"3\">3</option>\n          <option value=\"4\">4</option>\n          <option value=\"5\">5</option>\n          <option value=\"6\">6</option>\n          <option value=\"7\">7</option>\n          <option value=\"8\">8</option>\n          <option value=\"9\">9</option>\n          <option value=\"10\">10</option>\n          <option value=\"11\">11</option>\n          <option value=\"12\">12</option>\n          <option value=\"13\">13</option>\n          <option value=\"14\">14</option>\n          <option value=\"15\">15</option>\n          <option value=\"16\">16</option>\n          <option value=\"17\">17</option>\n          <option value=\"18\">18</option>\n          <option value=\"19\">19</option>\n          <option value=\"20\">20</option>\n          <option value=\"21\">21</option>\n          <option value=\"22\">22</option>\n          <option value=\"23\">23</option>\n          <option value=\"24\">24</option>\n          <option value=\"25\">25</option>\n        </select>\n      </div>\n      \n      <div>\n        <h2>Encrypted Message</h2>\n        <p type=\"text\" id=\"encMessage\">{{encMessage}}</p>\n      </div>\n      <div>\n        <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" (click)=\"createChallenge()\">BuildMessage</button>\n      </div>\n      \n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -967,25 +974,19 @@ var ChallengeComponent = /** @class */ (function () {
     }
     ChallengeComponent.prototype.ngOnInit = function () {
         var _this = this;
-        //this.api.getUsers().subscribe(res => {
         this.api.getUsers()
             .subscribe(function (res) {
             _this.users = res;
-            //console.log(this.users);
         });
     };
     ChallengeComponent.prototype.getIdVal = function (value) {
-        console.log(value);
         this.sentTo_id = value;
-        console.log(this.sentTo_id);
         var userList = this.users;
         function getTheUser(id) {
-            return userList.find(function (usr) { return usr.id === id; });
+            return userList.find(function (usr) { return usr._id === id; });
         }
-        this.user = getTheUser(value._id);
-        console.log(this.user);
+        this.user = getTheUser(value);
         this.sentTo_Alias = this.user.alias;
-        console.log(this.sentTo_Alias);
     };
     ChallengeComponent.prototype.keySound = function () {
         var keyAudio = new Audio;
@@ -1072,7 +1073,7 @@ var ChallengeComponent = /** @class */ (function () {
         var sendChallenge = {
             Sender_id: usr._id,
             SentTo_id: this.sentTo_id,
-            SentTo_Alias: to,
+            SentTo_Alias: this.sentTo_Alias,
             DecryptedMsg: text,
             EncryptedMsg: encText,
             EncryptionKey: key,
@@ -1084,6 +1085,7 @@ var ChallengeComponent = /** @class */ (function () {
         console.log(sendChallenge);
         this.postTheSentMessage(sendChallenge);
         var recvdChallenge = {
+            Receiver_id: this.sentTo_id,
             ReceivedFrom_id: usr._id,
             ReceivedFrom_Alias: usr.alias,
             DecryptedMsg: text,
@@ -1678,7 +1680,7 @@ module.exports = ".menu{color: lightgreen; font-size: 12px; background: rgba(0,0
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h5>Decrypt the Message</h5>\n<form *ngFor=\"let message of messages; let i = index\">\n    <h6>Author: </h6>\n        <p>{{message.from}}</p>\n    <h6>Encrypted Message:</h6>\n        <p id=\"encMessage\">{{message.encMessage}}</p>\n        <div class=\"row\">\n            <div class=\"col-sm-6\">\n                <h6>Choose Cipher</h6>\n                    <select class=\"menu\" id=\"cypher\">\n                        <option value=\"cCrypt\">Caesar Cipher</option>\n                        <option value=\"cCrypt2\">Reverse Caesar</option>\n                    </select>\n            </div>\n            <div class=\"col-sm-6\">\n                <h6>Choose Key</h6>\n                    <select class=\"menu\" id=\"encryptionKey\">\n                        <option value=\"0\">0</option>\n                        <option value=\"1\">1</option>\n                        <option value=\"2\">2</option>\n                        <option value=\"3\">3</option>\n                        <option value=\"4\">4</option>\n                        <option value=\"5\">5</option>\n                        <option value=\"6\">6</option>\n                        <option value=\"7\">7</option>\n                        <option value=\"8\">8</option>\n                        <option value=\"9\">9</option>\n                        <option value=\"10\">10</option>\n                        <option value=\"11\">11</option>\n                        <option value=\"12\">12</option>\n                        <option value=\"13\">13</option>\n                        <option value=\"14\">14</option>\n                        <option value=\"15\">15</option>\n                        <option value=\"16\">16</option>\n                        <option value=\"17\">17</option>\n                        <option value=\"18\">18</option>\n                        <option value=\"19\">19</option>\n                        <option value=\"20\">20</option>\n                        <option value=\"21\">21</option>\n                        <option value=\"22\">22</option>\n                        <option value=\"23\">23</option>\n                        <option value=\"24\">24</option>\n                        <option value=\"25\">25</option>\n                    </select>\n                </div>\n            <div class=\"col-sm-6\">\n                <h6>Attempts: {{message.attempts}}</h6>\n            </div>\n        </div>\n         <br/>\n            <button class=\"btn btn-outline-success btn-sm\"  id=\"runCrypt\" (click)=\"doCrypt(true)\">Decrypt</button>\n            <h6>Solution: </h6>\n            <p id=\"message\"></p>\n\n</form>\n\n"
+module.exports = "<h5>Decrypt the Message</h5>\n<form>\n    <h6>Author: </h6>\n        <p>{{message.ReceivedFrom_Alias}}</p>\n    <h6>Encrypted Message:</h6>\n        <p id=\"encMessage\">{{message.EncryptedMsg}}</p>\n        <div class=\"row\">\n            <div class=\"col-sm-6\">\n                <h6>Choose Cipher</h6>\n                    <select class=\"menu\" id=\"cypher\">\n                        <option value=\"null\">Select Cypher</option>\n                        <option value=\"cCrypt\">Caesar Cipher</option>\n                        <option value=\"cCrypt2\">Reverse Caesar</option>\n                    </select>\n            </div>\n            <div class=\"col-sm-6\">\n                <h6>Choose Key</h6>\n                    <select class=\"menu\" id=\"encryptionKey\">\n                        <option value=\"0\">0</option>\n                        <option value=\"1\">1</option>\n                        <option value=\"2\">2</option>\n                        <option value=\"3\">3</option>\n                        <option value=\"4\">4</option>\n                        <option value=\"5\">5</option>\n                        <option value=\"6\">6</option>\n                        <option value=\"7\">7</option>\n                        <option value=\"8\">8</option>\n                        <option value=\"9\">9</option>\n                        <option value=\"10\">10</option>\n                        <option value=\"11\">11</option>\n                        <option value=\"12\">12</option>\n                        <option value=\"13\">13</option>\n                        <option value=\"14\">14</option>\n                        <option value=\"15\">15</option>\n                        <option value=\"16\">16</option>\n                        <option value=\"17\">17</option>\n                        <option value=\"18\">18</option>\n                        <option value=\"19\">19</option>\n                        <option value=\"20\">20</option>\n                        <option value=\"21\">21</option>\n                        <option value=\"22\">22</option>\n                        <option value=\"23\">23</option>\n                        <option value=\"24\">24</option>\n                        <option value=\"25\">25</option>\n                    </select>\n                </div>\n            <div class=\"col-sm-6\">\n                <h6>Attempts: {{message.AttemptsRemaining}}</h6>\n            </div>\n        </div>\n         <br/>\n            <button class=\"btn btn-outline-success btn-sm\"  id=\"runCrypt\" (click)=\"doCrypt(true)\">Decrypt</button>\n            <h6>Solution: </h6>\n            <p id=\"message\"></p>\n\n</form>\n\n"
 
 /***/ }),
 
@@ -1707,33 +1709,22 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var Message = /** @class */ (function () {
-    //  timeSent: Date; 
-    function Message(from, message, encMessage, key) {
-        this.from = from;
-        this.completed = false;
-        this.message = message;
-        this.encMessage = encMessage;
-        this.key = key;
-        this.attempts = 10;
-    }
-    return Message;
-}());
 var SolveComponent = /** @class */ (function () {
-    function SolveComponent(activeRoute, router, apiService) {
+    function SolveComponent(activeRoute, router, api) {
         this.activeRoute = activeRoute;
         this.router = router;
-        this.apiService = apiService;
-        this.messages = [];
+        this.api = api;
     }
     SolveComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.activeRoute.params.subscribe(function (params) {
             _this.id = params['id'];
-            console.log(_this.id);
         });
-        var message1 = new Message("Paul", "ABC", "BCD", 1);
-        this.messages.push(message1);
+        this.api.getRecvdMsg(this.id)
+            .subscribe(function (res) {
+            _this.message = res;
+            console.log(_this.message);
+        });
     };
     SolveComponent.prototype.onBack = function () {
         this.router.navigate(['messages']);
@@ -1748,11 +1739,14 @@ var SolveComponent = /** @class */ (function () {
         if (chooseCypher === "cCrypt2") {
             this.cCrypt2(isDecrypt);
         }
-        this.messages[0].attempts--;
-        console.log(solution + " " + this.messages[0].message);
-        if (solution === this.messages[0].message) {
+        this.message.AttemptsRemaining--;
+        console.log(solution + " " + this.message.DecryptedMessage);
+        if (solution === this.message.DecryptedMessage) {
+            this.message.Solved = true;
+            //this.message.MessageScore = 100;
             console.log("You Win!");
         }
+        this.api.updateRecvdMsg(this.id, this.message);
         // if (solution !== this.messages[0].message){
         //   alert("You lOOSE!");
         // }
@@ -1884,7 +1878,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/david/Documents/BootcampProjects/DCrypt/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/David/Documents/MyCourseWork-iMac/dCrypt/src/main.ts */"./src/main.ts");
 
 
 /***/ })
