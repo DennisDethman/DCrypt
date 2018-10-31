@@ -20,28 +20,21 @@ export class ChallengeComponent implements OnInit {
   constructor(private auth: AuthenticationService, private api: ApiService, private router: Router) { }
 
   ngOnInit() {
-
-    //this.api.getUsers().subscribe(res => {
     this.api.getUsers()
     .subscribe(res => {
       this.users = res;
-      //console.log(this.users);
     })
   }
 
   getIdVal(value) {
-    //console.log(value)
     this.sentTo_id = value;
-    //console.log(this.sentTo_id)
-
     let userList = this.users;
+
     function getTheUser(id) {
-      return userList.find(usr => usr.id === id);
+      return userList.find(usr => usr._id === id);
     }
-    this.user = getTheUser(value._id);
-    //console.log(this.user);
+    this.user = getTheUser(value);
     this.sentTo_Alias = this.user.alias;
-    //console.log(this.sentTo_Alias)
   }
 
   keySound(){
@@ -150,6 +143,7 @@ export class ChallengeComponent implements OnInit {
     this.postTheSentMessage(sendChallenge);
 
     var recvdChallenge = {
+      Receiver_id: this.sentTo_id,
       ReceivedFrom_id: usr._id,
       ReceivedFrom_Alias: usr.alias,
       DecryptedMsg: text,

@@ -1,13 +1,14 @@
 <h5>Decrypt the Message</h5>
-<form *ngFor="let message of messages; let i = index">
+<form>
     <h6>Author: </h6>
-        <p>{{message.from}}</p>
+        <p>{{message.ReceivedFrom_Alias}}</p>
     <h6>Encrypted Message:</h6>
-        <p id="encMessage">{{message.encMessage}}</p>
+        <p id="encMessage">{{message.EncryptedMsg}}</p>
         <div class="row">
             <div class="col-sm-6">
                 <h6>Choose Cipher</h6>
                     <select class="menu" id="cypher">
+                        <option value="null">Select Cypher</option>
                         <option value="cCrypt">Caesar Cipher</option>
                         <option value="cCrypt2">Reverse Caesar</option>
                     </select>
@@ -44,7 +45,7 @@
                     </select>
                 </div>
             <div class="col-sm-6">
-                <h6>Attempts: {{message.attempts}}</h6>
+                <h6>Attempts: {{message.AttemptsRemaining}}</h6>
             </div>
         </div>
          <br/>

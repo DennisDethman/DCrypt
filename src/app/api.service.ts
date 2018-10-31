@@ -54,6 +54,12 @@ export class ApiService {
       catchError(this.handleError));
   }
 
+  getRecvdMsg(msg): Observable<any> {
+    return this.http.get('/recvdmsgsapi/'+msg, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
   getRecvdMsgs(): Observable<any> {
     return this.http.get('/recvdmsgsapi', httpOptions).pipe(
       map(this.extractData),
@@ -72,6 +78,13 @@ export class ApiService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  updateRecvdMsg(id: string, data): Observable<any> {
+    return this.http.put('/recvdmsgsapi'+id, data, httpOptions)
+    .pipe(
+    catchError(this.handleError)
+    );
   }
 
   getStats(): Observable<any> {
