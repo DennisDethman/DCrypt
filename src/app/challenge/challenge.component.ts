@@ -12,8 +12,10 @@ import { HttpBackend } from '@angular/common/http';
 })
 export class ChallengeComponent implements OnInit {
 
+  user: any;
   users: any;
   sentTo_id: any;
+  sentTo_Alias: any;
 
   constructor(private auth: AuthenticationService, private api: ApiService, private router: Router) { }
 
@@ -28,7 +30,18 @@ export class ChallengeComponent implements OnInit {
   }
 
   getIdVal(value) {
+    //console.log(value)
     this.sentTo_id = value;
+    //console.log(this.sentTo_id)
+
+    let userList = this.users;
+    function getTheUser(id) {
+      return userList.find(usr => usr.id === id);
+    }
+    this.user = getTheUser(value._id);
+    //console.log(this.user);
+    this.sentTo_Alias = this.user.alias;
+    //console.log(this.sentTo_Alias)
   }
 
   keySound(){
@@ -120,11 +133,11 @@ export class ChallengeComponent implements OnInit {
     var encText = (<HTMLElement>document.getElementById("encMessage")).textContent;
     var key = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
 
-    const user = this.auth.getUserDetails();
+    const usr = this.auth.getUserDetails();
     var sendChallenge = {
-      Sender_id: user._id,
+      Sender_id: usr._id,
       SentTo_id: this.sentTo_id,
-      SentTo_Alias: '#alias',
+      SentTo_Alias: this.sentTo_Alias,
       DecryptedMsg: text,
       EncryptedMsg: encText,
       EncryptionKey: key,
@@ -133,11 +146,12 @@ export class ChallengeComponent implements OnInit {
       Solved: false,
       MessageScore: 0
     }
+    console.log(sendChallenge)
     this.postTheSentMessage(sendChallenge);
 
     var recvdChallenge = {
-      ReceivedFrom_id: user._id,
-      ReceivedFrom_Alias: user.alias,
+      ReceivedFrom_id: usr._id,
+      ReceivedFrom_Alias: usr.alias,
       DecryptedMsg: text,
       EncryptedMsg: encText,
       EncryptionKey: key,
