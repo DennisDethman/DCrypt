@@ -977,6 +977,15 @@ var ChallengeComponent = /** @class */ (function () {
     ChallengeComponent.prototype.getIdVal = function (value) {
         console.log(value);
         this.sentTo_id = value;
+        console.log(this.sentTo_id);
+        var userList = this.users;
+        function getTheUser(id) {
+            return userList.find(function (usr) { return usr.id === id; });
+        }
+        this.user = getTheUser(value._id);
+        console.log(this.user);
+        this.sentTo_Alias = this.user.alias;
+        console.log(this.sentTo_Alias);
     };
     ChallengeComponent.prototype.keySound = function () {
         var keyAudio = new Audio;
@@ -1059,11 +1068,11 @@ var ChallengeComponent = /** @class */ (function () {
         var to = document.getElementById("opponent").value;
         var encText = document.getElementById("encMessage").textContent;
         var key = document.getElementById("encryptionKey").value;
-        var user = this.auth.getUserDetails();
+        var usr = this.auth.getUserDetails();
         var sendChallenge = {
-            Sender_id: user._id,
+            Sender_id: usr._id,
             SentTo_id: this.sentTo_id,
-            SentTo_Alias: '#alias',
+            SentTo_Alias: to,
             DecryptedMsg: text,
             EncryptedMsg: encText,
             EncryptionKey: key,
@@ -1072,10 +1081,11 @@ var ChallengeComponent = /** @class */ (function () {
             Solved: false,
             MessageScore: 0
         };
+        console.log(sendChallenge);
         this.postTheSentMessage(sendChallenge);
         var recvdChallenge = {
-            ReceivedFrom_id: user._id,
-            ReceivedFrom_Alias: user.alias,
+            ReceivedFrom_id: usr._id,
+            ReceivedFrom_Alias: usr.alias,
             DecryptedMsg: text,
             EncryptedMsg: encText,
             EncryptionKey: key,
