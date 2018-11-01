@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-solve',
@@ -11,15 +12,21 @@ export class SolveComponent implements OnInit {
 
   id: any;
   message: any;
+  gameStats: any;
   solution: any;
+  msgScore: any;
+  userScore: any;
   solved: boolean = false; 
   failed: boolean = false; 
 
   constructor (private activeRoute: ActivatedRoute,
+               private auth: AuthenticationService,
                private router: Router,
                private api: ApiService) { }
 
   ngOnInit() {
+    const usr = this.auth.getUserDetails();
+    
     this.activeRoute.params.subscribe(params => {
       this.id = params['id'];
     });
@@ -27,7 +34,20 @@ export class SolveComponent implements OnInit {
     this.api.getRecvdMsg(this.id)
     .subscribe(res => {
       this.message = res;
-      console.log(this.message)
+      //console.log(this.message)
+    })
+
+    this.api.getGameStat(this.id)
+    .subscribe(res => {
+      console.log('gamestat')
+      console.log(res)
+      this.gameStats = res;
+      if (this.gameStats)
+        this.userScore = res.Score
+      else
+        //this.gameStats = new GameStats();
+        this.userScore = 0;
+        this.gameStats.alias = usr.alias;
     })
   }
 
@@ -53,7 +73,11 @@ export class SolveComponent implements OnInit {
     if (this.solution === this.message.DecryptedMsg) {
       this.message.Solved = true;
       this.solved = true;
-      this.message.MessageScore = this.message.AttemptsRemaining * 10; 
+      this.msgScore = this.message.AttemptsRemaining * 10;
+      this.message.MessageScore = this.msgScore;
+      this.gameStats.Score = this.msgScore + this.userScore;
+      console.log(this.gameStats)
+      this.updateGameStat();
     }
 
     this.api.updateRecvdMsg(this.id, this.message)
@@ -62,6 +86,15 @@ export class SolveComponent implements OnInit {
       console.log(err);
       }
     );
+  }
+
+  updateGameStat() {
+    this.api.updateGameStat(this.id, this.gameStats)
+      .subscribe(res => {
+      }, (err) => {
+      console.log(err);
+      }
+    );    
   }
   
   cCrypt(isDecrypt) {
@@ -84,7 +117,7 @@ export class SolveComponent implements OnInit {
     var encMessage = (<HTMLElement>document.getElementById("encMessage"));
     textElem.textContent = this.caesarShift(encMessage.textContent, shift);
     this.solution = this.caesarShift(encMessage.textContent, shift);
-    console.log("text element: " + textElem.textContent + "--> Encrypted Element: " + encMessage.textContent)
+    //console.log("text element: " + textElem.textContent + "--> Encrypted Element: " + encMessage.textContent)
   }
     
   cCrypt2(isDecrypt) {
@@ -106,7 +139,7 @@ export class SolveComponent implements OnInit {
     var encMessage = (<HTMLElement>document.getElementById("encMessage"));
     textElem.textContent = this.caesarShift(encMessage.textContent, shift);
     this.solution = this.caesarShift(encMessage.textContent, shift);
-    console.log("text element: " + textElem.textContent + "--> Encrypted Element: " + encMessage.textContent)
+    //console.log("text element: " + textElem.textContent + "--> Encrypted Element: " + encMessage.textContent)
   }
   
   caesarShift(text, shift) {

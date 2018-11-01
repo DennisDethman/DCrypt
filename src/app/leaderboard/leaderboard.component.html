@@ -1,10 +1,20 @@
 <div class="container">
   <h1>Leaderboard</h1>
-
+  <br>
   <!-- ng-repeat loops through data to build list -->
-  <ul>
-    <li ng-repeat="users in user">
-      {{user.score}}
-    </li>
-  </ul>>
+  <div>
+    <h5>Special Agent:</h5>
+    <ul>
+      <li>{{gameStats[0].alias}} : {{gameStats[0].Score}}</li>
+    </ul>
+  </div>
+  <br>
+  <div>
+    <h5>Top Agent Listing:</h5>
+    <ul>
+      <li *ngFor="let stat of gameStats">
+        {{stat.alias}} : {{stat.Score}}
+      </li>
+    </ul>
+  </div>
 </div>

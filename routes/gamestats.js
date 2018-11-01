@@ -3,11 +3,15 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var GameStats = require('../models/GameStats.js');
 
-/* GET ALL Stats */
+/* GET top 5 Stats */
 router.get('/', function(req, res, next) {
-  GameStats.find(function (err, messages) {
+   //GameStats.find(function (err, stats) {
+  GameStats.find({})
+  .sort({'Score': -1})
+  .limit(5)
+  .exec(function (err, stats) {
     if (err) return next(err);
-    res.json(messages);
+    res.json(stats);
   });
 });
 

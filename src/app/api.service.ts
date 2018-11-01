@@ -87,12 +87,25 @@ export class ApiService {
     );
   }
 
-  getStats(): Observable<any> {
+  getGameStat(id: string): Observable<any> {
+    return this.http.get('/statsapi/'+id, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  getGameStats(): Observable<any> {
     return this.http.get('/statsapi', httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
 
+  updateGameStat(id: string, data): Observable<any> {
+    return this.http.put('/statsapi/'+id, data, httpOptions)
+    .pipe(
+    catchError(this.handleError)
+    );
+  }
+  
   getBooks(): Observable<any> {
     return this.http.get(apiUrl, httpOptions).pipe(
       map(this.extractData),
