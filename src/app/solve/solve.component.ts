@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
-import { CLEAN_PROMISE } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-solve',
@@ -13,15 +12,16 @@ export class SolveComponent implements OnInit {
   id: any;
   message: any;
   solution: any;
+  solved: boolean = false; 
+  failed: boolean = false; 
 
-  constructor(private activeRoute: ActivatedRoute,
-              private router: Router,
-              private api: ApiService) { }
+  constructor (private activeRoute: ActivatedRoute,
+               private router: Router,
+               private api: ApiService) { }
 
   ngOnInit() {
     this.activeRoute.params.subscribe(params => {
       this.id = params['id'];
-      
     });
 
     this.api.getRecvdMsg(this.id)
@@ -30,37 +30,39 @@ export class SolveComponent implements OnInit {
       console.log(this.message)
     })
   }
-public solved: boolean = false; 
-public failed: boolean = false; 
 
   onBack(): void {
     this.router.navigate(['messages']);
- }
+  }
  
-  doCrypt(isDecrypt){
- 
+  doCrypt(isDecrypt) {
     const chooseCypher = (<HTMLInputElement>document.getElementById("cypher")).value;
-    if(chooseCypher === "cCrypt"){
+    
+    if (chooseCypher === "cCrypt") {
       this.cCrypt(isDecrypt);
     }
-    if(chooseCypher === "cCrypt2"){
+    if (chooseCypher === "cCrypt2") {
       this.cCrypt2(isDecrypt);
     }
     this.message.AttemptsRemaining--;
 
-    console.log(this.message.DecryptedMsg)
-    console.log(this.solution + " is the solution");
-    if (this.solution == this.message.DecryptedMsg){
+    if (this.message.AttemptsRemaining === 0) {
+      this.failed = true; 
+    }
+
+    if (this.solution === this.message.DecryptedMsg) {
       this.message.Solved = true;
       this.solved = true;
       this.message.MessageScore = this.message.AttemptsRemaining * 10; 
-      console.log("You Win!");
     }
-    this.api.updateRecvdMsg(this.id, this.message);
-    if(this.message.AttemptsRemaining === 0){
-      this.failed = true; 
-    }
-}
+
+    this.api.updateRecvdMsg(this.id, this.message)
+      .subscribe(res => {
+      }, (err) => {
+      console.log(err);
+      }
+    );
+  }
   
   cCrypt(isDecrypt) {
     var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
@@ -68,11 +70,13 @@ public failed: boolean = false;
       alert("Shift is not an integer");
       return;
     }
+
     var shift = parseInt(shiftText, 10);
     if (shift < 0 || shift >= 26) {
       alert("Shift is out of range");
       return;
     }
+
     if (isDecrypt)
       shift = (26 + shift) % 26;
     
@@ -89,6 +93,7 @@ public failed: boolean = false;
       alert("Shift is not an integer");
       return;
     }
+
     var shift = parseInt(shiftText, 10);
     if (shift < 0 || shift >= 26) {
       alert("Shift is out of range");

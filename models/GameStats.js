@@ -6,6 +6,11 @@ var gamestatsSchema = new mongoose.Schema({
     unique: false,
     required: true
   },
+  alias: {
+    type: String,
+    unique: false,
+    required: false
+  },
   UserScore: {
     type: Number,
     unique: false,

@@ -81,7 +81,7 @@ export class ApiService {
   }
 
   updateRecvdMsg(id: string, data): Observable<any> {
-    return this.http.put('/recvdmsgsapi'+id, data, httpOptions)
+    return this.http.put('/recvdmsgsapi/'+id, data, httpOptions)
     .pipe(
     catchError(this.handleError)
     );
