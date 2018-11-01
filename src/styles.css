@@ -6,7 +6,7 @@ body{background: rgba(241, 31, 39, 0.75);font-family: 'Droid', sans-serif;font-s
 body{text-shadow: 2px 2px 2px black, 0 0 1em lightgreen, 0 0 0.2em lightgreen;}
 
 #myVideo {
-    z-index: 0;
+    z-index: -100;
     position: fixed;
     right: 0;
     bottom: 0;
