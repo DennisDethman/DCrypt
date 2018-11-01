@@ -12,6 +12,7 @@ export class SolveComponent implements OnInit {
 
   id: any;
   message: any;
+  solution: any;
 
   constructor(private activeRoute: ActivatedRoute,
               private router: Router,
@@ -20,6 +21,7 @@ export class SolveComponent implements OnInit {
   ngOnInit() {
     this.activeRoute.params.subscribe(params => {
       this.id = params['id'];
+      
     });
 
     this.api.getRecvdMsg(this.id)
@@ -28,35 +30,37 @@ export class SolveComponent implements OnInit {
       console.log(this.message)
     })
   }
+public solved: boolean = false; 
+public failed: boolean = false; 
 
   onBack(): void {
     this.router.navigate(['messages']);
  }
-    
+ 
   doCrypt(isDecrypt){
-    // console.log(lngDetector.detect('This is a test.'));
-    
-    const solution = (<HTMLElement>document.getElementById("message")).textContent;
+ 
     const chooseCypher = (<HTMLInputElement>document.getElementById("cypher")).value;
-    
     if(chooseCypher === "cCrypt"){
       this.cCrypt(isDecrypt);
     }
     if(chooseCypher === "cCrypt2"){
       this.cCrypt2(isDecrypt);
     }
-    this.message.AttemptsRemaining--
-    console.log( solution + " " + this.message.DecryptedMessage)
-    if (solution === this.message.DecryptedMessage){
+    this.message.AttemptsRemaining--;
+
+    console.log(this.message.DecryptedMsg)
+    console.log(this.solution + " is the solution");
+    if (this.solution == this.message.DecryptedMsg){
       this.message.Solved = true;
-      //this.message.MessageScore = 100;
+      this.solved = true;
+      this.message.MessageScore = this.message.AttemptsRemaining * 10; 
       console.log("You Win!");
     }
     this.api.updateRecvdMsg(this.id, this.message);
-    // if (solution !== this.messages[0].message){
-    //   alert("You lOOSE!");
-    // }
-  }
+    if(this.message.AttemptsRemaining === 0){
+      this.failed = true; 
+    }
+}
   
   cCrypt(isDecrypt) {
     var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
@@ -75,6 +79,7 @@ export class SolveComponent implements OnInit {
     var textElem = (<HTMLElement>document.getElementById("message"));
     var encMessage = (<HTMLElement>document.getElementById("encMessage"));
     textElem.textContent = this.caesarShift(encMessage.textContent, shift);
+    this.solution = this.caesarShift(encMessage.textContent, shift);
     console.log("text element: " + textElem.textContent + "--> Encrypted Element: " + encMessage.textContent)
   }
     
@@ -95,6 +100,7 @@ export class SolveComponent implements OnInit {
     var textElem = (<HTMLElement>document.getElementById("message"));
     var encMessage = (<HTMLElement>document.getElementById("encMessage"));
     textElem.textContent = this.caesarShift(encMessage.textContent, shift);
+    this.solution = this.caesarShift(encMessage.textContent, shift);
     console.log("text element: " + textElem.textContent + "--> Encrypted Element: " + encMessage.textContent)
   }
   

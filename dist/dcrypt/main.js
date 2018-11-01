@@ -1528,7 +1528,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; }\n/*# sourceMappingU
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n     <div class=\"col-md-12\">\n\n\n      <h1>Your dCrypt Profile</h1>\n\n\n      <div class=\"form-horizontal\">\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Full name</label>\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.name }}</p>\n        </div>\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Email</label>\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.email }}</p>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n     <div class=\"col-md-12\">\n\n\n      <h1>Your dCrypt Profile</h1>\n\n\n      <div class=\"form-horizontal\">\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Full name</label>\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.name }}</p>\n        </div>\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Email</label>\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.email }}</p>\n        </div>\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Alias</label>\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.alias }}</p>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1680,7 +1680,7 @@ module.exports = ".menu{color: lightgreen; font-size: 12px; background: rgba(0,0
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h5>Decrypt the Message</h5>\n<form>\n    <h6>Author: </h6>\n        <p>{{message.ReceivedFrom_Alias}}</p>\n    <h6>Encrypted Message:</h6>\n        <p id=\"encMessage\">{{message.EncryptedMsg}}</p>\n        <div class=\"row\">\n            <div class=\"col-sm-6\">\n                <h6>Choose Cipher</h6>\n                    <select class=\"menu\" id=\"cypher\">\n                        <option value=\"null\">Select Cypher</option>\n                        <option value=\"cCrypt\">Caesar Cipher</option>\n                        <option value=\"cCrypt2\">Reverse Caesar</option>\n                    </select>\n            </div>\n            <div class=\"col-sm-6\">\n                <h6>Choose Key</h6>\n                    <select class=\"menu\" id=\"encryptionKey\">\n                        <option value=\"0\">0</option>\n                        <option value=\"1\">1</option>\n                        <option value=\"2\">2</option>\n                        <option value=\"3\">3</option>\n                        <option value=\"4\">4</option>\n                        <option value=\"5\">5</option>\n                        <option value=\"6\">6</option>\n                        <option value=\"7\">7</option>\n                        <option value=\"8\">8</option>\n                        <option value=\"9\">9</option>\n                        <option value=\"10\">10</option>\n                        <option value=\"11\">11</option>\n                        <option value=\"12\">12</option>\n                        <option value=\"13\">13</option>\n                        <option value=\"14\">14</option>\n                        <option value=\"15\">15</option>\n                        <option value=\"16\">16</option>\n                        <option value=\"17\">17</option>\n                        <option value=\"18\">18</option>\n                        <option value=\"19\">19</option>\n                        <option value=\"20\">20</option>\n                        <option value=\"21\">21</option>\n                        <option value=\"22\">22</option>\n                        <option value=\"23\">23</option>\n                        <option value=\"24\">24</option>\n                        <option value=\"25\">25</option>\n                    </select>\n                </div>\n            <div class=\"col-sm-6\">\n                <h6>Attempts: {{message.AttemptsRemaining}}</h6>\n            </div>\n        </div>\n         <br/>\n            <button class=\"btn btn-outline-success btn-sm\"  id=\"runCrypt\" (click)=\"doCrypt(true)\">Decrypt</button>\n            <h6>Solution: </h6>\n            <p id=\"message\"></p>\n\n</form>\n\n"
+module.exports = "<h5>Decrypt the Message</h5>\n<ng-container *ngIf=\"!solved && !failed\">\n    <form>\n        <h6>Author: </h6>\n            <p>{{message.ReceivedFrom_Alias}}</p>\n        <h6>Encrypted Message:</h6>\n            <p id=\"encMessage\">{{message.EncryptedMsg}}</p>\n            <div class=\"row\">\n                <div class=\"col-sm-6\">\n                    <h6>Choose Cipher</h6>\n                        <select class=\"menu\" id=\"cypher\">\n                            <option value=\"null\">Select Cypher</option>\n                            <option value=\"cCrypt\">Caesar Cipher</option>\n                            <option value=\"cCrypt2\">Reverse Caesar</option>\n                        </select>\n                </div>\n                <div class=\"col-sm-6\">\n                    <h6>Choose Key</h6>\n                        <select class=\"menu\" id=\"encryptionKey\">\n                            <option value=\"0\">0</option>\n                            <option value=\"1\">1</option>\n                            <option value=\"2\">2</option>\n                            <option value=\"3\">3</option>\n                            <option value=\"4\">4</option>\n                            <option value=\"5\">5</option>\n                            <option value=\"6\">6</option>\n                            <option value=\"7\">7</option>\n                            <option value=\"8\">8</option>\n                            <option value=\"9\">9</option>\n                            <option value=\"10\">10</option>\n                            <option value=\"11\">11</option>\n                            <option value=\"12\">12</option>\n                            <option value=\"13\">13</option>\n                            <option value=\"14\">14</option>\n                            <option value=\"15\">15</option>\n                            <option value=\"16\">16</option>\n                            <option value=\"17\">17</option>\n                            <option value=\"18\">18</option>\n                            <option value=\"19\">19</option>\n                            <option value=\"20\">20</option>\n                            <option value=\"21\">21</option>\n                            <option value=\"22\">22</option>\n                            <option value=\"23\">23</option>\n                            <option value=\"24\">24</option>\n                            <option value=\"25\">25</option>\n                        </select>\n                    </div>\n                <div class=\"col-sm-6\">\n                    <h6>Attempts: {{message.AttemptsRemaining}}</h6>\n                </div>\n            </div>\n             <br/>\n                <button class=\"btn btn-outline-success btn-sm\" id=\"runCrypt\" (click)=\"doCrypt(true)\">Decrypt</button>\n                <h6>Solution: </h6>\n                <p id=\"message\"></p>\n    \n    </form>\n\n</ng-container >\n\n<ng-container *ngIf=\"solved && !failed\">\n    <h4>Congratulations! You solved it!</h4>\n    <button class=\"btn btn-sm\" (click)=\"onBack()\">\n        Back to Messages\n    </button>\n</ng-container>\n<ng-container *ngIf=\"!solved && failed\">\n    <h4>You have failed!</h4>\n    <button class=\"btn btn-sm\" (click)=\"onBack()\">\n        Back to Messages\n    </button>\n</ng-container>\n\n\n\n\n"
 
 /***/ }),
 
@@ -1714,6 +1714,8 @@ var SolveComponent = /** @class */ (function () {
         this.activeRoute = activeRoute;
         this.router = router;
         this.api = api;
+        this.solved = false;
+        this.failed = false;
     }
     SolveComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1729,9 +1731,14 @@ var SolveComponent = /** @class */ (function () {
     SolveComponent.prototype.onBack = function () {
         this.router.navigate(['messages']);
     };
+    SolveComponent.prototype.checkWin = function (text) {
+        if (text === this.message.DecryptedMsg) {
+            this.solved = true;
+        }
+    };
     SolveComponent.prototype.doCrypt = function (isDecrypt) {
         // console.log(lngDetector.detect('This is a test.'));
-        var solution = document.getElementById("message").textContent;
+        // const solution = (<HTMLElement>document.getElementById("message")).textContent;
         var chooseCypher = document.getElementById("cypher").value;
         if (chooseCypher === "cCrypt") {
             this.cCrypt(isDecrypt);
@@ -1740,9 +1747,11 @@ var SolveComponent = /** @class */ (function () {
             this.cCrypt2(isDecrypt);
         }
         this.message.AttemptsRemaining--;
-        console.log(solution + " " + this.message.DecryptedMessage);
-        if (solution === this.message.DecryptedMessage) {
-            this.message.Solved = true;
+        // this.checkWin(solution);
+        console.log(this.message.DecryptedMsg);
+        console.log(this.solution + " is the solution");
+        if (this.solution == this.message.DecryptedMsg) {
+            this.solved = true;
             //this.message.MessageScore = 100;
             console.log("You Win!");
         }
@@ -1750,6 +1759,9 @@ var SolveComponent = /** @class */ (function () {
         // if (solution !== this.messages[0].message){
         //   alert("You lOOSE!");
         // }
+        if (this.message.AttemptsRemaining === 0) {
+            this.failed = true;
+        }
     };
     SolveComponent.prototype.cCrypt = function (isDecrypt) {
         var shiftText = document.getElementById("encryptionKey").value;
@@ -1767,6 +1779,7 @@ var SolveComponent = /** @class */ (function () {
         var textElem = document.getElementById("message");
         var encMessage = document.getElementById("encMessage");
         textElem.textContent = this.caesarShift(encMessage.textContent, shift);
+        this.solution = this.caesarShift(encMessage.textContent, shift);
         console.log("text element: " + textElem.textContent + "--> Encrypted Element: " + encMessage.textContent);
     };
     SolveComponent.prototype.cCrypt2 = function (isDecrypt) {
@@ -1785,6 +1798,7 @@ var SolveComponent = /** @class */ (function () {
         var textElem = document.getElementById("message");
         var encMessage = document.getElementById("encMessage");
         textElem.textContent = this.caesarShift(encMessage.textContent, shift);
+        this.solution = this.caesarShift(encMessage.textContent, shift);
         console.log("text element: " + textElem.textContent + "--> Encrypted Element: " + encMessage.textContent);
     };
     SolveComponent.prototype.caesarShift = function (text, shift) {
@@ -1878,7 +1892,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/David/Documents/MyCourseWork-iMac/dCrypt/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\miran\Desktop\project3\DCrypt\src\main.ts */"./src/main.ts");
 
 
 /***/ })
