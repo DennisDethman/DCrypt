@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
+import { AuthenticationService } from '../authentication.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-leaderboard',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaderboardComponent implements OnInit {
 
-  constructor() { }
+  gameStats: any;
+
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
+    this.api.getGameStats()
+    .subscribe(res => {
+      this.gameStats = res;
+    }) 
   }
-
 }

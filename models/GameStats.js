@@ -11,7 +11,7 @@ var gamestatsSchema = new mongoose.Schema({
     unique: false,
     required: false
   },
-  UserScore: {
+  Score: {
     type: Number,
     unique: false,
     required: false

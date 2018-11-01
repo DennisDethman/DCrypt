@@ -29,7 +29,7 @@ module.exports = [[module.i, "/*!\n * Bootstrap v4.1.3 (https://getbootstrap.com
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = [[module.i, "\nh1 {font-size: 30px; text-align: center; }\n\nbody{background: rgba(241, 31, 39, 0.75);font-family: 'Droid', sans-serif;font-size:7pt;color:#d8c99e;font-weight:700;text-transform:uppercase;}\n\nbody{text-shadow: 2px 2px 2px black, 0 0 1em lightgreen, 0 0 0.2em lightgreen;}\n\n#myVideo {\n    z-index: 0;\n    position: fixed;\n    right: 0;\n    bottom: 0;\n    min-width: 100%; \n    min-height: 100%;\n  }\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9zdHlsZXMuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQSxJQUFJLGdCQUFnQixDQUFDLG1CQUFtQixFQUFFOztBQUUxQyxLQUFLLG9DQUFvQyxpQ0FBaUMsY0FBYyxjQUFjLGdCQUFnQix5QkFBeUIsQ0FBQzs7QUFFaEosS0FBSyx5RUFBeUUsQ0FBQzs7QUFFL0U7SUFDSSxXQUFXO0lBQ1gsZ0JBQWdCO0lBQ2hCLFNBQVM7SUFDVCxVQUFVO0lBQ1YsZ0JBQWdCO0lBQ2hCLGlCQUFpQjtHQUNsQiIsImZpbGUiOiJzcmMvc3R5bGVzLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuaDEge2ZvbnQtc2l6ZTogMzBweDsgdGV4dC1hbGlnbjogY2VudGVyOyB9XG5cbmJvZHl7YmFja2dyb3VuZDogcmdiYSgyNDEsIDMxLCAzOSwgMC43NSk7Zm9udC1mYW1pbHk6ICdEcm9pZCcsIHNhbnMtc2VyaWY7Zm9udC1zaXplOjdwdDtjb2xvcjojZDhjOTllO2ZvbnQtd2VpZ2h0OjcwMDt0ZXh0LXRyYW5zZm9ybTp1cHBlcmNhc2U7fVxuXG5ib2R5e3RleHQtc2hhZG93OiAycHggMnB4IDJweCBibGFjaywgMCAwIDFlbSBsaWdodGdyZWVuLCAwIDAgMC4yZW0gbGlnaHRncmVlbjt9XG5cbiNteVZpZGVvIHtcbiAgICB6LWluZGV4OiAwO1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICByaWdodDogMDtcbiAgICBib3R0b206IDA7XG4gICAgbWluLXdpZHRoOiAxMDAlOyBcbiAgICBtaW4taGVpZ2h0OiAxMDAlO1xuICB9XG5cbiJdfQ== */", '', '']]
+module.exports = [[module.i, "\nh1 {font-size: 30px; text-align: center; }\n\nbody{background: rgba(241, 31, 39, 0.75);font-family: 'Droid', sans-serif;font-size:7pt;color:#d8c99e;font-weight:700;text-transform:uppercase;}\n\nbody{text-shadow: 2px 2px 2px black, 0 0 1em lightgreen, 0 0 0.2em lightgreen;}\n\n#myVideo {\n    z-index: -100;\n    position: fixed;\n    right: 0;\n    bottom: 0;\n    min-width: 100%; \n    min-height: 100%;\n  }\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9zdHlsZXMuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQSxJQUFJLGdCQUFnQixDQUFDLG1CQUFtQixFQUFFOztBQUUxQyxLQUFLLG9DQUFvQyxpQ0FBaUMsY0FBYyxjQUFjLGdCQUFnQix5QkFBeUIsQ0FBQzs7QUFFaEosS0FBSyx5RUFBeUUsQ0FBQzs7QUFFL0U7SUFDSSxjQUFjO0lBQ2QsZ0JBQWdCO0lBQ2hCLFNBQVM7SUFDVCxVQUFVO0lBQ1YsZ0JBQWdCO0lBQ2hCLGlCQUFpQjtHQUNsQiIsImZpbGUiOiJzcmMvc3R5bGVzLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuaDEge2ZvbnQtc2l6ZTogMzBweDsgdGV4dC1hbGlnbjogY2VudGVyOyB9XG5cbmJvZHl7YmFja2dyb3VuZDogcmdiYSgyNDEsIDMxLCAzOSwgMC43NSk7Zm9udC1mYW1pbHk6ICdEcm9pZCcsIHNhbnMtc2VyaWY7Zm9udC1zaXplOjdwdDtjb2xvcjojZDhjOTllO2ZvbnQtd2VpZ2h0OjcwMDt0ZXh0LXRyYW5zZm9ybTp1cHBlcmNhc2U7fVxuXG5ib2R5e3RleHQtc2hhZG93OiAycHggMnB4IDJweCBibGFjaywgMCAwIDFlbSBsaWdodGdyZWVuLCAwIDAgMC4yZW0gbGlnaHRncmVlbjt9XG5cbiNteVZpZGVvIHtcbiAgICB6LWluZGV4OiAtMTAwO1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICByaWdodDogMDtcbiAgICBib3R0b206IDA7XG4gICAgbWluLXdpZHRoOiAxMDAlOyBcbiAgICBtaW4taGVpZ2h0OiAxMDAlO1xuICB9XG5cbiJdfQ== */", '', '']]
 
 /***/ }),
 
@@ -637,11 +637,9 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-__webpack_require__(/*! C:\Users\miran\Desktop\project3\DCrypt\node_modules\@angular\material\prebuilt-themes\purple-green.css */"./node_modules/@angular/material/prebuilt-themes/purple-green.css");
-__webpack_require__(/*! C:\Users\miran\Desktop\project3\DCrypt\src\styles.css */"./src/styles.css");
-module.exports = __webpack_require__(/*! C:\Users\miran\Desktop\project3\DCrypt\node_modules\bootstrap\dist\css\bootstrap.css */"./node_modules/bootstrap/dist/css/bootstrap.css");
-
+__webpack_require__(/*! /Users/David/Documents/MyCourseWork-iMac/dCrypt/node_modules/@angular/material/prebuilt-themes/purple-green.css */"./node_modules/@angular/material/prebuilt-themes/purple-green.css");
+__webpack_require__(/*! /Users/David/Documents/MyCourseWork-iMac/dCrypt/src/styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! /Users/David/Documents/MyCourseWork-iMac/dCrypt/node_modules/bootstrap/dist/css/bootstrap.css */"./node_modules/bootstrap/dist/css/bootstrap.css");
 
 
 /***/ })
