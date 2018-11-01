@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
-import { CLEAN_PROMISE } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-solve',
@@ -12,10 +11,13 @@ export class SolveComponent implements OnInit {
 
   id: any;
   message: any;
+  solution: any;
+  solved: boolean = false; 
+  failed: boolean = false; 
 
-  constructor(private activeRoute: ActivatedRoute,
-              private router: Router,
-              private api: ApiService) { }
+  constructor (private activeRoute: ActivatedRoute,
+               private router: Router,
+               private api: ApiService) { }
 
   ngOnInit() {
     this.activeRoute.params.subscribe(params => {
@@ -31,31 +33,35 @@ export class SolveComponent implements OnInit {
 
   onBack(): void {
     this.router.navigate(['messages']);
- }
-    
-  doCrypt(isDecrypt){
-    // console.log(lngDetector.detect('This is a test.'));
-    
-    const solution = (<HTMLElement>document.getElementById("message")).textContent;
+  }
+ 
+  doCrypt(isDecrypt) {
     const chooseCypher = (<HTMLInputElement>document.getElementById("cypher")).value;
     
-    if(chooseCypher === "cCrypt"){
+    if (chooseCypher === "cCrypt") {
       this.cCrypt(isDecrypt);
     }
-    if(chooseCypher === "cCrypt2"){
+    if (chooseCypher === "cCrypt2") {
       this.cCrypt2(isDecrypt);
     }
-    this.message.AttemptsRemaining--
-    console.log( solution + " " + this.message.DecryptedMessage)
-    if (solution === this.message.DecryptedMessage){
-      this.message.Solved = true;
-      //this.message.MessageScore = 100;
-      console.log("You Win!");
+    this.message.AttemptsRemaining--;
+
+    if (this.message.AttemptsRemaining === 0) {
+      this.failed = true; 
     }
-    this.api.updateRecvdMsg(this.id, this.message);
-    // if (solution !== this.messages[0].message){
-    //   alert("You lOOSE!");
-    // }
+
+    if (this.solution === this.message.DecryptedMsg) {
+      this.message.Solved = true;
+      this.solved = true;
+      this.message.MessageScore = this.message.AttemptsRemaining * 10; 
+    }
+
+    this.api.updateRecvdMsg(this.id, this.message)
+      .subscribe(res => {
+      }, (err) => {
+      console.log(err);
+      }
+    );
   }
   
   cCrypt(isDecrypt) {
@@ -64,17 +70,20 @@ export class SolveComponent implements OnInit {
       alert("Shift is not an integer");
       return;
     }
+
     var shift = parseInt(shiftText, 10);
     if (shift < 0 || shift >= 26) {
       alert("Shift is out of range");
       return;
     }
+
     if (isDecrypt)
       shift = (26 + shift) % 26;
     
     var textElem = (<HTMLElement>document.getElementById("message"));
     var encMessage = (<HTMLElement>document.getElementById("encMessage"));
     textElem.textContent = this.caesarShift(encMessage.textContent, shift);
+    this.solution = this.caesarShift(encMessage.textContent, shift);
     console.log("text element: " + textElem.textContent + "--> Encrypted Element: " + encMessage.textContent)
   }
     
@@ -84,6 +93,7 @@ export class SolveComponent implements OnInit {
       alert("Shift is not an integer");
       return;
     }
+
     var shift = parseInt(shiftText, 10);
     if (shift < 0 || shift >= 26) {
       alert("Shift is out of range");
@@ -95,6 +105,7 @@ export class SolveComponent implements OnInit {
     var textElem = (<HTMLElement>document.getElementById("message"));
     var encMessage = (<HTMLElement>document.getElementById("encMessage"));
     textElem.textContent = this.caesarShift(encMessage.textContent, shift);
+    this.solution = this.caesarShift(encMessage.textContent, shift);
     console.log("text element: " + textElem.textContent + "--> Encrypted Element: " + encMessage.textContent)
   }
   

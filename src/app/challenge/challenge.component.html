@@ -12,7 +12,7 @@
       </select> -->
       <select class="menu" id="opponent" #t (change)="getIdVal(t.value)">
         <option [value]="null">Select Alias</option>
-        <option *ngFor="let user of users" [value]=[user._id]>{{user.alias}}</option>
+        <option *ngFor="let user of filteredUsersList" [value]=[user._id]>{{user.alias}}</option>
       </select>
       <h2>Cypher</h2>
         <select class="menu" id="cypher" (click)="doCrypt(true)">

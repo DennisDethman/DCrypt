@@ -26,6 +26,14 @@ export class ChallengeComponent implements OnInit {
     })
   }
 
+  get filteredUsersList() {
+    const usr = this.auth.getUserDetails();
+    
+    return this.users.filter((u) =>
+        u._id !== usr._id
+      );
+  }
+
   getIdVal(value) {
     this.sentTo_id = value;
     let userList = this.users;

@@ -3,7 +3,7 @@
      <div class="col-md-12">
 
 
-      <h1>Your dCrypt Profile</h1>
+      <h1>dCrypt Profile</h1>
 
 
       <div class="form-horizontal">
@@ -14,6 +14,10 @@
         <div class="form-group">
           <label class="col-sm-3 control-label">Email</label>
           <p class="form-control-static">{{ auth.getUserDetails()?.email }}</p>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Alias</label>
+          <p class="form-control-static">{{ auth.getUserDetails()?.alias }}</p>
         </div>
       </div>
 
