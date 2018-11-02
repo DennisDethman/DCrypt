@@ -18,7 +18,14 @@ export class SolveComponent implements OnInit {
   userScore: any;
   solved: boolean = false; 
   failed: boolean = false; 
-
+  incorrect: boolean = null;
+  
+  greenSound(){
+    let greenAudio = new Audio;
+    greenAudio.src = "./././assets/audio/function.mp3";
+    greenAudio.load();
+    greenAudio.play();
+  }
   constructor (private activeRoute: ActivatedRoute,
                private auth: AuthenticationService,
                private router: Router,
@@ -26,7 +33,6 @@ export class SolveComponent implements OnInit {
 
   ngOnInit() {
     const usr = this.auth.getUserDetails();
-    
     this.activeRoute.params.subscribe(params => {
       this.id = params['id'];
     });
@@ -35,7 +41,7 @@ export class SolveComponent implements OnInit {
     .subscribe(res => {
       this.message = res;
       //console.log(this.message)
-    })
+    });
 
     this.api.getGameStat(this.id)
     .subscribe(res => {
@@ -54,8 +60,15 @@ export class SolveComponent implements OnInit {
   onBack(): void {
     this.router.navigate(['messages']);
   }
- 
+  keySound(){
+    let keyAudio = new Audio;
+    keyAudio.src = "./././assets/audio/key.mp3";
+    keyAudio.load();
+    keyAudio.play();
+  }
+
   doCrypt(isDecrypt) {
+    this.keySound();
     const chooseCypher = (<HTMLInputElement>document.getElementById("cypher")).value;
     
     if (chooseCypher === "cCrypt") {
@@ -66,17 +79,21 @@ export class SolveComponent implements OnInit {
     }
     this.message.AttemptsRemaining--;
 
-    if (this.message.AttemptsRemaining === 0) {
+    if (this.message.AttemptsRemaining < 1) {
       this.failed = true; 
     }
-
+    if(this.solution !== this.message.DecryptedMsg){
+      this.incorrect = true; 
+      this.greenSound();
+    }
     if (this.solution === this.message.DecryptedMsg) {
+      this.incorrect = false;
       this.message.Solved = true;
       this.solved = true;
       this.msgScore = this.message.AttemptsRemaining * 10;
       this.message.MessageScore = this.msgScore;
       this.gameStats.Score = this.msgScore + this.userScore;
-      console.log(this.gameStats)
+      console.log(this.gameStats);
       this.updateGameStat();
     }
 

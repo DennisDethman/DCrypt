@@ -18,6 +18,7 @@ export class LeaderboardComponent implements OnInit {
     this.api.getGameStats()
     .subscribe(res => {
       this.gameStats = res;
+      console.log(res);
     }) 
   }
 }
