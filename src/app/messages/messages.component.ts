@@ -18,12 +18,10 @@ export class MessagesComponent implements OnInit {
   constructor(private api: ApiService, private auth: AuthenticationService) { }
 
   ngOnInit() {
-    this.usr = this.auth.getUserDetails;
-
+    this.usr = this.auth.getUserDetails();
     this.dataSource.connect(this.usr._id)
     .subscribe(res => {
       this.messages = res;
-      console.log(this.messages);
     }, err => {
       console.log(err);
     });
@@ -40,7 +38,7 @@ export class MsgDataSource extends DataSource<any> {
 
   connect(id) {
     console.log(id);
-    return this.api.getRecvdMsgs();
+    return this.api.getRecvdMsgs(id);
   }
 
   disconnect() {
