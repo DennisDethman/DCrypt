@@ -224,7 +224,7 @@ var AppComponent = /** @class */ (function () {
         this.bgAudio.pause();
         this.bgAudio3.pause();
         this.bgAudio4.pause();
-        this.bgAudio2.src = "././assets/audio/bgmusica2.mp3";
+        this.bgAudio2.src = "././assets/audio/bgmusica2sm.mp3";
         this.bgAudio2.load();
         this.bgAudio2.play();
         this.bgAudio2.loop = true;
@@ -233,7 +233,7 @@ var AppComponent = /** @class */ (function () {
         this.bgAudio2.pause();
         this.bgAudio.pause();
         this.bgAudio4.pause();
-        this.bgAudio3.src = "././assets/audio/bgmusica3.mp3";
+        this.bgAudio3.src = "././assets/audio/bgmusica3sm.mp3";
         this.bgAudio3.load();
         this.bgAudio3.play();
         this.bgAudio3.loop = true;
@@ -242,7 +242,7 @@ var AppComponent = /** @class */ (function () {
         this.bgAudio.pause();
         this.bgAudio3.pause();
         this.bgAudio2.pause();
-        this.bgAudio4.src = "././assets/audio/bgmusica4.mp3";
+        this.bgAudio4.src = "././assets/audio/bgmusica4sm.mp3";
         this.bgAudio4.load();
         this.bgAudio4.play();
         this.bgAudio4.loop = true;
