@@ -19,7 +19,14 @@ export class SolveComponent implements OnInit {
   gameScore: number;
   solved: boolean = false; 
   failed: boolean = false; 
-
+  incorrect: boolean = null;
+  
+  greenSound(){
+    let greenAudio = new Audio;
+    greenAudio.src = "./././assets/audio/function.mp3";
+    greenAudio.load();
+    greenAudio.play();
+  }
   constructor (private activeRoute: ActivatedRoute,
                private auth: AuthenticationService,
                private router: Router,
@@ -27,11 +34,13 @@ export class SolveComponent implements OnInit {
 
   ngOnInit() {
 
+
     solution: '';
     msgScore: 0;
     gameScore: 0;
     solved: false; 
     failed: false; 
+
 
     this.activeRoute.params.subscribe(params => {
       this.id = params['id'];
@@ -66,8 +75,15 @@ export class SolveComponent implements OnInit {
   onBack(): void {
     this.router.navigate(['messages']);
   }
- 
+  keySound(){
+    let keyAudio = new Audio;
+    keyAudio.src = "./././assets/audio/key.mp3";
+    keyAudio.load();
+    keyAudio.play();
+  }
+
   doCrypt(isDecrypt) {
+    this.keySound();
     const chooseCypher = (<HTMLInputElement>document.getElementById("cypher")).value;
 
     if (chooseCypher === "cCrypt") {
@@ -77,11 +93,15 @@ export class SolveComponent implements OnInit {
       this.cCrypt2(isDecrypt);
     }
 
-    if (this.message.AttemptsRemaining === 0) {
+    if (this.message.AttemptsRemaining < 1) {
       this.failed = true; 
     }
-
+    if(this.solution !== this.message.DecryptedMsg){
+      this.incorrect = true; 
+      this.greenSound();
+    }
     if (this.solution === this.message.DecryptedMsg) {
+      this.incorrect = false;
       this.message.Solved = true;
       this.sentMessage.Solved = true;
       this.solved = true;
@@ -89,6 +109,7 @@ export class SolveComponent implements OnInit {
       console.log('msgScore: ')
       console.log(this.msgScore);
       this.message.MessageScore = this.msgScore;
+
       this.sentMessage.MessageScore = this.msgScore;
       this.gameScore += this.msgScore;
       console.log('gameScore: ')
