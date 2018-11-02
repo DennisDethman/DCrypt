@@ -1,33 +1,39 @@
 <h1>Challenge</h1>
 
 <div class="container">
+
   <div class="row">
     <div class="col-md-12">
       <h2>Choose an Opponent</h2>
-      <!-- <select class="menu" id="opponent">
-        <option value="Patrick">Patrick</option>
-        <option value="David">David</option>
-        <option value="Paul">Paul</option>
-        <option value="Dennis">Dennis</option>
-      </select> -->
       <select class="menu" id="opponent" #t (change)="getIdVal(t.value)">
         <option [value]="null">Select Alias</option>
         <option *ngFor="let user of filteredUsersList" [value]=[user._id]>{{user.alias}}</option>
       </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
       <h2>Cypher</h2>
         <select class="menu" id="cypher" (click)="doCrypt(true)">
           <option [value]="null">Select Cypher</option>  
           <option value="cCrypt">Caesar Cypher</option>
           <option value="cCrypt2">Reverse Caesar</option>
         </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
       <h2>Message</h2>
-
-
       <input type="text" class="menu" id="message" [(ngModel)]="newMessage" (keyup)="doCrypt(true)" maxlength="20">
       <!-- <p id="isEng">Valid English</p>
       <p id="nonEng">Not Valid English</p> -->
+    </div>
+  </div>
 
-      <div>
+  <div class="row">
+    <div class="col-md-12">
         <h2>Encryption Key</h2>
         <!-- <input id="encryptionKey"> -->
         <select class="menu" id="encryptionKey" (click)="doCrypt(true)">
@@ -58,16 +64,18 @@
           <option value="24">24</option>
           <option value="25">25</option>
         </select>
-      </div>
-      
+    </div>
+  </div>
+ 
+  <div class="row">
+    <div class="col-md-12">
       <div>
         <h2>Encrypted Message</h2>
         <p type="text" id="encMessage">{{encMessage}}</p>
       </div>
       <div>
-        <button class="btn btn-outline-success btn-sm" id="clearButton" (click)="createChallenge()">BuildMessage</button>
+        <button class="btn btn-outline-success btn-sm" id="clearButton" (click)="createChallenge()">Build Message</button>
       </div>
-      
-    </div>
+    </div>  
   </div>
 </div>

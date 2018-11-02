@@ -29,6 +29,10 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  gameScore: {
+    type: Number,
+    default: 0
+  },
   hash: String,
   salt: String
 },

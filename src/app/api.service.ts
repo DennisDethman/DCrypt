@@ -36,20 +36,33 @@ export class ApiService {
     return body || { };
   }
 
-  // getUser(): Observable<any> {
-  //   return this.http.get('/userapi', httpOptions).pipe(
-  //     map(this.extractData),
-  //     catchError(this.handleError));
-  // }
-
   getUsers(){
       return this.http.get('/userapi', httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
 
-  getSentMsgs(): Observable<any> {
-    return this.http.get('/getmsgsapi', httpOptions).pipe(
+  getUser(id: string){
+    return this.http.get('/userapi/'+id, httpOptions).pipe(
+    map(this.extractData),
+    catchError(this.handleError));
+  }
+
+  updateUser(id: string, data): Observable<any> {
+    return this.http.put('/userapi/'+id, data, httpOptions)
+    .pipe(
+    catchError(this.handleError)
+    );
+  }
+
+  getSentMsg(msg): Observable<any> {
+    return this.http.get('/getmsgsapi/'+msg, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  getSentMsgs(id: string): Observable<any> {
+    return this.http.get('/getmsgsapi/allforid/'+id, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
@@ -60,8 +73,9 @@ export class ApiService {
       catchError(this.handleError));
   }
 
-  getRecvdMsgs(): Observable<any> {
-    return this.http.get('/recvdmsgsapi', httpOptions).pipe(
+  //getRecvdMsgs(): Observable<any> {
+  getRecvdMsgs(id: string): Observable<any> {
+    return this.http.get('/recvdmsgsapi/allforid/'+id, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
@@ -71,6 +85,13 @@ export class ApiService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  updateSentMsg(id: string, data): Observable<any> {
+    return this.http.put('/getmsgsapi/'+id, data, httpOptions)
+    .pipe(
+    catchError(this.handleError)
+    );
   }
 
   postRecvdMsg(data): Observable<any> {
@@ -88,13 +109,13 @@ export class ApiService {
   }
 
   getGameStat(id: string): Observable<any> {
-    return this.http.get('/statsapi/'+id, httpOptions).pipe(
+    return this.http.get('/userapi/'+id, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
 
   getGameStats(): Observable<any> {
-    return this.http.get('/statsapi', httpOptions).pipe(
+    return this.http.get('/userapi/stats', httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
@@ -105,41 +126,20 @@ export class ApiService {
     catchError(this.handleError)
     );
   }
-  
-  getBooks(): Observable<any> {
-    return this.http.get(apiUrl, httpOptions).pipe(
-      map(this.extractData),
-      catchError(this.handleError));
-  }
-  
-  getBook(id: string): Observable<any> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.get(url, httpOptions).pipe(
-      map(this.extractData),
-      catchError(this.handleError));
-  }
-  
-  postBook(data): Observable<any> {
-    return this.http.post(apiUrl, data, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-  
-  updateBook(id: string, data): Observable<any> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.put(url, data, httpOptions)
+
+  createGameStat(data): Observable<any> {
+    return this.http.post('/statsapi', data, httpOptions)
     .pipe(
     catchError(this.handleError)
     );
   }
   
-  deleteBook(id: string): Observable<{}> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.delete(url, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
+  // deleteBook(id: string): Observable<{}> {
+  //   const url = `${apiUrl}/${id}`;
+  //   return this.http.delete(url, httpOptions)
+  //     .pipe(
+  //       catchError(this.handleError)
+  //     );
+  // }
 
 }

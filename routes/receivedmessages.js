@@ -11,6 +11,15 @@ router.get('/', function(req, res, next) {
   });
 });
 
+/* GET ALL MESSAGES for User */
+router.get('/allforid/:id', function(req, res, next) {
+  RecvdMsgs.find({'Solved': false, 'Receiver_id': req.params.id})
+  .exec(function (err, messages) {
+    if (err) return next(err);
+    res.json(messages);
+  });
+});
+
 /* GET SINGLE MSG BY ID */
 router.get('/:id', function(req, res, next) {
   RecvdMsgs.findById(req.params.id, function (err, post) {
@@ -21,6 +30,7 @@ router.get('/:id', function(req, res, next) {
 
 /* SAVE MSG */
 router.post('/', function(req, res, next) {
+  console.log(req)
   RecvdMsgs.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);

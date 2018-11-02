@@ -5,22 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MessagesComponent } from './messages/messages.component';
-import { BookComponent } from './book/book.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChallengeComponent } from './challenge/challenge.component';
+import { SolveComponent } from './solve/solve.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { BookDetailComponent } from './book-detail/book-detail.component';
-import { BookCreateComponent } from './book-create/book-create.component';
-import { BookEditComponent } from './book-edit/book-edit.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
 import { AuthGuardService } from './auth-guard.service';
-
+import { ApiService } from './api.service';
 import {
   MatInputModule,
   MatPaginatorModule,
@@ -31,7 +28,6 @@ import {
   MatButtonModule,
   MatCardModule,
   MatFormFieldModule } from "@angular/material";
-import { SolveComponent } from './solve/solve.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -48,10 +44,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    BookComponent,
-    BookDetailComponent,
-    BookCreateComponent,
-    BookEditComponent,
     MessagesComponent,
     ProfileComponent,
     ChallengeComponent,
@@ -82,7 +74,8 @@ const appRoutes: Routes = [
   ],
   providers: [    
     AuthenticationService, 
-    AuthGuardService
+    AuthGuardService,
+    ApiService
   ],
   bootstrap: [AppComponent]
 })
