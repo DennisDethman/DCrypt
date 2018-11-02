@@ -37,6 +37,11 @@ export class SolveComponent implements OnInit {
       this.id = params['id'];
     });
 
+    this.grabData()
+  }
+
+  grabData() {
+
     this.api.getRecvdMsg(this.id)
     .subscribe(res => {
       this.message = res;
@@ -52,6 +57,10 @@ export class SolveComponent implements OnInit {
         this.gameScore = this.usr.gameScore;
       });
     });
+  }
+
+  ngOnChanges() {
+
   }
 
   onBack(): void {
@@ -77,10 +86,14 @@ export class SolveComponent implements OnInit {
       this.sentMessage.Solved = true;
       this.solved = true;
       this.msgScore = this.message.AttemptsRemaining * 10;
+      console.log('msgScore: ')
+      console.log(this.msgScore);
       this.message.MessageScore = this.msgScore;
       this.sentMessage.MessageScore = this.msgScore;
       this.gameScore += this.msgScore;
-      this.usr.gameScore += this.gameScore;
+      console.log('gameScore: ')
+      console.log(this.gameScore)
+      this.usr.gameScore = this.gameScore;
       this.updateGameScore();
       //this.message.AttemptsRemaining = 1;
       //this.sentMessage.AttemptsRemaining = 1;
