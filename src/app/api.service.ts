@@ -61,8 +61,8 @@ export class ApiService {
       catchError(this.handleError));
   }
 
-  getSentMsgs(): Observable<any> {
-    return this.http.get('/getmsgsapi', httpOptions).pipe(
+  getSentMsgs(id: string): Observable<any> {
+    return this.http.get('/getmsgsapi/allforid/'+id, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }

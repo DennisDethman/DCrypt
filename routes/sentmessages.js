@@ -11,6 +11,15 @@ router.get('/', function(req, res, next) {
   });
 });
 
+/* GET ALL MESSAGES for User */
+router.get('/allforid/:id', function(req, res, next) {
+  SentMsgs.find({'Sender_id': req.params.id})
+  .exec(function (err, messages) {
+    if (err) return next(err);
+    res.json(messages);
+  });
+});
+
 /* GET SINGLE MSG BY ID */
 router.get('/:id', function(req, res, next) {
   SentMsgs.findById(req.params.id, function (err, post) {

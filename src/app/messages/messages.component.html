@@ -1,12 +1,27 @@
 <div class="container">
   <h1>Messages</h1>
-
+  <button class="btn btn-outline-success btn-sm" (click)="msgsReceived()">
+    Messages Received
+  </button>
+  <button class="btn btn-outline-success btn-sm" (click)="msgsSent()">
+    Messages Sent
+  </button>
   <!-- ng-repeat loops through data to build list -->
-  <ul>
+  <ul *ngIf="viewRcvd">
     <li *ngFor="let message of messages; index as i" class="list-group-item d-flex justify-content-between align-items-center" >
       <p>{{i + 1 }}: </p>
       <p>From: {{message.ReceivedFrom_Alias}}</p>
-      <button class="btn btn-outline-success btn-sm" id="clearButton" [routerLink]="['/solve', message._id]">Solve</button><br>
+      <button class="btn btn-outline-success btn-sm" id="solveBtn" [routerLink]="['/solve', message._id]">Solve</button><br>
+    </li>
+  </ul>
+  <ul *ngIf="viewSent">
+    <li *ngFor="let message of messages; index as i" class="list-group-item d-flex justify-content-between align-items-center" >
+      <p>{{i + 1 }}: </p>
+      <p>Sent To: {{message.SentTo_Alias}}</p>
+      <p>Solved: {{message.Solved}}</p>
+      <p *ngIf="!message.Solved">Attempts: {{message.AttemptsRemaining}}</p>
+      <p *ngIf="message.Solved">Score: {{message.MessageScore}}</p>
+      <button class="btn btn-outline-success btn-sm" id="deleteBtn" (click)="msgDelete(message._id)">Delete</button><br>
     </li>
   </ul>
 </div>

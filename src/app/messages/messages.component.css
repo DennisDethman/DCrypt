@@ -2,5 +2,6 @@ li {color: green; font-size: 12px; background-color:black; border-color: silver;
 h1 {font-size: 30px; text-align: center; margin-left: -41px}
 h2 {font-size: 20px}
 ul{max-width: 300px; max-height:300px; overflow: auto}
-.btn{margin-left: 100px; margin-top: 0px; border-color: #9daaa3; color: #7ff12a; text-shadow: 2px 2px 2px black, 0 0 1em lightgreen, 0 0 0.2em lightgreen;}
+#solveBtn{margin-left: 100px; margin-top: 0px; border-color: #9daaa3; color: #7ff12a; text-shadow: 2px 2px 2px black, 0 0 1em lightgreen, 0 0 0.2em lightgreen;}
+#deleteBtn{margin-left: 20px; margin-top: 0px; border-color: #9daaa3; color: #7ff12a; text-shadow: 2px 2px 2px black, 0 0 1em lightgreen, 0 0 0.2em lightgreen;}
 .d-flex{margin-left: -40px; max-width: 300px; max-height: 50px;}
