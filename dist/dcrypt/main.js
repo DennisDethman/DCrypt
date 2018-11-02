@@ -117,6 +117,10 @@ var ApiService = /** @class */ (function () {
         return this.http.put('/statsapi/' + id, data, httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
+    ApiService.prototype.createGameStat = function (data) {
+        return this.http.post('/statsapi', data, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    };
     ApiService.prototype.getBooks = function () {
         return this.http.get(apiUrl, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
@@ -1227,7 +1231,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; margin-left: -40px}\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Leaderboard</h1>\n  <br>\n  <!-- ng-repeat loops through data to build list -->\n  <div>\n    <h5>Special Agent:</h5>\n    <ul>\n      <li>{{gameStats[0].alias}} : {{gameStats[0].Score}}</li>\n    </ul>\n  </div>\n  <br>\n  <div>\n    <h5>Top Agent Listing:</h5>\n    <ul>\n      <li *ngFor=\"let stat of gameStats\">\n        {{stat.alias}} : {{stat.Score}}\n      </li>\n    </ul>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <h1>Leaderboard</h1>\n  <br>\n  <!-- ng-repeat loops through data to build list -->\n  <div>\n    <h5>Ranking Special Agent:</h5>\n    <ul>\n      <li>{{gameStats[0].alias}} : {{gameStats[0].Score}}</li>\n    </ul>\n  </div>\n  <br>\n  <div>\n    <h5>Top Agent Listing:</h5>\n    <ul>\n      <li *ngFor=\"let stat of gameStats\">\n        {{stat.alias}} : {{stat.Score}}\n      </li>\n    </ul>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1742,6 +1746,7 @@ var SolveComponent = /** @class */ (function () {
         this.auth = auth;
         this.router = router;
         this.api = api;
+        this.newStatsRecord = false;
         this.solved = false;
         this.failed = false;
     }
@@ -1754,20 +1759,27 @@ var SolveComponent = /** @class */ (function () {
         this.api.getRecvdMsg(this.id)
             .subscribe(function (res) {
             _this.message = res;
-            //console.log(this.message)
         });
-        this.api.getGameStat(this.id)
+        this.api.getGameStat(usr._id)
             .subscribe(function (res) {
-            console.log('gamestat');
-            console.log(res);
             _this.gameStats = res;
-            if (_this.gameStats)
-                _this.userScore = res.Score;
-            else
-                //this.gameStats = new GameStats();
-                _this.userScore = 0;
-            _this.gameStats.alias = usr.alias;
         });
+        if (this.gameStats) {
+            console.log('gamestat if');
+            this.userScore = this.gameStats.Score;
+            console.log(this.userScore);
+            console.log(this.gameStats);
+        }
+        else {
+            console.log('didnt exist');
+            this.gameStats = {};
+            this.newStatsRecord = true;
+            this.userScore = 0;
+            this.gameStats.alias = usr.alias;
+            this.gameStats.User_id = usr._id;
+            this.gameStats.Score = 0;
+            console.log(this.gameStats);
+        }
     };
     SolveComponent.prototype.onBack = function () {
         this.router.navigate(['messages']);
@@ -1785,6 +1797,7 @@ var SolveComponent = /** @class */ (function () {
             this.failed = true;
         }
         if (this.solution === this.message.DecryptedMsg) {
+            console.log('entered solved');
             this.message.Solved = true;
             this.solved = true;
             this.msgScore = this.message.AttemptsRemaining * 10;
@@ -1800,11 +1813,29 @@ var SolveComponent = /** @class */ (function () {
         });
     };
     SolveComponent.prototype.updateGameStat = function () {
-        this.api.updateGameStat(this.id, this.gameStats)
-            .subscribe(function (res) {
-        }, function (err) {
-            console.log(err);
-        });
+        console.log('entered api call');
+        console.log(this.gameStats._id);
+        console.log(this.gameStats);
+        if (!this.newStatsRecord) {
+            console.log('existing');
+            console.log(this.gameStats);
+            this.api.updateGameStat(this.gameStats._id, this.gameStats)
+                .subscribe(function (res) {
+                console.log(res);
+            }, function (err) {
+                console.log(err);
+            });
+        }
+        else {
+            console.log('new');
+            console.log(this.gameStats);
+            this.api.createGameStat(this.gameStats)
+                .subscribe(function (res) {
+                console.log(res);
+            }, function (err) {
+                console.log(err);
+            });
+        }
     };
     SolveComponent.prototype.cCrypt = function (isDecrypt) {
         var shiftText = document.getElementById("encryptionKey").value;
@@ -1936,7 +1967,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/David/Documents/MyCourseWork-iMac/dCrypt/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/david/Documents/BootcampProjects/DCrypt/src/main.ts */"./src/main.ts");
 
 
 /***/ })

@@ -105,6 +105,13 @@ export class ApiService {
     catchError(this.handleError)
     );
   }
+
+  createGameStat(data): Observable<any> {
+    return this.http.post('/statsapi', data, httpOptions)
+    .pipe(
+    catchError(this.handleError)
+    );
+  }
   
   getBooks(): Observable<any> {
     return this.http.get(apiUrl, httpOptions).pipe(

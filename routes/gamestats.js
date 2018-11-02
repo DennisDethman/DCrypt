@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 
 /* GET SINGLE STAT BY ID */
 router.get('/:id', function(req, res, next) {
-  GameStats.findById(req.params.id, function (err, post) {
+  GameStats.find({'User_id': req.params.id}, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -33,7 +33,8 @@ router.post('/', function(req, res, next) {
 
 /* UPDATE STAT */
 router.put('/:id', function(req, res, next) {
-  GameStats.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  //GameStats.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  GameStats.update(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });

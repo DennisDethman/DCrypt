@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 import { AuthenticationService } from '../authentication.service';
+import { GameStats } from '../../../models/GameStats';
 
 @Component({
   selector: 'app-solve',
@@ -14,8 +15,9 @@ export class SolveComponent implements OnInit {
   message: any;
   gameStats: any;
   solution: any;
-  msgScore: any;
-  userScore: any;
+  msgScore: number;
+  userScore: number;
+  newStatsRecord: boolean = false;
   solved: boolean = false; 
   failed: boolean = false; 
 
@@ -26,7 +28,7 @@ export class SolveComponent implements OnInit {
 
   ngOnInit() {
     const usr = this.auth.getUserDetails();
-    
+
     this.activeRoute.params.subscribe(params => {
       this.id = params['id'];
     });
@@ -34,21 +36,29 @@ export class SolveComponent implements OnInit {
     this.api.getRecvdMsg(this.id)
     .subscribe(res => {
       this.message = res;
-      //console.log(this.message)
-    })
+    });
 
-    this.api.getGameStat(this.id)
+    this.api.getGameStat(usr._id)
     .subscribe(res => {
-      console.log('gamestat')
-      console.log(res)
       this.gameStats = res;
-      if (this.gameStats)
-        this.userScore = res.Score
-      else
-        //this.gameStats = new GameStats();
-        this.userScore = 0;
-        this.gameStats.alias = usr.alias;
-    })
+    });
+
+    if (this.gameStats) {
+      console.log('gamestat if');
+      this.userScore = this.gameStats.Score;
+      console.log(this.userScore);
+      console.log(this.gameStats);
+    }
+    else {
+      console.log('didnt exist');
+      this.gameStats = {};
+      this.newStatsRecord = true;
+      this.userScore = 0;
+      this.gameStats.alias = usr.alias;
+      this.gameStats.User_id = usr._id;
+      this.gameStats.Score = 0;
+      console.log(this.gameStats);
+    }
   }
 
   onBack(): void {
@@ -71,6 +81,8 @@ export class SolveComponent implements OnInit {
     }
 
     if (this.solution === this.message.DecryptedMsg) {
+      
+      console.log('entered solved')
       this.message.Solved = true;
       this.solved = true;
       this.msgScore = this.message.AttemptsRemaining * 10;
@@ -89,12 +101,32 @@ export class SolveComponent implements OnInit {
   }
 
   updateGameStat() {
-    this.api.updateGameStat(this.id, this.gameStats)
-      .subscribe(res => {
-      }, (err) => {
-      console.log(err);
-      }
-    );    
+    console.log('entered api call')
+    console.log(this.gameStats._id)
+    console.log(this.gameStats)
+
+    if (!this.newStatsRecord) {
+      console.log('existing')
+      console.log(this.gameStats)
+      this.api.updateGameStat(this.gameStats._id, this.gameStats)
+        .subscribe(res => {
+          console.log(res)
+        }, (err) => {
+        console.log(err);
+        }
+      );
+    }
+    else {
+      console.log('new')
+      console.log(this.gameStats)
+      this.api.createGameStat(this.gameStats)
+        .subscribe(res => {
+          console.log(res)
+        }, (err) => {
+        console.log(err);
+        }
+      ); 
+    }   
   }
   
   cCrypt(isDecrypt) {
