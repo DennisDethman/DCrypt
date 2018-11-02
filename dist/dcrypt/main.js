@@ -1336,6 +1336,10 @@ var SolveComponent = /** @class */ (function () {
         this.activeRoute.params.subscribe(function (params) {
             _this.id = params['id'];
         });
+        this.grabData();
+    };
+    SolveComponent.prototype.grabData = function () {
+        var _this = this;
         this.api.getRecvdMsg(this.id)
             .subscribe(function (res) {
             _this.message = res;
@@ -1349,6 +1353,8 @@ var SolveComponent = /** @class */ (function () {
                 _this.gameScore = _this.usr.gameScore;
             });
         });
+    };
+    SolveComponent.prototype.ngOnChanges = function () {
     };
     SolveComponent.prototype.onBack = function () {
         this.router.navigate(['messages']);
@@ -1369,10 +1375,14 @@ var SolveComponent = /** @class */ (function () {
             this.sentMessage.Solved = true;
             this.solved = true;
             this.msgScore = this.message.AttemptsRemaining * 10;
+            console.log('msgScore: ');
+            console.log(this.msgScore);
             this.message.MessageScore = this.msgScore;
             this.sentMessage.MessageScore = this.msgScore;
             this.gameScore += this.msgScore;
-            this.usr.gameScore += this.gameScore;
+            console.log('gameScore: ');
+            console.log(this.gameScore);
+            this.usr.gameScore = this.gameScore;
             this.updateGameScore();
             //this.message.AttemptsRemaining = 1;
             //this.sentMessage.AttemptsRemaining = 1;
