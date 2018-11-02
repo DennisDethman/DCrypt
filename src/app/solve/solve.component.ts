@@ -10,12 +10,13 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class SolveComponent implements OnInit {
 
+  usr: any;
   id: any;
   message: any;
-  gameStats: any;
-  solution: any;
-  msgScore: any;
-  userScore: any;
+  sentMessage: any;
+  solution: string
+  msgScore: number;
+  gameScore: number;
   solved: boolean = false; 
   failed: boolean = false; 
 
@@ -25,8 +26,13 @@ export class SolveComponent implements OnInit {
                private api: ApiService) { }
 
   ngOnInit() {
-    const usr = this.auth.getUserDetails();
-    
+
+    solution: '';
+    msgScore: 0;
+    gameScore: 0;
+    solved: false; 
+    failed: false; 
+
     this.activeRoute.params.subscribe(params => {
       this.id = params['id'];
     });
@@ -34,21 +40,18 @@ export class SolveComponent implements OnInit {
     this.api.getRecvdMsg(this.id)
     .subscribe(res => {
       this.message = res;
-      //console.log(this.message)
-    })
 
-    this.api.getGameStat(this.id)
-    .subscribe(res => {
-      console.log('gamestat')
-      console.log(res)
-      this.gameStats = res;
-      if (this.gameStats)
-        this.userScore = res.Score
-      else
-        //this.gameStats = new GameStats();
-        this.userScore = 0;
-        this.gameStats.alias = usr.alias;
-    })
+      this.api.getSentMsg(this.message.SentMsg_id)
+      .subscribe(res => {
+        this.sentMessage = res;
+      });
+
+      this.api.getUser(this.message.Receiver_id)
+      .subscribe(res => {
+        this.usr = res;
+        this.gameScore = this.usr.gameScore;
+      });
+    });
   }
 
   onBack(): void {
@@ -57,14 +60,13 @@ export class SolveComponent implements OnInit {
  
   doCrypt(isDecrypt) {
     const chooseCypher = (<HTMLInputElement>document.getElementById("cypher")).value;
-    
+
     if (chooseCypher === "cCrypt") {
       this.cCrypt(isDecrypt);
     }
     if (chooseCypher === "cCrypt2") {
       this.cCrypt2(isDecrypt);
     }
-    this.message.AttemptsRemaining--;
 
     if (this.message.AttemptsRemaining === 0) {
       this.failed = true; 
@@ -72,13 +74,20 @@ export class SolveComponent implements OnInit {
 
     if (this.solution === this.message.DecryptedMsg) {
       this.message.Solved = true;
+      this.sentMessage.Solved = true;
       this.solved = true;
       this.msgScore = this.message.AttemptsRemaining * 10;
       this.message.MessageScore = this.msgScore;
-      this.gameStats.Score = this.msgScore + this.userScore;
-      console.log(this.gameStats)
-      this.updateGameStat();
+      this.sentMessage.MessageScore = this.msgScore;
+      this.gameScore += this.msgScore;
+      this.usr.gameScore += this.gameScore;
+      this.updateGameScore();
+      //this.message.AttemptsRemaining = 1;
+      //this.sentMessage.AttemptsRemaining = 1;
     }
+
+    this.message.AttemptsRemaining--;
+    this.sentMessage.AttemptsRemaining--;
 
     this.api.updateRecvdMsg(this.id, this.message)
       .subscribe(res => {
@@ -86,15 +95,22 @@ export class SolveComponent implements OnInit {
       console.log(err);
       }
     );
+
+    this.api.updateSentMsg(this.message.SentMsg_id, this.sentMessage)
+    .subscribe(res => {
+    }, (err) => {
+    console.log(err);
+    }
+  );
   }
 
-  updateGameStat() {
-    this.api.updateGameStat(this.id, this.gameStats)
+  updateGameScore() {
+    this.api.updateUser(this.usr._id, this.usr)
       .subscribe(res => {
       }, (err) => {
       console.log(err);
       }
-    );    
+    );
   }
   
   cCrypt(isDecrypt) {

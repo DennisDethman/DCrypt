@@ -16,6 +16,8 @@ export class ChallengeComponent implements OnInit {
   users: any;
   sentTo_id: any;
   sentTo_Alias: any;
+  sentMsg_id: any;
+  recvdChallenge: any;
 
   constructor(private auth: AuthenticationService, private api: ApiService, private router: Router) { }
 
@@ -127,7 +129,7 @@ export class ChallengeComponent implements OnInit {
 
   // }
 
-  createChallenge(){
+  createChallenge() {
     this.greenSound();
     var text = (<HTMLInputElement>document.getElementById("message")).value;
     var to = (<HTMLInputElement>document.getElementById("opponent")).value;
@@ -147,10 +149,8 @@ export class ChallengeComponent implements OnInit {
       Solved: false,
       MessageScore: 0
     }
-    console.log(sendChallenge)
-    this.postTheSentMessage(sendChallenge);
 
-    var recvdChallenge = {
+    this.recvdChallenge = {
       Receiver_id: this.sentTo_id,
       ReceivedFrom_id: usr._id,
       ReceivedFrom_Alias: usr.alias,
@@ -162,12 +162,16 @@ export class ChallengeComponent implements OnInit {
       Solved: false,
       MessageScore: 0
     }
-    this.postTheRecvdMessage(recvdChallenge);
+
+    this.postTheSentMessage(sendChallenge);
   }
 
   postTheSentMessage(challenge) {
-    this.api.postSentMsg(challenge).subscribe(() => {
-      this.router.navigateByUrl('/profile');
+    this.api.postSentMsg(challenge).subscribe((data) => {
+      this.sentMsg_id = data._id;
+      this.recvdChallenge.SentMsg_id = this.sentMsg_id;
+      this.postTheRecvdMessage(this.recvdChallenge)
+      //this.router.navigateByUrl('/profile');
     }, (err) => {
       console.error(err);
     }); 

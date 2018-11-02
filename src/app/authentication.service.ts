@@ -10,6 +10,7 @@ export interface UserDetails {
   name: string;
   username: string;
   alias: string;
+  gameScore: number;
   lastLogin: string;
   exp: number;
   iat: number

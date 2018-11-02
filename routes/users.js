@@ -11,6 +11,25 @@ router.get('/', function(req, res, next) {
   });
 });
 
+/* GET top 5 Stats */
+router.get('/stats', function(req, res, next) {
+  User.find({})
+  .sort({'gameScore': -1})
+  .limit(5)
+  .exec(function (err, stats) {
+    if (err) return next(err);
+    res.json(stats);
+  });
+});
+
+/* GET SINGLE STAT BY ID */
+router.get('/stats/:id', function(req, res, next) {
+  User.find({'_id': req.params.id}, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 /* GET SINGLE User BY ID */
 router.get('/:id', function(req, res, next) {
   User.findById(req.params.id, function (err, user) {
