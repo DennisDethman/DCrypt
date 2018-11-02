@@ -18,33 +18,4 @@ router.get('/', auth, ctrlProfile.profileRead);
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
 
-// leaderboard display
-// router.get('/leaderboard', function (req, res) {
-//   console.log('I received a GET request');
-//   user.find({ "user":"score" }, function(err, users) {
-//     if(!err){
-//       res.send(users);
-//     }
-//     else{
-//         res.send('could not retrived data');
-//   }
-//   });
-
-// });
-
-// // get user messages
-// router.get('/messages', function (req, res) {
-//   console.log('I received a GET request');
-//   SentMessages.find({ "SentMessages":"DecryptedMsg" }, function(err, msgs) {
-//     if(!err){
-//       res.send(msgs);
-//     }
-//     else{
-//         res.send('could not retrived data');
-//   }
-//   });
-
-// });
-
-
 module.exports = router;
