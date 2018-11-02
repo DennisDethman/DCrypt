@@ -23,7 +23,6 @@ module.exports.register = function(req, res) {
   user.alias = req.body.alias;
   user.username = req.body.alias;
   user.lastLogin = Date.now();
-  user.gameScore = 0;
 
   user.setPassword(req.body.password);
 

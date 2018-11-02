@@ -4,10 +4,8 @@ var mongoose = require('mongoose');
 var RecvdMsgs = require('../models/ReceivedMessages.js');
 
 /* GET ALL MESSAGES for User */
-//router.get('/:id', function(req, res, next) {
-router.get('/', function(req, res, next) {
-  //RecvdMsgs.find({'Solved': false, '_id': req.params.id})
-  RecvdMsgs.find({'Solved': false})
+router.get('/allforid/:id', function(req, res, next) {
+  RecvdMsgs.find({'Solved': false, 'Receiver_id': req.params.id})
   .exec(function (err, messages) {
     if (err) return next(err);
     res.json(messages);

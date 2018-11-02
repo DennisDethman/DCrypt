@@ -97,9 +97,9 @@ var ApiService = /** @class */ (function () {
     ApiService.prototype.getRecvdMsg = function (msg) {
         return this.http.get('/recvdmsgsapi/' + msg, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
-    ApiService.prototype.getRecvdMsgs = function () {
-        //getRecvdMsgs(id: string): Observable<any> {
-        return this.http.get('/recvdmsgsapi', httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    //getRecvdMsgs(): Observable<any> {
+    ApiService.prototype.getRecvdMsgs = function (id) {
+        return this.http.get('/recvdmsgsapi/allforid/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     ApiService.prototype.postSentMsg = function (data) {
         return this.http.post('/getmsgsapi', data, httpOptions)
@@ -1006,7 +1006,9 @@ var MessagesComponent = /** @class */ (function () {
     }
     MessagesComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.usr = this.auth.getUserDetails;
+        this.usr = this.auth.getUserDetails();
+        console.log(this.usr);
+        console.log(this.usr.id);
         this.dataSource.connect(this.usr._id)
             .subscribe(function (res) {
             _this.messages = res;
@@ -1035,7 +1037,7 @@ var MsgDataSource = /** @class */ (function (_super) {
     }
     MsgDataSource.prototype.connect = function (id) {
         console.log(id);
-        return this.api.getRecvdMsgs();
+        return this.api.getRecvdMsgs(id);
     };
     MsgDataSource.prototype.disconnect = function () {
     };
