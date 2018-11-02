@@ -5,15 +5,17 @@
   <div>
     <h5>Ranking Special Agent:</h5>
     <ul>
-      <li>{{gameStats[0].alias}} : {{gameStats[0].Score}}</li>
+      <li>
+        {{gameStats[0].alias}} : {{gameStats[0].gameScore}}
+      </li>
     </ul>
   </div>
   <br>
   <div>
     <h5>Top Agent Listing:</h5>
     <ul>
-      <li *ngFor="let stat of gameStats">
-        {{stat.alias}} : {{stat.Score}}
+      <li *ngFor="let stats of gameStats">
+        {{stats.alias}} : {{stats.gameScore}}
       </li>
     </ul>
   </div>

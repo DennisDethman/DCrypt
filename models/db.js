@@ -46,8 +46,6 @@ process.on('SIGTERM', function() {
 });
 
 // BRING IN YOUR SCHEMAS & MODELS
-require('./Book');
 require('./Users');
-require('./GameStats');
 require('./ReceivedMessages');
 require('./SentMessages');

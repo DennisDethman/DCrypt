@@ -78,13 +78,18 @@ var ApiService = /** @class */ (function () {
         var body = res;
         return body || {};
     };
-    // getUser(): Observable<any> {
-    //   return this.http.get('/userapi', httpOptions).pipe(
-    //     map(this.extractData),
-    //     catchError(this.handleError));
-    // }
     ApiService.prototype.getUsers = function () {
         return this.http.get('/userapi', httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    };
+    ApiService.prototype.getUser = function (id) {
+        return this.http.get('/userapi/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    };
+    ApiService.prototype.updateUser = function (id, data) {
+        return this.http.put('/userapi/' + id, data, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    };
+    ApiService.prototype.getSentMsg = function (msg) {
+        return this.http.get('/getmsgsapi/' + msg, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     ApiService.prototype.getSentMsgs = function () {
         return this.http.get('/getmsgsapi', httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
@@ -93,10 +98,15 @@ var ApiService = /** @class */ (function () {
         return this.http.get('/recvdmsgsapi/' + msg, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     ApiService.prototype.getRecvdMsgs = function () {
+        //getRecvdMsgs(id: string): Observable<any> {
         return this.http.get('/recvdmsgsapi', httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     ApiService.prototype.postSentMsg = function (data) {
         return this.http.post('/getmsgsapi', data, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    };
+    ApiService.prototype.updateSentMsg = function (id, data) {
+        return this.http.put('/getmsgsapi/' + id, data, httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     ApiService.prototype.postRecvdMsg = function (data) {
@@ -108,10 +118,10 @@ var ApiService = /** @class */ (function () {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     ApiService.prototype.getGameStat = function (id) {
-        return this.http.get('/statsapi/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        return this.http.get('/userapi/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     ApiService.prototype.getGameStats = function () {
-        return this.http.get('/statsapi', httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+        return this.http.get('/userapi/stats', httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     ApiService.prototype.updateGameStat = function (id, data) {
         return this.http.put('/statsapi/' + id, data, httpOptions)
@@ -119,27 +129,6 @@ var ApiService = /** @class */ (function () {
     };
     ApiService.prototype.createGameStat = function (data) {
         return this.http.post('/statsapi', data, httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
-    };
-    ApiService.prototype.getBooks = function () {
-        return this.http.get(apiUrl, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
-    };
-    ApiService.prototype.getBook = function (id) {
-        var url = apiUrl + "/" + id;
-        return this.http.get(url, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
-    };
-    ApiService.prototype.postBook = function (data) {
-        return this.http.post(apiUrl, data, httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
-    };
-    ApiService.prototype.updateBook = function (id, data) {
-        var url = apiUrl + "/" + id;
-        return this.http.put(url, data, httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
-    };
-    ApiService.prototype.deleteBook = function (id) {
-        var url = apiUrl + "/" + id;
-        return this.http.delete(url, httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     ApiService = __decorate([
@@ -253,23 +242,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./navbar/navbar.component */ "./src/app/navbar/navbar.component.ts");
 /* harmony import */ var _messages_messages_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./messages/messages.component */ "./src/app/messages/messages.component.ts");
-/* harmony import */ var _book_book_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./book/book.component */ "./src/app/book/book.component.ts");
-/* harmony import */ var _profile_profile_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./profile/profile.component */ "./src/app/profile/profile.component.ts");
-/* harmony import */ var _challenge_challenge_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./challenge/challenge.component */ "./src/app/challenge/challenge.component.ts");
+/* harmony import */ var _profile_profile_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./profile/profile.component */ "./src/app/profile/profile.component.ts");
+/* harmony import */ var _challenge_challenge_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./challenge/challenge.component */ "./src/app/challenge/challenge.component.ts");
+/* harmony import */ var _solve_solve_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./solve/solve.component */ "./src/app/solve/solve.component.ts");
 /* harmony import */ var _leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./leaderboard/leaderboard.component */ "./src/app/leaderboard/leaderboard.component.ts");
 /* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
 /* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _book_detail_book_detail_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./book-detail/book-detail.component */ "./src/app/book-detail/book-detail.component.ts");
-/* harmony import */ var _book_create_book_create_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./book-create/book-create.component */ "./src/app/book-create/book-create.component.ts");
-/* harmony import */ var _book_edit_book_edit_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./book-edit/book-edit.component */ "./src/app/book-edit/book-edit.component.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./authentication.service */ "./src/app/authentication.service.ts");
-/* harmony import */ var _auth_guard_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./auth-guard.service */ "./src/app/auth-guard.service.ts");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _solve_solve_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./solve/solve.component */ "./src/app/solve/solve.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./authentication.service */ "./src/app/authentication.service.ts");
+/* harmony import */ var _auth_guard_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./auth-guard.service */ "./src/app/auth-guard.service.ts");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./api.service */ "./src/app/api.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -296,18 +282,15 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
-
-
 var appRoutes = [
     { path: '', component: _home_home_component__WEBPACK_IMPORTED_MODULE_12__["HomeComponent"] },
     { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"] },
     { path: 'register', component: _register_register_component__WEBPACK_IMPORTED_MODULE_11__["RegisterComponent"] },
     { path: 'messages', component: _messages_messages_component__WEBPACK_IMPORTED_MODULE_5__["MessagesComponent"] },
-    { path: 'challenge', component: _challenge_challenge_component__WEBPACK_IMPORTED_MODULE_8__["ChallengeComponent"] },
+    { path: 'challenge', component: _challenge_challenge_component__WEBPACK_IMPORTED_MODULE_7__["ChallengeComponent"] },
     { path: 'leaderboard', component: _leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_9__["LeaderboardComponent"] },
-    { path: 'profile', component: _profile_profile_component__WEBPACK_IMPORTED_MODULE_7__["ProfileComponent"] },
-    { path: 'solve/:id', component: _solve_solve_component__WEBPACK_IMPORTED_MODULE_22__["SolveComponent"] }
+    { path: 'profile', component: _profile_profile_component__WEBPACK_IMPORTED_MODULE_6__["ProfileComponent"] },
+    { path: 'solve/:id', component: _solve_solve_component__WEBPACK_IMPORTED_MODULE_8__["SolveComponent"] }
     // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] }
 ];
 var AppModule = /** @class */ (function () {
@@ -317,41 +300,38 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
-                _book_book_component__WEBPACK_IMPORTED_MODULE_6__["BookComponent"],
-                _book_detail_book_detail_component__WEBPACK_IMPORTED_MODULE_13__["BookDetailComponent"],
-                _book_create_book_create_component__WEBPACK_IMPORTED_MODULE_14__["BookCreateComponent"],
-                _book_edit_book_edit_component__WEBPACK_IMPORTED_MODULE_15__["BookEditComponent"],
                 _messages_messages_component__WEBPACK_IMPORTED_MODULE_5__["MessagesComponent"],
-                _profile_profile_component__WEBPACK_IMPORTED_MODULE_7__["ProfileComponent"],
-                _challenge_challenge_component__WEBPACK_IMPORTED_MODULE_8__["ChallengeComponent"],
+                _profile_profile_component__WEBPACK_IMPORTED_MODULE_6__["ProfileComponent"],
+                _challenge_challenge_component__WEBPACK_IMPORTED_MODULE_7__["ChallengeComponent"],
                 _leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_9__["LeaderboardComponent"],
                 _login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
                 _register_register_component__WEBPACK_IMPORTED_MODULE_11__["RegisterComponent"],
                 _home_home_component__WEBPACK_IMPORTED_MODULE_12__["HomeComponent"],
                 _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_4__["NavbarComponent"],
-                _solve_solve_component__WEBPACK_IMPORTED_MODULE_22__["SolveComponent"]
+                _solve_solve_component__WEBPACK_IMPORTED_MODULE_8__["SolveComponent"]
             ],
             imports: [
-                _angular_router__WEBPACK_IMPORTED_MODULE_16__["RouterModule"].forRoot(appRoutes),
+                _angular_router__WEBPACK_IMPORTED_MODULE_13__["RouterModule"].forRoot(appRoutes),
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_17__["FormsModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_17__["ReactiveFormsModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_18__["HttpClientModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_14__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_14__["ReactiveFormsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_15__["HttpClientModule"],
                 //BrowserAnimationsModule,
-                _angular_material__WEBPACK_IMPORTED_MODULE_21__["MatInputModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_21__["MatTableModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_21__["MatPaginatorModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_21__["MatSortModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_21__["MatProgressSpinnerModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_21__["MatIconModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_21__["MatButtonModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_21__["MatCardModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_21__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatInputModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatTableModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatPaginatorModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatSortModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatProgressSpinnerModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatIconModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatButtonModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatCardModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatFormFieldModule"],
                 _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModule"].forRoot()
             ],
             providers: [
-                _authentication_service__WEBPACK_IMPORTED_MODULE_19__["AuthenticationService"],
-                _auth_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthGuardService"]
+                _authentication_service__WEBPACK_IMPORTED_MODULE_16__["AuthenticationService"],
+                _auth_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthGuardService"],
+                _api_service__WEBPACK_IMPORTED_MODULE_18__["ApiService"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
         })
@@ -519,415 +499,6 @@ var AuthenticationService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/book-create/book-create.component.css":
-/*!*******************************************************!*\
-  !*** ./src/app/book-create/book-create.component.css ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ".example-form {\n    min-width: 150px;\n    max-width: 500px;\n    width: 100%;\n  }\n  \n  .example-full-width {\n    width: 100%;\n  }\n  \n  .example-full-width:nth-last-child() {\n    margin-bottom: 10px;\n  }\n  \n  .button-row {\n    margin: 10px 0;\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYm9vay1jcmVhdGUvYm9vay1jcmVhdGUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGlCQUFpQjtJQUNqQixpQkFBaUI7SUFDakIsWUFBWTtHQUNiOztFQUVEO0lBQ0UsWUFBWTtHQUNiOztFQUVEO0lBQ0Usb0JBQW9CO0dBQ3JCOztFQUVEO0lBQ0UsZUFBZTtHQUNoQiIsImZpbGUiOiJzcmMvYXBwL2Jvb2stY3JlYXRlL2Jvb2stY3JlYXRlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZXhhbXBsZS1mb3JtIHtcbiAgICBtaW4td2lkdGg6IDE1MHB4O1xuICAgIG1heC13aWR0aDogNTAwcHg7XG4gICAgd2lkdGg6IDEwMCU7XG4gIH1cbiAgXG4gIC5leGFtcGxlLWZ1bGwtd2lkdGgge1xuICAgIHdpZHRoOiAxMDAlO1xuICB9XG4gIFxuICAuZXhhbXBsZS1mdWxsLXdpZHRoOm50aC1sYXN0LWNoaWxkKCkge1xuICAgIG1hcmdpbi1ib3R0b206IDEwcHg7XG4gIH1cbiAgXG4gIC5idXR0b24tcm93IHtcbiAgICBtYXJnaW46IDEwcHggMDtcbiAgfSJdfQ== */"
-
-/***/ }),
-
-/***/ "./src/app/book-create/book-create.component.html":
-/*!********************************************************!*\
-  !*** ./src/app/book-create/book-create.component.html ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"button-row\">\n  <a mat-raised-button color=\"primary\" [routerLink]=\"['/books']\"><mat-icon>list</mat-icon></a>\n</div>\n<form [formGroup]=\"bookForm\" (ngSubmit)=\"onFormSubmit(bookForm.value)\">\n  <mat-form-field class=\"example-full-width\">\n    <input matInput placeholder=\"ISBN\" formControlName=\"isbn\"\n           [errorStateMatcher]=\"matcher\">\n    <mat-error>\n      <span *ngIf=\"!bookForm.get('isbn').valid && bookForm.get('isbn').touched\">Please enter ISBN</span>\n    </mat-error>\n  </mat-form-field>\n  <mat-form-field class=\"example-full-width\">\n    <input matInput placeholder=\"Title\" formControlName=\"title\"\n           [errorStateMatcher]=\"matcher\">\n    <mat-error>\n      <span *ngIf=\"!bookForm.get('title').valid && bookForm.get('title').touched\">Please enter Book Title</span>\n    </mat-error>\n  </mat-form-field>\n  <mat-form-field class=\"example-full-width\">\n    <input matInput placeholder=\"Author\" formControlName=\"author\"\n           [errorStateMatcher]=\"matcher\">\n    <mat-error>\n      <span *ngIf=\"!bookForm.get('author').valid && bookForm.get('author').touched\">Please enter Book Author</span>\n    </mat-error>\n  </mat-form-field>\n  <mat-form-field class=\"example-full-width\">\n    <textarea matInput placeholder=\"Description\" formControlName=\"description\"\n           [errorStateMatcher]=\"matcher\"></textarea>\n    <mat-error>\n      <span *ngIf=\"!bookForm.get('description').valid && bookForm.get('description').touched\">Please enter Book Description</span>\n    </mat-error>\n  </mat-form-field>\n  <mat-form-field class=\"example-full-width\">\n    <input matInput placeholder=\"Publisher\" formControlName=\"publisher\"\n           [errorStateMatcher]=\"matcher\">\n    <mat-error>\n      <span *ngIf=\"!bookForm.get('publisher').valid && bookForm.get('publisher').touched\">Please enter Publisher</span>\n    </mat-error>\n  </mat-form-field>\n  <mat-form-field class=\"example-full-width\">\n    <input matInput placeholder=\"Published Year\" formControlName=\"published_year\"\n           [errorStateMatcher]=\"matcher\">\n    <mat-error>\n      <span *ngIf=\"!bookForm.get('published_year').valid && bookForm.get('published_year').touched\">Please enter Published Year</span>\n    </mat-error>\n  </mat-form-field>\n  <div class=\"button-row\">\n    <button type=\"submit\" [disabled]=\"!bookForm.valid\" mat-raised-button color=\"primary\"><mat-icon>save</mat-icon></button>\n  </div>\n</form>"
-
-/***/ }),
-
-/***/ "./src/app/book-create/book-create.component.ts":
-/*!******************************************************!*\
-  !*** ./src/app/book-create/book-create.component.ts ***!
-  \******************************************************/
-/*! exports provided: BookCreateComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BookCreateComponent", function() { return BookCreateComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var BookCreateComponent = /** @class */ (function () {
-    function BookCreateComponent(router, api, formBuilder) {
-        this.router = router;
-        this.api = api;
-        this.formBuilder = formBuilder;
-        this.isbn = '';
-        this.title = '';
-        this.description = '';
-        this.author = '';
-        this.publisher = '';
-        this.published_year = '';
-    }
-    BookCreateComponent.prototype.ngOnInit = function () {
-        this.bookForm = this.formBuilder.group({
-            'isbn': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            'title': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            'description': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            'author': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            'publisher': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            'published_year': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]
-        });
-    };
-    BookCreateComponent.prototype.onFormSubmit = function (form) {
-        var _this = this;
-        this.api.postBook(form)
-            .subscribe(function (res) {
-            var id = res['_id'];
-            _this.router.navigate(['/book-details', id]);
-        }, function (err) {
-            console.log(err);
-        });
-    };
-    BookCreateComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-book-create',
-            template: __webpack_require__(/*! ./book-create.component.html */ "./src/app/book-create/book-create.component.html"),
-            styles: [__webpack_require__(/*! ./book-create.component.css */ "./src/app/book-create/book-create.component.css")]
-        }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]])
-    ], BookCreateComponent);
-    return BookCreateComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/book-detail/book-detail.component.css":
-/*!*******************************************************!*\
-  !*** ./src/app/book-detail/book-detail.component.css ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ".example-card {\n    max-width: 500px;\n  }\n  \n  .button-row {\n    margin: 10px 0;\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYm9vay1kZXRhaWwvYm9vay1kZXRhaWwuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGlCQUFpQjtHQUNsQjs7RUFFRDtJQUNFLGVBQWU7R0FDaEIiLCJmaWxlIjoic3JjL2FwcC9ib29rLWRldGFpbC9ib29rLWRldGFpbC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmV4YW1wbGUtY2FyZCB7XG4gICAgbWF4LXdpZHRoOiA1MDBweDtcbiAgfVxuICBcbiAgLmJ1dHRvbi1yb3cge1xuICAgIG1hcmdpbjogMTBweCAwO1xuICB9Il19 */"
-
-/***/ }),
-
-/***/ "./src/app/book-detail/book-detail.component.html":
-/*!********************************************************!*\
-  !*** ./src/app/book-detail/book-detail.component.html ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"button-row\">\n  <a mat-raised-button color=\"primary\" [routerLink]=\"['/books']\"><mat-icon>list</mat-icon></a>\n</div>\n<mat-card class=\"example-card\">\n  <mat-card-header>\n    <mat-card-title><h2>{{book.title}}</h2></mat-card-title>\n    <mat-card-subtitle>{{book.description}}</mat-card-subtitle>\n  </mat-card-header>\n  <mat-card-content>\n    <dl>\n      <dt>ISBN:</dt>\n      <dd>{{book.isbn}}</dd>\n      <dt>Author:</dt>\n      <dd>{{book.author}}</dd>\n      <dt>Publisher:</dt>\n      <dd>{{book.publisher}}</dd>\n      <dt>Publish Year:</dt>\n      <dd>{{book.published_year}}</dd>\n      <dt>Update Date:</dt>\n      <dd>{{book.updated_date | date}}</dd>\n    </dl>\n  </mat-card-content>\n  <mat-card-actions>\n    <a mat-raised-button color=\"primary\" [routerLink]=\"['/book-edit', book._id]\"><mat-icon>edit</mat-icon></a>\n    <a mat-raised-button color=\"warn\" (click)=\"deleteBook(book._id)\"><mat-icon>delete</mat-icon></a>\n  </mat-card-actions>\n</mat-card>"
-
-/***/ }),
-
-/***/ "./src/app/book-detail/book-detail.component.ts":
-/*!******************************************************!*\
-  !*** ./src/app/book-detail/book-detail.component.ts ***!
-  \******************************************************/
-/*! exports provided: BookDetailComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BookDetailComponent", function() { return BookDetailComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var BookDetailComponent = /** @class */ (function () {
-    function BookDetailComponent(route, api, router) {
-        this.route = route;
-        this.api = api;
-        this.router = router;
-        this.book = {};
-    }
-    BookDetailComponent.prototype.ngOnInit = function () {
-        this.getBookDetails(this.route.snapshot.params['id']);
-    };
-    BookDetailComponent.prototype.getBookDetails = function (id) {
-        var _this = this;
-        this.api.getBook(id)
-            .subscribe(function (data) {
-            console.log(data);
-            _this.book = data;
-        });
-    };
-    BookDetailComponent.prototype.deleteBook = function (id) {
-        var _this = this;
-        this.api.deleteBook(id)
-            .subscribe(function (res) {
-            _this.router.navigate(['/books']);
-        }, function (err) {
-            console.log(err);
-        });
-    };
-    BookDetailComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-book-detail',
-            template: __webpack_require__(/*! ./book-detail.component.html */ "./src/app/book-detail/book-detail.component.html"),
-            styles: [__webpack_require__(/*! ./book-detail.component.css */ "./src/app/book-detail/book-detail.component.css")]
-        }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
-    ], BookDetailComponent);
-    return BookDetailComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/book-edit/book-edit.component.css":
-/*!***************************************************!*\
-  !*** ./src/app/book-edit/book-edit.component.css ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ".example-form {\n    min-width: 150px;\n    max-width: 500px;\n    width: 100%;\n  }\n  \n  .example-full-width {\n    width: 100%;\n  }\n  \n  .example-full-width:nth-last-child() {\n    margin-bottom: 10px;\n  }\n  \n  .button-row {\n    margin: 10px 0;\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYm9vay1lZGl0L2Jvb2stZWRpdC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksaUJBQWlCO0lBQ2pCLGlCQUFpQjtJQUNqQixZQUFZO0dBQ2I7O0VBRUQ7SUFDRSxZQUFZO0dBQ2I7O0VBRUQ7SUFDRSxvQkFBb0I7R0FDckI7O0VBRUQ7SUFDRSxlQUFlO0dBQ2hCIiwiZmlsZSI6InNyYy9hcHAvYm9vay1lZGl0L2Jvb2stZWRpdC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmV4YW1wbGUtZm9ybSB7XG4gICAgbWluLXdpZHRoOiAxNTBweDtcbiAgICBtYXgtd2lkdGg6IDUwMHB4O1xuICAgIHdpZHRoOiAxMDAlO1xuICB9XG4gIFxuICAuZXhhbXBsZS1mdWxsLXdpZHRoIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgfVxuICBcbiAgLmV4YW1wbGUtZnVsbC13aWR0aDpudGgtbGFzdC1jaGlsZCgpIHtcbiAgICBtYXJnaW4tYm90dG9tOiAxMHB4O1xuICB9XG4gIFxuICAuYnV0dG9uLXJvdyB7XG4gICAgbWFyZ2luOiAxMHB4IDA7XG4gIH0iXX0= */"
-
-/***/ }),
-
-/***/ "./src/app/book-edit/book-edit.component.html":
-/*!****************************************************!*\
-  !*** ./src/app/book-edit/book-edit.component.html ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"button-row\">\n  <a mat-raised-button color=\"primary\" (click)=\"bookDetails()\"><mat-icon>show</mat-icon></a>\n</div>\n<form [formGroup]=\"bookForm\" (ngSubmit)=\"onFormSubmit(bookForm.value)\">\n  <mat-form-field class=\"example-full-width\">\n    <input matInput placeholder=\"ISBN\" formControlName=\"isbn\"\n           [errorStateMatcher]=\"matcher\">\n    <mat-error>\n      <span *ngIf=\"!bookForm.get('isbn').valid && bookForm.get('isbn').touched\">Please enter ISBN</span>\n    </mat-error>\n  </mat-form-field>\n  <mat-form-field class=\"example-full-width\">\n    <input matInput placeholder=\"Title\" formControlName=\"title\"\n           [errorStateMatcher]=\"matcher\">\n    <mat-error>\n      <span *ngIf=\"!bookForm.get('title').valid && bookForm.get('title').touched\">Please enter Book Title</span>\n    </mat-error>\n  </mat-form-field>\n  <mat-form-field class=\"example-full-width\">\n    <input matInput placeholder=\"Author\" formControlName=\"author\"\n           [errorStateMatcher]=\"matcher\">\n    <mat-error>\n      <span *ngIf=\"!bookForm.get('author').valid && bookForm.get('author').touched\">Please enter Book Author</span>\n    </mat-error>\n  </mat-form-field>\n  <mat-form-field class=\"example-full-width\">\n    <textarea matInput placeholder=\"Description\" formControlName=\"description\"\n           [errorStateMatcher]=\"matcher\"></textarea>\n    <mat-error>\n      <span *ngIf=\"!bookForm.get('description').valid && bookForm.get('description').touched\">Please enter Book Description</span>\n    </mat-error>\n  </mat-form-field>\n  <mat-form-field class=\"example-full-width\">\n    <input matInput placeholder=\"Publisher\" formControlName=\"publisher\"\n           [errorStateMatcher]=\"matcher\">\n    <mat-error>\n      <span *ngIf=\"!bookForm.get('publisher').valid && bookForm.get('publisher').touched\">Please enter Publisher</span>\n    </mat-error>\n  </mat-form-field>\n  <mat-form-field class=\"example-full-width\">\n    <input matInput placeholder=\"Published Year\" formControlName=\"published_year\"\n           [errorStateMatcher]=\"matcher\">\n    <mat-error>\n      <span *ngIf=\"!bookForm.get('published_year').valid && bookForm.get('published_year').touched\">Please enter Published Year</span>\n    </mat-error>\n  </mat-form-field>\n  <div class=\"button-row\">\n    <button type=\"submit\" [disabled]=\"!bookForm.valid\" mat-raised-button color=\"primary\"><mat-icon>save</mat-icon></button>\n  </div>\n</form>"
-
-/***/ }),
-
-/***/ "./src/app/book-edit/book-edit.component.ts":
-/*!**************************************************!*\
-  !*** ./src/app/book-edit/book-edit.component.ts ***!
-  \**************************************************/
-/*! exports provided: BookEditComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BookEditComponent", function() { return BookEditComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var BookEditComponent = /** @class */ (function () {
-    function BookEditComponent(router, route, api, formBuilder) {
-        this.router = router;
-        this.route = route;
-        this.api = api;
-        this.formBuilder = formBuilder;
-        this.id = '';
-        this.isbn = '';
-        this.title = '';
-        this.description = '';
-        this.author = '';
-        this.publisher = '';
-        this.published_year = '';
-    }
-    BookEditComponent.prototype.ngOnInit = function () {
-        this.getBook(this.route.snapshot.params['id']);
-        this.bookForm = this.formBuilder.group({
-            'isbn': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            'title': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            'description': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            'author': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            'publisher': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            'published_year': [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]
-        });
-    };
-    BookEditComponent.prototype.getBook = function (id) {
-        var _this = this;
-        this.api.getBook(id).subscribe(function (data) {
-            _this.id = data._id;
-            _this.bookForm.setValue({
-                isbn: data.isbn,
-                title: data.title,
-                description: data.description,
-                author: data.author,
-                publisher: data.publisher,
-                published_year: data.published_year
-            });
-        });
-    };
-    BookEditComponent.prototype.onFormSubmit = function (form) {
-        var _this = this;
-        this.api.updateBook(this.id, form)
-            .subscribe(function (res) {
-            var id = res['_id'];
-            _this.router.navigate(['/book-details', id]);
-        }, function (err) {
-            console.log(err);
-        });
-    };
-    BookEditComponent.prototype.bookDetails = function () {
-        this.router.navigate(['/book-details', this.id]);
-    };
-    BookEditComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-book-edit',
-            template: __webpack_require__(/*! ./book-edit.component.html */ "./src/app/book-edit/book-edit.component.html"),
-            styles: [__webpack_require__(/*! ./book-edit.component.css */ "./src/app/book-edit/book-edit.component.css")]
-        }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]])
-    ], BookEditComponent);
-    return BookEditComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/book/book.component.css":
-/*!*****************************************!*\
-  !*** ./src/app/book/book.component.css ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ".example-container {\n    display: flex;\n    flex-direction: column;\n    max-height: 500px;\n    min-width: 300px;\n    overflow: auto;\n  }\n  \n  .isbn-col {\n    flex: 0 0 100px !important;\n    white-space: unset !important;\n  }\n  \n  .button-row {\n    margin: 10px 0;\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYm9vay9ib29rLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxjQUFjO0lBQ2QsdUJBQXVCO0lBQ3ZCLGtCQUFrQjtJQUNsQixpQkFBaUI7SUFDakIsZUFBZTtHQUNoQjs7RUFFRDtJQUNFLDJCQUEyQjtJQUMzQiw4QkFBOEI7R0FDL0I7O0VBRUQ7SUFDRSxlQUFlO0dBQ2hCIiwiZmlsZSI6InNyYy9hcHAvYm9vay9ib29rLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZXhhbXBsZS1jb250YWluZXIge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgICBtYXgtaGVpZ2h0OiA1MDBweDtcbiAgICBtaW4td2lkdGg6IDMwMHB4O1xuICAgIG92ZXJmbG93OiBhdXRvO1xuICB9XG4gIFxuICAuaXNibi1jb2wge1xuICAgIGZsZXg6IDAgMCAxMDBweCAhaW1wb3J0YW50O1xuICAgIHdoaXRlLXNwYWNlOiB1bnNldCAhaW1wb3J0YW50O1xuICB9XG4gIFxuICAuYnV0dG9uLXJvdyB7XG4gICAgbWFyZ2luOiAxMHB4IDA7XG4gIH0iXX0= */"
-
-/***/ }),
-
-/***/ "./src/app/book/book.component.html":
-/*!******************************************!*\
-  !*** ./src/app/book/book.component.html ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"button-row\">\n  <a mat-raised-button color=\"primary\" [routerLink]=\"['/book-create']\"><mat-icon>add</mat-icon></a>\n</div>\n<div class=\"example-container mat-elevation-z8\">\n  <table mat-table #table [dataSource]=\"dataSource\">\n\n    <!--- Note that these columns can be defined in any order.\n          The actual rendered columns are set as a property on the row definition\" -->\n\n    <!-- Title Column -->\n    <ng-container matColumnDef=\"isbn\">\n      <th mat-header-cell *matHeaderCellDef> ISBN </th>\n      <td mat-cell *matCellDef=\"let element\" class=\"isbn-col\"> {{element.isbn}} </td>\n    </ng-container>\n\n    <!-- Title Column -->\n    <ng-container matColumnDef=\"title\">\n      <th mat-header-cell *matHeaderCellDef> Title </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.title}} </td>\n    </ng-container>\n\n    <!-- Author Column -->\n    <ng-container matColumnDef=\"author\">\n      <th mat-header-cell *matHeaderCellDef> Author </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.author}} </td>\n    </ng-container>\n\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\" [routerLink]=\"['/book-details/', row._id]\"></tr>\n  </table>\n</div>"
-
-/***/ }),
-
-/***/ "./src/app/book/book.component.ts":
-/*!****************************************!*\
-  !*** ./src/app/book/book.component.ts ***!
-  \****************************************/
-/*! exports provided: BookComponent, BookDataSource */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BookComponent", function() { return BookComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BookDataSource", function() { return BookDataSource; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
-/* harmony import */ var _angular_cdk_collections__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/cdk/collections */ "./node_modules/@angular/cdk/esm5/collections.es5.js");
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    }
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var BookComponent = /** @class */ (function () {
-    function BookComponent(api) {
-        this.api = api;
-        this.displayedColumns = ['isbn', 'title', 'author'];
-        this.dataSource = new BookDataSource(this.api);
-    }
-    BookComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.api.getBooks()
-            .subscribe(function (res) {
-            console.log('book');
-            console.log(res);
-            _this.books = res;
-        }, function (err) {
-            console.log(err);
-        });
-    };
-    BookComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-book',
-            template: __webpack_require__(/*! ./book.component.html */ "./src/app/book/book.component.html"),
-            styles: [__webpack_require__(/*! ./book.component.css */ "./src/app/book/book.component.css")]
-        }),
-        __metadata("design:paramtypes", [_api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"]])
-    ], BookComponent);
-    return BookComponent;
-}());
-
-var BookDataSource = /** @class */ (function (_super) {
-    __extends(BookDataSource, _super);
-    function BookDataSource(api) {
-        var _this = _super.call(this) || this;
-        _this.api = api;
-        return _this;
-    }
-    BookDataSource.prototype.connect = function () {
-        return this.api.getBooks();
-    };
-    BookDataSource.prototype.disconnect = function () {
-    };
-    return BookDataSource;
-}(_angular_cdk_collections__WEBPACK_IMPORTED_MODULE_2__["DataSource"]));
-
-
-
-/***/ }),
-
 /***/ "./src/app/challenge/challenge.component.css":
 /*!***************************************************!*\
   !*** ./src/app/challenge/challenge.component.css ***!
@@ -935,7 +506,7 @@ var BookDataSource = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "h1 {font-size: 30px; text-align: center; margin-bottom: 15px; margin-left: -42px}\nh2 {font-size: 15px;}\n.menu{color: lightgreen; font-size: 12px; background: rgba(0,0,0,0.8); border: #9daaa3 1px solid; border-radius: 0px; max-width: 480px}\nselect option{color: lightgreen; font-size: 12px; background-color: rgba(0,0,0,0.8);}\n.btn{margin-left: 100px; margin-top: 10px; border-color: #9daaa3; color: #7ff12a; text-shadow: 2px 2px 2px black, 0 0 1em lightgreen, 0 0 0.2em lightgreen;}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhbGxlbmdlL2NoYWxsZW5nZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLElBQUksZ0JBQWdCLENBQUMsbUJBQW1CLENBQUMsb0JBQW9CLENBQUMsa0JBQWtCLENBQUM7QUFDakYsSUFBSSxnQkFBZ0IsQ0FBQztBQUNyQixNQUFNLGtCQUFrQixDQUFDLGdCQUFnQixDQUFDLDRCQUE0QixDQUFDLDBCQUEwQixDQUFDLG1CQUFtQixDQUFDLGdCQUFnQixDQUFDO0FBQ3ZJLGNBQWMsa0JBQWtCLENBQUMsZ0JBQWdCLENBQUMsa0NBQWtDLENBQUM7QUFDckYsS0FBSyxtQkFBbUIsQ0FBQyxpQkFBaUIsQ0FBQyxzQkFBc0IsQ0FBQyxlQUFlLENBQUMseUVBQXlFLENBQUMiLCJmaWxlIjoic3JjL2FwcC9jaGFsbGVuZ2UvY2hhbGxlbmdlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJoMSB7Zm9udC1zaXplOiAzMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7IG1hcmdpbi1ib3R0b206IDE1cHg7IG1hcmdpbi1sZWZ0OiAtNDJweH1cbmgyIHtmb250LXNpemU6IDE1cHg7fVxuLm1lbnV7Y29sb3I6IGxpZ2h0Z3JlZW47IGZvbnQtc2l6ZTogMTJweDsgYmFja2dyb3VuZDogcmdiYSgwLDAsMCwwLjgpOyBib3JkZXI6ICM5ZGFhYTMgMXB4IHNvbGlkOyBib3JkZXItcmFkaXVzOiAwcHg7IG1heC13aWR0aDogNDgwcHh9XG5zZWxlY3Qgb3B0aW9ue2NvbG9yOiBsaWdodGdyZWVuOyBmb250LXNpemU6IDEycHg7IGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwwLDAsMC44KTt9XG4uYnRue21hcmdpbi1sZWZ0OiAxMDBweDsgbWFyZ2luLXRvcDogMTBweDsgYm9yZGVyLWNvbG9yOiAjOWRhYWEzOyBjb2xvcjogIzdmZjEyYTsgdGV4dC1zaGFkb3c6IDJweCAycHggMnB4IGJsYWNrLCAwIDAgMWVtIGxpZ2h0Z3JlZW4sIDAgMCAwLjJlbSBsaWdodGdyZWVuO30iXX0= */"
+module.exports = "h1 {font-size: 30px; text-align: center; margin-bottom: 15px; margin-left: -42px}\nh2 {font-size: 15px;}\n.menu{color: lightgreen; font-size: 12px; background: rgba(0,0,0,0.8); border: #9daaa3 1px solid; border-radius: 0px; max-width: 480px}\nselect option{color: lightgreen; font-size: 12px; background-color: rgba(0,0,0,0.8);}\n.btn{margin-left: 150px; border-color: #9daaa3; color: #7ff12a; text-shadow: 2px 2px 2px black, 0 0 1em lightgreen, 0 0 0.2em lightgreen;}\n.row{margin-bottom: 15px}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhbGxlbmdlL2NoYWxsZW5nZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLElBQUksZ0JBQWdCLENBQUMsbUJBQW1CLENBQUMsb0JBQW9CLENBQUMsa0JBQWtCLENBQUM7QUFDakYsSUFBSSxnQkFBZ0IsQ0FBQztBQUNyQixNQUFNLGtCQUFrQixDQUFDLGdCQUFnQixDQUFDLDRCQUE0QixDQUFDLDBCQUEwQixDQUFDLG1CQUFtQixDQUFDLGdCQUFnQixDQUFDO0FBQ3ZJLGNBQWMsa0JBQWtCLENBQUMsZ0JBQWdCLENBQUMsa0NBQWtDLENBQUM7QUFDckYsS0FBSyxtQkFBbUIsQ0FBQyxzQkFBc0IsQ0FBQyxlQUFlLENBQUMseUVBQXlFLENBQUM7QUFDMUksS0FBSyxtQkFBbUIsQ0FBQyIsImZpbGUiOiJzcmMvYXBwL2NoYWxsZW5nZS9jaGFsbGVuZ2UuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbImgxIHtmb250LXNpemU6IDMwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsgbWFyZ2luLWJvdHRvbTogMTVweDsgbWFyZ2luLWxlZnQ6IC00MnB4fVxuaDIge2ZvbnQtc2l6ZTogMTVweDt9XG4ubWVudXtjb2xvcjogbGlnaHRncmVlbjsgZm9udC1zaXplOiAxMnB4OyBiYWNrZ3JvdW5kOiByZ2JhKDAsMCwwLDAuOCk7IGJvcmRlcjogIzlkYWFhMyAxcHggc29saWQ7IGJvcmRlci1yYWRpdXM6IDBweDsgbWF4LXdpZHRoOiA0ODBweH1cbnNlbGVjdCBvcHRpb257Y29sb3I6IGxpZ2h0Z3JlZW47IGZvbnQtc2l6ZTogMTJweDsgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLDAsMCwwLjgpO31cbi5idG57bWFyZ2luLWxlZnQ6IDE1MHB4OyBib3JkZXItY29sb3I6ICM5ZGFhYTM7IGNvbG9yOiAjN2ZmMTJhOyB0ZXh0LXNoYWRvdzogMnB4IDJweCAycHggYmxhY2ssIDAgMCAxZW0gbGlnaHRncmVlbiwgMCAwIDAuMmVtIGxpZ2h0Z3JlZW47fVxuLnJvd3ttYXJnaW4tYm90dG9tOiAxNXB4fSJdfQ== */"
 
 /***/ }),
 
@@ -946,7 +517,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; margin-bottom: 15px; 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Challenge</h1>\n\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Choose an Opponent</h2>\n      <!-- <select class=\"menu\" id=\"opponent\">\n        <option value=\"Patrick\">Patrick</option>\n        <option value=\"David\">David</option>\n        <option value=\"Paul\">Paul</option>\n        <option value=\"Dennis\">Dennis</option>\n      </select> -->\n      <select class=\"menu\" id=\"opponent\" #t (change)=\"getIdVal(t.value)\">\n        <option [value]=\"null\">Select Alias</option>\n        <option *ngFor=\"let user of filteredUsersList\" [value]=[user._id]>{{user.alias}}</option>\n      </select>\n      <h2>Cypher</h2>\n        <select class=\"menu\" id=\"cypher\" (click)=\"doCrypt(true)\">\n          <option [value]=\"null\">Select Cypher</option>  \n          <option value=\"cCrypt\">Caesar Cypher</option>\n          <option value=\"cCrypt2\">Reverse Caesar</option>\n        </select>\n      <h2>Message</h2>\n\n\n      <input type=\"text\" class=\"menu\" id=\"message\" [(ngModel)]=\"newMessage\" (keyup)=\"doCrypt(true)\" maxlength=\"20\">\n      <!-- <p id=\"isEng\">Valid English</p>\n      <p id=\"nonEng\">Not Valid English</p> -->\n\n      <div>\n        <h2>Encryption Key</h2>\n        <!-- <input id=\"encryptionKey\"> -->\n        <select class=\"menu\" id=\"encryptionKey\" (click)=\"doCrypt(true)\">\n          <option value=\"0\">0</option>\n          <option value=\"1\">1</option>\n          <option value=\"2\">2</option>\n          <option value=\"3\">3</option>\n          <option value=\"4\">4</option>\n          <option value=\"5\">5</option>\n          <option value=\"6\">6</option>\n          <option value=\"7\">7</option>\n          <option value=\"8\">8</option>\n          <option value=\"9\">9</option>\n          <option value=\"10\">10</option>\n          <option value=\"11\">11</option>\n          <option value=\"12\">12</option>\n          <option value=\"13\">13</option>\n          <option value=\"14\">14</option>\n          <option value=\"15\">15</option>\n          <option value=\"16\">16</option>\n          <option value=\"17\">17</option>\n          <option value=\"18\">18</option>\n          <option value=\"19\">19</option>\n          <option value=\"20\">20</option>\n          <option value=\"21\">21</option>\n          <option value=\"22\">22</option>\n          <option value=\"23\">23</option>\n          <option value=\"24\">24</option>\n          <option value=\"25\">25</option>\n        </select>\n      </div>\n      \n      <div>\n        <h2>Encrypted Message</h2>\n        <p type=\"text\" id=\"encMessage\">{{encMessage}}</p>\n      </div>\n      <div>\n        <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" (click)=\"createChallenge()\">BuildMessage</button>\n      </div>\n      \n    </div>\n  </div>\n</div>\n"
+module.exports = "<h1>Challenge</h1>\n\n<div class=\"container\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Choose an Opponent</h2>\n      <select class=\"menu\" id=\"opponent\" #t (change)=\"getIdVal(t.value)\">\n        <option [value]=\"null\">Select Alias</option>\n        <option *ngFor=\"let user of filteredUsersList\" [value]=[user._id]>{{user.alias}}</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Cypher</h2>\n        <select class=\"menu\" id=\"cypher\" (click)=\"doCrypt(true)\">\n          <option [value]=\"null\">Select Cypher</option>  \n          <option value=\"cCrypt\">Caesar Cypher</option>\n          <option value=\"cCrypt2\">Reverse Caesar</option>\n        </select>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Message</h2>\n      <input type=\"text\" class=\"menu\" id=\"message\" [(ngModel)]=\"newMessage\" (keyup)=\"doCrypt(true)\" maxlength=\"20\">\n      <!-- <p id=\"isEng\">Valid English</p>\n      <p id=\"nonEng\">Not Valid English</p> -->\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n        <h2>Encryption Key</h2>\n        <!-- <input id=\"encryptionKey\"> -->\n        <select class=\"menu\" id=\"encryptionKey\" (click)=\"doCrypt(true)\">\n          <option value=\"0\">0</option>\n          <option value=\"1\">1</option>\n          <option value=\"2\">2</option>\n          <option value=\"3\">3</option>\n          <option value=\"4\">4</option>\n          <option value=\"5\">5</option>\n          <option value=\"6\">6</option>\n          <option value=\"7\">7</option>\n          <option value=\"8\">8</option>\n          <option value=\"9\">9</option>\n          <option value=\"10\">10</option>\n          <option value=\"11\">11</option>\n          <option value=\"12\">12</option>\n          <option value=\"13\">13</option>\n          <option value=\"14\">14</option>\n          <option value=\"15\">15</option>\n          <option value=\"16\">16</option>\n          <option value=\"17\">17</option>\n          <option value=\"18\">18</option>\n          <option value=\"19\">19</option>\n          <option value=\"20\">20</option>\n          <option value=\"21\">21</option>\n          <option value=\"22\">22</option>\n          <option value=\"23\">23</option>\n          <option value=\"24\">24</option>\n          <option value=\"25\">25</option>\n        </select>\n    </div>\n  </div>\n \n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div>\n        <h2>Encrypted Message</h2>\n        <p type=\"text\" id=\"encMessage\">{{encMessage}}</p>\n      </div>\n      <div>\n        <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" (click)=\"createChallenge()\">Build Message</button>\n      </div>\n    </div>  \n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1103,9 +674,7 @@ var ChallengeComponent = /** @class */ (function () {
             Solved: false,
             MessageScore: 0
         };
-        console.log(sendChallenge);
-        this.postTheSentMessage(sendChallenge);
-        var recvdChallenge = {
+        this.recvdChallenge = {
             Receiver_id: this.sentTo_id,
             ReceivedFrom_id: usr._id,
             ReceivedFrom_Alias: usr.alias,
@@ -1117,12 +686,15 @@ var ChallengeComponent = /** @class */ (function () {
             Solved: false,
             MessageScore: 0
         };
-        this.postTheRecvdMessage(recvdChallenge);
+        this.postTheSentMessage(sendChallenge);
     };
     ChallengeComponent.prototype.postTheSentMessage = function (challenge) {
         var _this = this;
-        this.api.postSentMsg(challenge).subscribe(function () {
-            _this.router.navigateByUrl('/profile');
+        this.api.postSentMsg(challenge).subscribe(function (data) {
+            _this.sentMsg_id = data._id;
+            _this.recvdChallenge.SentMsg_id = _this.sentMsg_id;
+            _this.postTheRecvdMessage(_this.recvdChallenge);
+            //this.router.navigateByUrl('/profile');
         }, function (err) {
             console.error(err);
         });
@@ -1231,7 +803,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; margin-left: -40px}\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Leaderboard</h1>\n  <br>\n  <!-- ng-repeat loops through data to build list -->\n  <div>\n    <h5>Ranking Special Agent:</h5>\n    <ul>\n      <li>{{gameStats[0].alias}} : {{gameStats[0].Score}}</li>\n    </ul>\n  </div>\n  <br>\n  <div>\n    <h5>Top Agent Listing:</h5>\n    <ul>\n      <li *ngFor=\"let stat of gameStats\">\n        {{stat.alias}} : {{stat.Score}}\n      </li>\n    </ul>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <h1>Leaderboard</h1>\n  <br>\n  <!-- ng-repeat loops through data to build list -->\n  <div>\n    <h5>Ranking Special Agent:</h5>\n    <ul>\n      <li>\n        {{gameStats[0].alias}} : {{gameStats[0].gameScore}}\n      </li>\n    </ul>\n  </div>\n  <br>\n  <div>\n    <h5>Top Agent Listing:</h5>\n    <ul>\n      <li *ngFor=\"let stats of gameStats\">\n        {{stats.alias}} : {{stats.gameScore}}\n      </li>\n    </ul>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1399,6 +971,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api.service */ "./src/app/api.service.ts");
 /* harmony import */ var _angular_cdk_collections__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/cdk/collections */ "./node_modules/@angular/cdk/esm5/collections.es5.js");
+/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../authentication.service */ "./src/app/authentication.service.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -1424,14 +997,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var MessagesComponent = /** @class */ (function () {
-    function MessagesComponent(api) {
+    function MessagesComponent(api, auth) {
         this.api = api;
+        this.auth = auth;
         this.dataSource = new MsgDataSource(this.api);
     }
     MessagesComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.dataSource.connect()
+        this.usr = this.auth.getUserDetails;
+        this.dataSource.connect(this.usr._id)
             .subscribe(function (res) {
             _this.messages = res;
             console.log(_this.messages);
@@ -1445,7 +1021,7 @@ var MessagesComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./messages.component.html */ "./src/app/messages/messages.component.html"),
             styles: [__webpack_require__(/*! ./messages.component.css */ "./src/app/messages/messages.component.css")]
         }),
-        __metadata("design:paramtypes", [_api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"]])
+        __metadata("design:paramtypes", [_api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"], _authentication_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticationService"]])
     ], MessagesComponent);
     return MessagesComponent;
 }());
@@ -1457,7 +1033,8 @@ var MsgDataSource = /** @class */ (function (_super) {
         _this.api = api;
         return _this;
     }
-    MsgDataSource.prototype.connect = function () {
+    MsgDataSource.prototype.connect = function (id) {
+        console.log(id);
         return this.api.getRecvdMsgs();
     };
     MsgDataSource.prototype.disconnect = function () {
@@ -1709,7 +1286,7 @@ module.exports = ".menu{color: lightgreen; font-size: 12px; background: rgba(0,0
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h5>Decrypt the Message</h5>\n<ng-container *ngIf=\"!solved && !failed\">\n    <form>\n        <h6>Author: </h6>\n            <p>{{message.ReceivedFrom_Alias}}</p>\n        <h6>Encrypted Message:</h6>\n            <p id=\"encMessage\">{{message.EncryptedMsg}}</p>\n            <div class=\"row\">\n                <div class=\"col-sm-6\">\n                    <h6>Choose Cipher</h6>\n                        <select class=\"menu\" id=\"cypher\">\n                            <option value=\"null\">Select Cypher</option>\n                            <option value=\"cCrypt\">Caesar Cipher</option>\n                            <option value=\"cCrypt2\">Reverse Caesar</option>\n                        </select>\n                </div>\n                <div class=\"col-sm-6\">\n                    <h6>Choose Key</h6>\n                        <select class=\"menu\" id=\"encryptionKey\">\n                            <option value=\"0\">0</option>\n                            <option value=\"1\">1</option>\n                            <option value=\"2\">2</option>\n                            <option value=\"3\">3</option>\n                            <option value=\"4\">4</option>\n                            <option value=\"5\">5</option>\n                            <option value=\"6\">6</option>\n                            <option value=\"7\">7</option>\n                            <option value=\"8\">8</option>\n                            <option value=\"9\">9</option>\n                            <option value=\"10\">10</option>\n                            <option value=\"11\">11</option>\n                            <option value=\"12\">12</option>\n                            <option value=\"13\">13</option>\n                            <option value=\"14\">14</option>\n                            <option value=\"15\">15</option>\n                            <option value=\"16\">16</option>\n                            <option value=\"17\">17</option>\n                            <option value=\"18\">18</option>\n                            <option value=\"19\">19</option>\n                            <option value=\"20\">20</option>\n                            <option value=\"21\">21</option>\n                            <option value=\"22\">22</option>\n                            <option value=\"23\">23</option>\n                            <option value=\"24\">24</option>\n                            <option value=\"25\">25</option>\n                        </select>\n                    </div>\n                <div class=\"col-sm-6\">\n                    <h6>Attempts: {{message.AttemptsRemaining}}</h6>\n                </div>\n            </div>\n             <br/>\n                <button class=\"btn btn-outline-success btn-sm\" id=\"runCrypt\" (click)=\"doCrypt(true)\">Decrypt</button>\n                <h6>Solution: </h6>\n                <p id=\"message\"></p>\n    \n    </form>\n\n</ng-container >\n\n<ng-container *ngIf=\"solved && !failed\">\n    <h4>Congratulations! You solved it!</h4>\n    <button class=\"btn btn-sm\" (click)=\"onBack()\">\n        Back to Messages\n    </button>\n</ng-container>\n<ng-container *ngIf=\"!solved && failed\">\n    <h4>You have failed!</h4>\n    <button class=\"btn btn-sm\" (click)=\"onBack()\">\n        Back to Messages\n    </button>\n</ng-container>\n\n\n\n\n"
+module.exports = "<h5>Decrypt the Message</h5>\n<ng-container *ngIf=\"!solved && !failed\">\n    <form>\n        <h6>Author: </h6>\n            <p>{{message.ReceivedFrom_Alias}}</p>\n        <h6>Encrypted Message:</h6>\n            <p id=\"encMessage\">{{message.EncryptedMsg}}</p>\n            <div class=\"row\">\n                <div class=\"col-sm-6\">\n                    <h6>Choose Cipher</h6>\n                        <select class=\"menu\" id=\"cypher\">\n                            <option value=\"null\">Select Cypher</option>\n                            <option value=\"cCrypt\">Caesar Cipher</option>\n                            <option value=\"cCrypt2\">Reverse Caesar</option>\n                        </select>\n                </div>\n                <div class=\"col-sm-6\">\n                    <h6>Choose Key</h6>\n                        <select class=\"menu\" id=\"encryptionKey\">\n                            <option value=\"0\">0</option>\n                            <option value=\"1\">1</option>\n                            <option value=\"2\">2</option>\n                            <option value=\"3\">3</option>\n                            <option value=\"4\">4</option>\n                            <option value=\"5\">5</option>\n                            <option value=\"6\">6</option>\n                            <option value=\"7\">7</option>\n                            <option value=\"8\">8</option>\n                            <option value=\"9\">9</option>\n                            <option value=\"10\">10</option>\n                            <option value=\"11\">11</option>\n                            <option value=\"12\">12</option>\n                            <option value=\"13\">13</option>\n                            <option value=\"14\">14</option>\n                            <option value=\"15\">15</option>\n                            <option value=\"16\">16</option>\n                            <option value=\"17\">17</option>\n                            <option value=\"18\">18</option>\n                            <option value=\"19\">19</option>\n                            <option value=\"20\">20</option>\n                            <option value=\"21\">21</option>\n                            <option value=\"22\">22</option>\n                            <option value=\"23\">23</option>\n                            <option value=\"24\">24</option>\n                            <option value=\"25\">25</option>\n                        </select>\n                    </div>\n                <div class=\"col-sm-6\">\n                    <h6>Attempts: {{message.AttemptsRemaining}}</h6>\n                </div>\n            </div>\n             <br/>\n                <button class=\"btn btn-outline-success btn-sm\" id=\"runCrypt\" (click)=\"doCrypt(true)\">Decrypt</button>\n                <h6>Solution: </h6>\n                <p id=\"message\"></p>\n    \n    </form>\n\n</ng-container >\n\n<ng-container *ngIf=\"solved && !failed\">\n    <h4>Congratulations! You solved it!</h4>\n    <button class=\"btn btn-outline-success btn-sm\" (click)=\"onBack()\">\n        Back to Messages\n    </button>\n</ng-container>\n<ng-container *ngIf=\"!solved && failed\">\n    <h4>You have failed!</h4>\n    <button class=\"btn btn-outline-success btn-sm\" (click)=\"onBack()\">\n        Back to Messages\n    </button>\n</ng-container>\n\n\n\n\n"
 
 /***/ }),
 
@@ -1746,40 +1323,32 @@ var SolveComponent = /** @class */ (function () {
         this.auth = auth;
         this.router = router;
         this.api = api;
-        this.newStatsRecord = false;
         this.solved = false;
         this.failed = false;
     }
     SolveComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var usr = this.auth.getUserDetails();
+        solution: '';
+        msgScore: 0;
+        gameScore: 0;
+        solved: false;
+        failed: false;
         this.activeRoute.params.subscribe(function (params) {
             _this.id = params['id'];
         });
         this.api.getRecvdMsg(this.id)
             .subscribe(function (res) {
             _this.message = res;
+            _this.api.getSentMsg(_this.message.SentMsg_id)
+                .subscribe(function (res) {
+                _this.sentMessage = res;
+            });
+            _this.api.getUser(_this.message.Receiver_id)
+                .subscribe(function (res) {
+                _this.usr = res;
+                _this.gameScore = _this.usr.gameScore;
+            });
         });
-        this.api.getGameStat(usr._id)
-            .subscribe(function (res) {
-            _this.gameStats = res;
-        });
-        if (this.gameStats) {
-            console.log('gamestat if');
-            this.userScore = this.gameStats.Score;
-            console.log(this.userScore);
-            console.log(this.gameStats);
-        }
-        else {
-            console.log('didnt exist');
-            this.gameStats = {};
-            this.newStatsRecord = true;
-            this.userScore = 0;
-            this.gameStats.alias = usr.alias;
-            this.gameStats.User_id = usr._id;
-            this.gameStats.Score = 0;
-            console.log(this.gameStats);
-        }
     };
     SolveComponent.prototype.onBack = function () {
         this.router.navigate(['messages']);
@@ -1792,50 +1361,41 @@ var SolveComponent = /** @class */ (function () {
         if (chooseCypher === "cCrypt2") {
             this.cCrypt2(isDecrypt);
         }
-        this.message.AttemptsRemaining--;
         if (this.message.AttemptsRemaining === 0) {
             this.failed = true;
         }
         if (this.solution === this.message.DecryptedMsg) {
-            console.log('entered solved');
             this.message.Solved = true;
+            this.sentMessage.Solved = true;
             this.solved = true;
             this.msgScore = this.message.AttemptsRemaining * 10;
             this.message.MessageScore = this.msgScore;
-            this.gameStats.Score = this.msgScore + this.userScore;
-            console.log(this.gameStats);
-            this.updateGameStat();
+            this.sentMessage.MessageScore = this.msgScore;
+            this.gameScore += this.msgScore;
+            this.usr.gameScore += this.gameScore;
+            this.updateGameScore();
+            //this.message.AttemptsRemaining = 1;
+            //this.sentMessage.AttemptsRemaining = 1;
         }
+        this.message.AttemptsRemaining--;
+        this.sentMessage.AttemptsRemaining--;
         this.api.updateRecvdMsg(this.id, this.message)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
         });
+        this.api.updateSentMsg(this.message.SentMsg_id, this.sentMessage)
+            .subscribe(function (res) {
+        }, function (err) {
+            console.log(err);
+        });
     };
-    SolveComponent.prototype.updateGameStat = function () {
-        console.log('entered api call');
-        console.log(this.gameStats._id);
-        console.log(this.gameStats);
-        if (!this.newStatsRecord) {
-            console.log('existing');
-            console.log(this.gameStats);
-            this.api.updateGameStat(this.gameStats._id, this.gameStats)
-                .subscribe(function (res) {
-                console.log(res);
-            }, function (err) {
-                console.log(err);
-            });
-        }
-        else {
-            console.log('new');
-            console.log(this.gameStats);
-            this.api.createGameStat(this.gameStats)
-                .subscribe(function (res) {
-                console.log(res);
-            }, function (err) {
-                console.log(err);
-            });
-        }
+    SolveComponent.prototype.updateGameScore = function () {
+        this.api.updateUser(this.usr._id, this.usr)
+            .subscribe(function (res) {
+        }, function (err) {
+            console.log(err);
+        });
     };
     SolveComponent.prototype.cCrypt = function (isDecrypt) {
         var shiftText = document.getElementById("encryptionKey").value;
@@ -1967,7 +1527,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/david/Documents/BootcampProjects/DCrypt/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/David/Documents/MyCourseWork-iMac/dCrypt/src/main.ts */"./src/main.ts");
 
 
 /***/ })

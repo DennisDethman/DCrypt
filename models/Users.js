@@ -29,6 +29,10 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  gameScore: {
+    type: Number,
+    default: 0
+  },
   hash: String,
   salt: String
 },
@@ -57,6 +61,7 @@ userSchema.methods.generateJwt = function(req) {
     email: this.email,
     name: this.name,
     alias: this.alias,
+    gameScore: this.gameScore,
     lastLogin: this.lastLogin,
     exp: parseInt(expiry.getTime() / 1000),
   }, Object(jwtKey.jwtKeys.secretKey).toString()); // DO NOT KEEP YOUR SECRET IN THE CODE!

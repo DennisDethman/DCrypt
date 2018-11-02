@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 import { AuthenticationService } from '../authentication.service';
-import { GameStats } from '../../../models/GameStats';
 
 @Component({
   selector: 'app-solve',
@@ -11,13 +10,13 @@ import { GameStats } from '../../../models/GameStats';
 })
 export class SolveComponent implements OnInit {
 
+  usr: any;
   id: any;
   message: any;
-  gameStats: any;
-  solution: any;
+  sentMessage: any;
+  solution: string
   msgScore: number;
-  userScore: number;
-  newStatsRecord: boolean = false;
+  gameScore: number;
   solved: boolean = false; 
   failed: boolean = false; 
 
@@ -27,7 +26,12 @@ export class SolveComponent implements OnInit {
                private api: ApiService) { }
 
   ngOnInit() {
-    const usr = this.auth.getUserDetails();
+
+    solution: '';
+    msgScore: 0;
+    gameScore: 0;
+    solved: false; 
+    failed: false; 
 
     this.activeRoute.params.subscribe(params => {
       this.id = params['id'];
@@ -36,29 +40,18 @@ export class SolveComponent implements OnInit {
     this.api.getRecvdMsg(this.id)
     .subscribe(res => {
       this.message = res;
-    });
 
-    this.api.getGameStat(usr._id)
-    .subscribe(res => {
-      this.gameStats = res;
-    });
+      this.api.getSentMsg(this.message.SentMsg_id)
+      .subscribe(res => {
+        this.sentMessage = res;
+      });
 
-    if (this.gameStats) {
-      console.log('gamestat if');
-      this.userScore = this.gameStats.Score;
-      console.log(this.userScore);
-      console.log(this.gameStats);
-    }
-    else {
-      console.log('didnt exist');
-      this.gameStats = {};
-      this.newStatsRecord = true;
-      this.userScore = 0;
-      this.gameStats.alias = usr.alias;
-      this.gameStats.User_id = usr._id;
-      this.gameStats.Score = 0;
-      console.log(this.gameStats);
-    }
+      this.api.getUser(this.message.Receiver_id)
+      .subscribe(res => {
+        this.usr = res;
+        this.gameScore = this.usr.gameScore;
+      });
+    });
   }
 
   onBack(): void {
@@ -67,30 +60,34 @@ export class SolveComponent implements OnInit {
  
   doCrypt(isDecrypt) {
     const chooseCypher = (<HTMLInputElement>document.getElementById("cypher")).value;
-    
+
     if (chooseCypher === "cCrypt") {
       this.cCrypt(isDecrypt);
     }
     if (chooseCypher === "cCrypt2") {
       this.cCrypt2(isDecrypt);
     }
-    this.message.AttemptsRemaining--;
 
     if (this.message.AttemptsRemaining === 0) {
       this.failed = true; 
     }
 
     if (this.solution === this.message.DecryptedMsg) {
-      
-      console.log('entered solved')
       this.message.Solved = true;
+      this.sentMessage.Solved = true;
       this.solved = true;
       this.msgScore = this.message.AttemptsRemaining * 10;
       this.message.MessageScore = this.msgScore;
-      this.gameStats.Score = this.msgScore + this.userScore;
-      console.log(this.gameStats)
-      this.updateGameStat();
+      this.sentMessage.MessageScore = this.msgScore;
+      this.gameScore += this.msgScore;
+      this.usr.gameScore += this.gameScore;
+      this.updateGameScore();
+      //this.message.AttemptsRemaining = 1;
+      //this.sentMessage.AttemptsRemaining = 1;
     }
+
+    this.message.AttemptsRemaining--;
+    this.sentMessage.AttemptsRemaining--;
 
     this.api.updateRecvdMsg(this.id, this.message)
       .subscribe(res => {
@@ -98,35 +95,22 @@ export class SolveComponent implements OnInit {
       console.log(err);
       }
     );
+
+    this.api.updateSentMsg(this.message.SentMsg_id, this.sentMessage)
+    .subscribe(res => {
+    }, (err) => {
+    console.log(err);
+    }
+  );
   }
 
-  updateGameStat() {
-    console.log('entered api call')
-    console.log(this.gameStats._id)
-    console.log(this.gameStats)
-
-    if (!this.newStatsRecord) {
-      console.log('existing')
-      console.log(this.gameStats)
-      this.api.updateGameStat(this.gameStats._id, this.gameStats)
-        .subscribe(res => {
-          console.log(res)
-        }, (err) => {
-        console.log(err);
-        }
-      );
-    }
-    else {
-      console.log('new')
-      console.log(this.gameStats)
-      this.api.createGameStat(this.gameStats)
-        .subscribe(res => {
-          console.log(res)
-        }, (err) => {
-        console.log(err);
-        }
-      ); 
-    }   
+  updateGameScore() {
+    this.api.updateUser(this.usr._id, this.usr)
+      .subscribe(res => {
+      }, (err) => {
+      console.log(err);
+      }
+    );
   }
   
   cCrypt(isDecrypt) {

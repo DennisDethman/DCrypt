@@ -9,9 +9,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var passport = require('passport');
 
-var apiRouter = require('./routes/book');
 var apiMsgRouter = require('./routes/sentmessages');
-var apiGameStats = require('./routes/gamestats');
 var apiProfile = require('./routes/users');
 var apiRcvdRouter = require('./routes/receivedmessages');
 
@@ -41,7 +39,6 @@ app.use('/loginapi',routesApi);
 app.use('/profileapi',routesApi);
 app.use('/getmsgsapi', apiMsgRouter);
 app.use('/recvdmsgsapi', apiRcvdRouter);
-app.use('/statsapi', apiGameStats);
 app.use('/userapi', apiProfile);
 
 

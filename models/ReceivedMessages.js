@@ -1,6 +1,11 @@
 var mongoose = require( 'mongoose' );
 
 var receivedMsgSchema = new mongoose.Schema({
+  SentMsg_id: {
+    type: String,
+    unique: false,
+    required: false   
+  },
   Receiver_id: {
     type: String,
     unique: false,

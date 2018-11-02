@@ -3,8 +3,10 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var RecvdMsgs = require('../models/ReceivedMessages.js');
 
-/* GET ALL MESSAGES */
+/* GET ALL MESSAGES for User */
+//router.get('/:id', function(req, res, next) {
 router.get('/', function(req, res, next) {
+  //RecvdMsgs.find({'Solved': false, '_id': req.params.id})
   RecvdMsgs.find({'Solved': false})
   .exec(function (err, messages) {
     if (err) return next(err);
@@ -22,6 +24,7 @@ router.get('/:id', function(req, res, next) {
 
 /* SAVE MSG */
 router.post('/', function(req, res, next) {
+  console.log(req)
   RecvdMsgs.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
