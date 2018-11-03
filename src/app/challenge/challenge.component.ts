@@ -179,7 +179,7 @@ export class ChallengeComponent implements OnInit {
 
   postTheRecvdMessage(challenge) {
     this.api.postRecvdMsg(challenge).subscribe(() => {
-      this.router.navigateByUrl('/profile');
+      this.router.navigateByUrl('/home');
     }, (err) => {
       console.error(err);
     }); 

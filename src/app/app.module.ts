@@ -30,6 +30,7 @@ import {
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'messages', component: MessagesComponent },
@@ -37,8 +38,7 @@ const appRoutes: Routes = [
   { path: 'leaderboard', component: LeaderboardComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'solve/:id', component: SolveComponent}
-  // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] }
-];  
+];
 
 @NgModule({
   declarations: [

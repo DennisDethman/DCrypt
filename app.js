@@ -33,7 +33,6 @@ app.use('/', express.static(path.join(__dirname, 'dist/dcrypt')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//app.use('/api', apiRouter);
 app.use('/registerapi', routesApi);
 app.use('/loginapi',routesApi);
 app.use('/profileapi',routesApi);
