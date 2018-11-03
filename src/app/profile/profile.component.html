@@ -7,16 +7,19 @@
 
 
       <div class="form-horizontal">
-        <div class="form-group">
-          <label class="col-sm-3 control-label">Full name</label>
+        <div class="form-group top">
+          <label class="col-sm-3 control-label ">Name</label>
+            <input class="menu">
           <p class="form-control-static">{{ auth.getUserDetails()?.name }}</p>
         </div>
         <div class="form-group">
           <label class="col-sm-3 control-label">Email</label>
+            <input class="menu">
           <p class="form-control-static">{{ auth.getUserDetails()?.email }}</p>
         </div>
         <div class="form-group">
           <label class="col-sm-3 control-label">Alias</label>
+            <input class="menu">
           <p class="form-control-static">{{ auth.getUserDetails()?.alias }}</p>
         </div>
       </div>

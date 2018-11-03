@@ -843,7 +843,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; margin-left: -40px}\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Leaderboard</h1>\n  <br>\n  <!-- ng-repeat loops through data to build list -->\n  <div>\n    <h5>Ranking Special Agent:</h5>\n    <ul>\n      <li>\n        {{gameStats[0].alias}} : {{gameStats[0].gameScore}}\n      </li>\n    </ul>\n  </div>\n  <br>\n  <div>\n    <h5>Top Agent Listing:</h5>\n    <ul>\n      <li *ngFor=\"let stats of gameStats\">\n        {{stats.alias}} : {{stats.gameScore}}\n      </li>\n    </ul>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <h1>Agent Rankings</h1>\n  <br>\n  <!-- ng-repeat loops through data to build list -->\n  <div>\n    <h5>Ranking Special Agent:</h5>\n    <ul>\n      <li>\n        {{gameStats[0].alias}} : {{gameStats[0].gameScore}}\n      </li>\n    </ul>\n  </div>\n  <br>\n  <div>\n    <h5>Top Agent Listing:</h5>\n    <ul>\n      <li *ngFor=\"let stats of gameStats\">\n        {{stats.alias}} : {{stats.gameScore}}\n      </li>\n    </ul>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1211,7 +1211,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; margin-left: -34px}\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n     <div class=\"col-md-12\">\n\n\n      <h1>dCrypt Profile</h1>\n\n\n      <div class=\"form-horizontal\">\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Full name</label>\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.name }}</p>\n        </div>\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Email</label>\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.email }}</p>\n        </div>\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Alias</label>\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.alias }}</p>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n     <div class=\"col-md-12\">\n\n\n      <h1>dCrypt Profile</h1>\n\n\n      <div class=\"form-horizontal\">\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Full name</label>\n          <p class=\"form-control-static menu\">{{ auth.getUserDetails()?.name }}</p>\n        </div>\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Email</label>\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.email }}</p>\n        </div>\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Alias</label>\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.alias }}</p>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1628,7 +1628,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/david/Documents/BootcampProjects/DCrypt/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/dennis/Desktop/class_work/DCrypt/src/main.ts */"./src/main.ts");
 
 
 /***/ })
