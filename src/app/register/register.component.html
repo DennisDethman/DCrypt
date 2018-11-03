@@ -6,7 +6,7 @@
       <p class="lead">Already a Registered Agent?</p>
       <p class="lead">Please <a routerLink="/login" class="menu1"> &nbsp;Login </a> &nbsp;instead.</p>
       <br>
-      <form (submit)="register()" class="row">
+      <form ngNativeValidate (submit)="register()" class="row">
         <div class="form-group col-6">
           <label for="name">Name</label>
           <input autofocus type="text" class="form-control menu1" name="name" placeholder="Enter your Name" [(ngModel)]="credentials.name" required>

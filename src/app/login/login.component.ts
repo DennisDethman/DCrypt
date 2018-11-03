@@ -13,12 +13,15 @@ export class LoginComponent {
     password: ''
   };
 
+  loginErrResponse: string;
+
   constructor(private auth: AuthenticationService, private router: Router) {}
 
   login() {
     this.auth.login(this.credentials).subscribe(() => {
       this.router.navigateByUrl('/profile');
     }, (err) => {
+      this.loginErrResponse = err.error.message + "!"
       console.error(err);
     }); 
   }
