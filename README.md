@@ -1,27 +1,23 @@
+# Group-Project 3
+
 # DCRYPT
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
+This is a web app game where players can send and receive encrypted messages and decrypt them for point values.
 
-## Development server
+The maximum number of guesses is 10.  Scoring is based on how many guesses it takes to solve the encrypted message.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+A message, whether decrypted or not, can be deleted by the Sender.
 
-## Code scaffolding
+Access to both Intercepted Messages (those received) and Messages Transmitted is given to the user.  Messages Transmitted by the user will indicate the status of the solving effort by the receiver.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+MEAN Stack was used for this project:  MongoDB, Express, Angular and NodeJS.  PassportJS was used for the authentication and JSON Web Tokens are used to track whether or not a user is signed in.
 
-## Build
+## **Created by:** #
+| [Patrick Miranda](https://github.com/PatMiranda/) | [Dennis Platts](https://github.com/DennisDethman/) | [David Martin](https://github.com/NitramDivad/) | [Paul Swiergosz](https://github.com/swiergoszp/) |
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## **Links:** #
 
-## Running unit tests
+| [Launch DCRYPT](https://radiant-retreat-95536.herokuapp.com/) | 
+[PowerPoint Presentation](https://drive.google.com/file/d/1ndwGdQCAvHbn8VPSGip0KXS9pg3RCl3J/view?usp=sharing) | 
+[Keynote Presentation](https://drive.google.com/file/d/1GUDF-ALkdjpEk99vLz4uMZ6BVcqcqRkZ/view?usp=sharing) |
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
