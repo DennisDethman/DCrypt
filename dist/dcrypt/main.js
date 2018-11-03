@@ -48,8 +48,6 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-
-
 var httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' })
 };
@@ -168,7 +166,7 @@ module.exports = "\n/*MAIN CONSOLE**************************************/\n/*.le
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"console\">\n  <div class=\"console-front\">\n    <div class=\"screen-border\">\n      <div class=\"screen-border-rim\">\n        <div class=\"screen\">\n          <div class=\"screen-reflection\"></div>\n          <div class=\"scan\"></div>\n\n          <nav>\n            <span class=\"info1\" (click)=\"buttonSound()\" [routerLink]=\"accessEnabled ? '/profile' : '/login'\"></span>\n            <span class=\"info2\" (click)=\"buttonSound()\" [routerLink]=\"accessEnabled ? '/challenge' : '/login'\"></span>\n            <span class=\"info3\" (click)=\"buttonSound()\" [routerLink]=\"accessEnabled ? '/messages' : '/login'\"></span>\n            <span class=\"info4\" (click)=\"buttonSound()\" [routerLink]=\"accessEnabled ? '/leaderboard' : '/login'\"></span>\n            <span *ngIf=\"auth.isLoggedIn()\" class=\"info5\" (click)=\"auth.logout()\"></span>\n            <span class=\"info6\" (click)=\"bgMusic()\"></span> \n          \n            <p>\n              <span class=\"line2\"></span>\n            </p>\n            <div class=\"game-text\">\n              <router-outlet></router-outlet>\n            </div>\n          </nav>\n\n        </div>\n      </div>\n    </div>\n  </div>\n\n\n  <div class=\"wheel\">\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-plug\"></div>\n  </div>\n\n  <div class=\"speakers\">\n    <div class=\"speaker\"></div>\n    <div class=\"speaker\"></div>\n    <div class=\"speaker\"></div>\n    <div class=\"speaker\"></div>\n\n      <div class=\"radios\">\n        <input id=\"link\" name=\"name\" type=\"radio\" class=\"music1\" checked (click)=\"noMusic()\"/>\n        <input type=\"radio\"  name=\"name\" class=\"music2\" (click)=\"bgMusic()\"/>\n        <input type=\"radio\"  name=\"name\" class=\"music3\" (click)=\"bgMusic2()\"/>\n        <input type=\"radio\"  name=\"name\" class=\"music4\" (click)=\"bgMusic3()\" />\n        <input type=\"radio\"  name=\"name\" class=\"music5\" (click)=\"bgMusic4()\"/>\n        <img src=\"./assets/img/screw.png\" id=\"stl\"><img src=\"./assets/img/screw.png\" id=\"str\"><img src=\"./assets/img/screw.png\" id=\"sbr\"><img src=\"./assets/img/screw.png\" id=\"sbl\">\n      </div>\n      <!-- \"start\": \"ng build && nodemon ./bin/www\", -->\n    <!-- <div class=\"logo\">LOGO</div> -->\n  </div>\n  \n  <div class=\"bottom-button\"></div>\n  <div class=\"top-right\">\n    <div class=\"power\"></div>\n  </div>\n</div>\n<app-navbar></app-navbar>\n<script src=\"/src/app/app.component.js\"></script>\n\n\n"
+module.exports = "<div class=\"console\">\n  <div class=\"console-front\">\n    <div class=\"screen-border\">\n      <div class=\"screen-border-rim\">\n        <div class=\"screen\">\n          <div class=\"screen-reflection\"></div>\n          <div class=\"scan\"></div>\n\n          <nav>\n            <span class=\"info1\" (click)=\"buttonSound()\" [routerLink]=\"accessEnabled ? '/profile' : '/login'\"></span>\n            <span class=\"info2\" (click)=\"buttonSound()\" [routerLink]=\"accessEnabled ? '/challenge' : '/login'\"></span>\n            <span class=\"info3\" (click)=\"buttonSound()\" [routerLink]=\"accessEnabled ? '/messages' : '/login'\"></span>\n            <span class=\"info4\" (click)=\"buttonSound()\" [routerLink]=\"accessEnabled ? '/leaderboard' : '/login'\"></span>\n            <span *ngIf=\"auth.isLoggedIn()\" class=\"info5\" (click)=\"auth.logout()\"></span>\n            <span class=\"info6\" (click)=\"bgMusic()\"></span> \n          \n            <p>\n              <span class=\"line2\"></span>\n            </p>\n            <div class=\"game-text\">\n              <router-outlet></router-outlet>\n            </div>\n          </nav>\n\n        </div>\n      </div>\n    </div>\n  </div>\n\n\n  <div class=\"wheel\">\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-plug\"></div>\n  </div>\n\n  <div class=\"speakers\">\n    <div class=\"speaker\"></div>\n    <div class=\"speaker\"></div>\n    <div class=\"speaker\"></div>\n    <div class=\"speaker\"></div>\n\n      <div class=\"radios\">\n        <input id=\"link\" name=\"name\" type=\"radio\" class=\"music1\" checked (click)=\"noMusic()\"/>\n        <input type=\"radio\"  name=\"name\" class=\"music2\" (click)=\"bgMusic()\"/>\n        <input type=\"radio\"  name=\"name\" class=\"music3\" (click)=\"bgMusic2()\"/>\n        <input type=\"radio\"  name=\"name\" class=\"music4\" (click)=\"bgMusic3()\" />\n        <input type=\"radio\"  name=\"name\" class=\"music5\" (click)=\"bgMusic4()\"/>\n        <img src=\"./assets/img/screw.png\" id=\"stl\"><img src=\"./assets/img/screw.png\" id=\"str\"><img src=\"./assets/img/screw.png\" id=\"sbr\"><img src=\"./assets/img/screw.png\" id=\"sbl\">\n      </div>\n      <!-- \"start\": \"ng build && nodemon ./bin/www\", -->\n    <!-- <div class=\"logo\">LOGO</div> -->\n  </div>\n  \n  <div class=\"bottom-button\"></div>\n  <div class=\"top-right\">\n    <div class=\"power\"></div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -294,22 +292,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./navbar/navbar.component */ "./src/app/navbar/navbar.component.ts");
-/* harmony import */ var _messages_messages_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./messages/messages.component */ "./src/app/messages/messages.component.ts");
-/* harmony import */ var _profile_profile_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./profile/profile.component */ "./src/app/profile/profile.component.ts");
-/* harmony import */ var _challenge_challenge_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./challenge/challenge.component */ "./src/app/challenge/challenge.component.ts");
-/* harmony import */ var _solve_solve_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./solve/solve.component */ "./src/app/solve/solve.component.ts");
-/* harmony import */ var _leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./leaderboard/leaderboard.component */ "./src/app/leaderboard/leaderboard.component.ts");
-/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
-/* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./authentication.service */ "./src/app/authentication.service.ts");
-/* harmony import */ var _auth_guard_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./auth-guard.service */ "./src/app/auth-guard.service.ts");
-/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./api.service */ "./src/app/api.service.ts");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _messages_messages_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./messages/messages.component */ "./src/app/messages/messages.component.ts");
+/* harmony import */ var _profile_profile_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./profile/profile.component */ "./src/app/profile/profile.component.ts");
+/* harmony import */ var _challenge_challenge_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./challenge/challenge.component */ "./src/app/challenge/challenge.component.ts");
+/* harmony import */ var _solve_solve_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./solve/solve.component */ "./src/app/solve/solve.component.ts");
+/* harmony import */ var _leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./leaderboard/leaderboard.component */ "./src/app/leaderboard/leaderboard.component.ts");
+/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
+/* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./authentication.service */ "./src/app/authentication.service.ts");
+/* harmony import */ var _auth_guard_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./auth-guard.service */ "./src/app/auth-guard.service.ts");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./api.service */ "./src/app/api.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -335,16 +332,15 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
 var appRoutes = [
-    { path: '', component: _home_home_component__WEBPACK_IMPORTED_MODULE_12__["HomeComponent"] },
-    { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"] },
-    { path: 'register', component: _register_register_component__WEBPACK_IMPORTED_MODULE_11__["RegisterComponent"] },
-    { path: 'messages', component: _messages_messages_component__WEBPACK_IMPORTED_MODULE_5__["MessagesComponent"] },
-    { path: 'challenge', component: _challenge_challenge_component__WEBPACK_IMPORTED_MODULE_7__["ChallengeComponent"] },
-    { path: 'leaderboard', component: _leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_9__["LeaderboardComponent"] },
-    { path: 'profile', component: _profile_profile_component__WEBPACK_IMPORTED_MODULE_6__["ProfileComponent"] },
-    { path: 'solve/:id', component: _solve_solve_component__WEBPACK_IMPORTED_MODULE_8__["SolveComponent"] }
+    { path: '', component: _home_home_component__WEBPACK_IMPORTED_MODULE_11__["HomeComponent"] },
+    { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_9__["LoginComponent"] },
+    { path: 'register', component: _register_register_component__WEBPACK_IMPORTED_MODULE_10__["RegisterComponent"] },
+    { path: 'messages', component: _messages_messages_component__WEBPACK_IMPORTED_MODULE_4__["MessagesComponent"] },
+    { path: 'challenge', component: _challenge_challenge_component__WEBPACK_IMPORTED_MODULE_6__["ChallengeComponent"] },
+    { path: 'leaderboard', component: _leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_8__["LeaderboardComponent"] },
+    { path: 'profile', component: _profile_profile_component__WEBPACK_IMPORTED_MODULE_5__["ProfileComponent"] },
+    { path: 'solve/:id', component: _solve_solve_component__WEBPACK_IMPORTED_MODULE_7__["SolveComponent"] }
     // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] }
 ];
 var AppModule = /** @class */ (function () {
@@ -354,38 +350,37 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
-                _messages_messages_component__WEBPACK_IMPORTED_MODULE_5__["MessagesComponent"],
-                _profile_profile_component__WEBPACK_IMPORTED_MODULE_6__["ProfileComponent"],
-                _challenge_challenge_component__WEBPACK_IMPORTED_MODULE_7__["ChallengeComponent"],
-                _leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_9__["LeaderboardComponent"],
-                _login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
-                _register_register_component__WEBPACK_IMPORTED_MODULE_11__["RegisterComponent"],
-                _home_home_component__WEBPACK_IMPORTED_MODULE_12__["HomeComponent"],
-                _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_4__["NavbarComponent"],
-                _solve_solve_component__WEBPACK_IMPORTED_MODULE_8__["SolveComponent"]
+                _messages_messages_component__WEBPACK_IMPORTED_MODULE_4__["MessagesComponent"],
+                _profile_profile_component__WEBPACK_IMPORTED_MODULE_5__["ProfileComponent"],
+                _challenge_challenge_component__WEBPACK_IMPORTED_MODULE_6__["ChallengeComponent"],
+                _leaderboard_leaderboard_component__WEBPACK_IMPORTED_MODULE_8__["LeaderboardComponent"],
+                _login_login_component__WEBPACK_IMPORTED_MODULE_9__["LoginComponent"],
+                _register_register_component__WEBPACK_IMPORTED_MODULE_10__["RegisterComponent"],
+                _home_home_component__WEBPACK_IMPORTED_MODULE_11__["HomeComponent"],
+                _solve_solve_component__WEBPACK_IMPORTED_MODULE_7__["SolveComponent"]
             ],
             imports: [
-                _angular_router__WEBPACK_IMPORTED_MODULE_13__["RouterModule"].forRoot(appRoutes),
+                _angular_router__WEBPACK_IMPORTED_MODULE_12__["RouterModule"].forRoot(appRoutes),
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_14__["FormsModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_14__["ReactiveFormsModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_15__["HttpClientModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_13__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_13__["ReactiveFormsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClientModule"],
                 //BrowserAnimationsModule,
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatInputModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatTableModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatPaginatorModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatSortModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatProgressSpinnerModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatIconModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatButtonModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatCardModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatInputModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatTableModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatPaginatorModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatSortModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatProgressSpinnerModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatIconModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatButtonModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatCardModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatFormFieldModule"],
                 _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModule"].forRoot()
             ],
             providers: [
-                _authentication_service__WEBPACK_IMPORTED_MODULE_16__["AuthenticationService"],
-                _auth_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthGuardService"],
-                _api_service__WEBPACK_IMPORTED_MODULE_18__["ApiService"]
+                _authentication_service__WEBPACK_IMPORTED_MODULE_15__["AuthenticationService"],
+                _auth_guard_service__WEBPACK_IMPORTED_MODULE_16__["AuthGuardService"],
+                _api_service__WEBPACK_IMPORTED_MODULE_17__["ApiService"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
         })
@@ -571,7 +566,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; margin-bottom: 15px; 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Challenge</h1>\n\n<div class=\"container\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Choose an Opponent</h2>\n      <select class=\"menu\" id=\"opponent\" #t (change)=\"getIdVal(t.value)\">\n        <option [value]=\"null\">Select Alias</option>\n        <option *ngFor=\"let user of filteredUsersList\" [value]=[user._id]>{{user.alias}}</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Cypher</h2>\n        <select class=\"menu\" id=\"cypher\" (click)=\"doCrypt(true)\">\n          <option [value]=\"null\">Select Cypher</option>  \n          <option value=\"cCrypt\">Caesar Cypher</option>\n          <option value=\"cCrypt2\">Reverse Caesar</option>\n        </select>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n        <h2>Encryption Key</h2>\n        <!-- <input id=\"encryptionKey\"> -->\n        <select class=\"menu\" id=\"encryptionKey\" (click)=\"doCrypt(true)\">\n          <option value=\"0\">0</option>\n          <option value=\"1\">1</option>\n          <option value=\"2\">2</option>\n          <option value=\"3\">3</option>\n          <option value=\"4\">4</option>\n          <option value=\"5\">5</option>\n          <option value=\"6\">6</option>\n          <option value=\"7\">7</option>\n          <option value=\"8\">8</option>\n          <option value=\"9\">9</option>\n          <option value=\"10\">10</option>\n          <option value=\"11\">11</option>\n          <option value=\"12\">12</option>\n          <option value=\"13\">13</option>\n          <option value=\"14\">14</option>\n          <option value=\"15\">15</option>\n          <option value=\"16\">16</option>\n          <option value=\"17\">17</option>\n          <option value=\"18\">18</option>\n          <option value=\"19\">19</option>\n          <option value=\"20\">20</option>\n          <option value=\"21\">21</option>\n          <option value=\"22\">22</option>\n          <option value=\"23\">23</option>\n          <option value=\"24\">24</option>\n          <option value=\"25\">25</option>\n        </select>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Message</h2>\n      <input type=\"text\" class=\"menu\" id=\"message\" [(ngModel)]=\"newMessage\" (keyup)=\"doCrypt(true)\" maxlength=\"20\">\n      <!-- <p id=\"isEng\">Valid English</p>\n      <p id=\"nonEng\">Not Valid English</p> -->\n    </div>\n  </div>\n\n  \n \n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div>\n        <h2>Encrypted Message</h2>\n        <p type=\"text\" id=\"encMessage\">{{encMessage}}</p>\n      </div>\n      <div>\n        <button class=\"btn btn-outline-success btn-sm build\" id=\"clearButton\" (click)=\"createChallenge()\">Build Message</button>\n      </div>\n    </div>  \n  </div>\n</div>\n"
+module.exports = "<h1>Challenge</h1>\n\n<div class=\"container\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Choose an Opponent</h2>\n      <select class=\"menu\" id=\"opponent\" #t (change)=\"getIdVal(t.value)\">\n        <option [value]=\"null\">Select Alias</option>\n        <option *ngFor=\"let user of filteredUsersList\" [value]=[user._id]>{{user.alias}}</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Cypher</h2>\n        <select class=\"menu\" id=\"cypher\" (click)=\"doCrypt(true)\">\n          <option [value]=\"null\">Select Cypher</option>  \n          <option value=\"cCrypt\">Caesar Cypher</option>\n          <option value=\"cCrypt2\">Reverse Caesar</option>\n        </select>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h2>Message</h2>\n      <input type=\"text\" class=\"menu\" id=\"message\" [(ngModel)]=\"newMessage\" (keyup)=\"doCrypt(true)\" maxlength=\"20\">\n      <!-- <p id=\"isEng\">Valid English</p>\n      <p id=\"nonEng\">Not Valid English</p> -->\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n        <h2>Encryption Key</h2>\n        <!-- <input id=\"encryptionKey\"> -->\n        <select class=\"menu\" id=\"encryptionKey\" (click)=\"doCrypt(true)\">\n          <option value=\"0\">0</option>\n          <option value=\"1\">1</option>\n          <option value=\"2\">2</option>\n          <option value=\"3\">3</option>\n          <option value=\"4\">4</option>\n          <option value=\"5\">5</option>\n          <option value=\"6\">6</option>\n          <option value=\"7\">7</option>\n          <option value=\"8\">8</option>\n          <option value=\"9\">9</option>\n          <option value=\"10\">10</option>\n          <option value=\"11\">11</option>\n          <option value=\"12\">12</option>\n          <option value=\"13\">13</option>\n          <option value=\"14\">14</option>\n          <option value=\"15\">15</option>\n          <option value=\"16\">16</option>\n          <option value=\"17\">17</option>\n          <option value=\"18\">18</option>\n          <option value=\"19\">19</option>\n          <option value=\"20\">20</option>\n          <option value=\"21\">21</option>\n          <option value=\"22\">22</option>\n          <option value=\"23\">23</option>\n          <option value=\"24\">24</option>\n          <option value=\"25\">25</option>\n        </select>\n    </div>\n  </div>\n \n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <div>\n        <h2>Encrypted Message</h2>\n        <p type=\"text\" id=\"encMessage\">{{encMessage}}</p>\n      </div>\n      <div>\n        <button class=\"btn btn-outline-success btn-sm build\" id=\"clearButton\" (click)=\"createChallenge()\">Build Message</button>\n      </div>\n    </div>  \n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -794,7 +789,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; }\n.container{margin-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  \n  <div class=\"title text-center\">\n    <h4>Welcome to dCrypt!</h4>\n  </div>\n  <hr>\n\n  <!-- <p>Please <a routerLink=\"/login\">sign in</a> or <a routerLink=\"/register\">register</a>?</p> -->\n\n  <div *ngIf=\"!auth.isLoggedIn()\" class=\"login-buttons text-center\">\n    <br>\n    <br>\n    <br>\n    <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" routerLink=\"/login\">Login</button>\n    <br>\n    <br>\n    <br>\n    <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" routerLink=\"/register\">Register</button>\n  </div> \n</div>\n"
+module.exports = "<div class=\"container\">\n  \n  <div class=\"title text-center\">\n    <h4>Welcome to dCrypt!</h4>\n  </div>\n  <hr>\n\n  <!-- <p>Please <a routerLink=\"/login\">sign in</a> or <a routerLink=\"/register\">register</a>?</p> -->\n\n  <div *ngIf=\"!auth.isLoggedIn()\" class=\"login-buttons text-center\">\n    <br>\n    <br>\n    <br>\n    <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" routerLink=\"/login\">Login</button>\n    <br>\n    <br>\n    <br>\n    <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" routerLink=\"/register\">Register</button>\n  </div>\n  <br>\n  <br>\n  <img src=\"../../assets/img/tenor.gif\">\n</div>\n"
 
 /***/ }),
 
@@ -860,7 +855,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; margin-left: -40px}\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Agent Rankings</h1>\n  <br>\n  <!-- ng-repeat loops through data to build list -->\n  <div>\n    <h5>Ranking Special Agent:</h5>\n    <ul>\n      <li>\n        {{gameStats[0].alias}} : {{gameStats[0].gameScore}}\n      </li>\n    </ul>\n  </div>\n  <br>\n  <div>\n    <h5>Top Agent Listing:</h5>\n    <ul>\n      <li *ngFor=\"let stats of gameStats\">\n        {{stats.alias}} : {{stats.gameScore}}\n      </li>\n    </ul>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <h1>Agent Rankings</h1>\n  <br>\n  <!-- ng-repeat loops through data to build list -->\n  <div>\n    <h5>Ranking Special Agent:</h5>\n    <ul>\n      <li>\n        {{gameStats[0].alias}} : {{gameStats[0].gameScore}}\n      </li>\n    </ul>\n  </div>\n  <br>\n  <div>\n    <h5>Top Agent Listing:</h5>\n    <ol>\n      <li *ngFor=\"let stats of gameStats\">\n        {{stats.alias}} : {{stats.gameScore}}\n      </li>\n    </ol>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1011,7 +1006,7 @@ module.exports = "li {color: green; font-size: 12px; background-color:black; bor
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Messages</h1>\n\n  <div class=\"row\">\n    <div class=\"col-sm-6\">\n      <button class=\"btn btn-outline-success btn-sm inter\" (click)=\"msgsReceived()\">\n        Intercepted Messages\n      </button>\n    </div>\n    <div class=\"col-sm-6\">\n      <button class=\"btn btn-outline-success btn-sm inter1\" (click)=\"msgsSent()\">\n        Messages Sent\n      </button>\n    </div>\n  </div>\n\n  <!-- ng-repeat loops through data to build list -->\n  <ul *ngIf=\"viewRcvd\">\n    <li *ngFor=\"let message of messages; index as i\" class=\"list-group-item d-flex justify-content-between align-items-center\" >\n      <p>{{i + 1 }}: </p>\n      <p>From: {{message.ReceivedFrom_Alias}}</p>\n      <button class=\"btn btn-outline-success btn-sm\" id=\"solveBtn\" [routerLink]=\"['/solve', message._id]\">Solve</button><br>\n    </li>\n  </ul>\n  <ul *ngIf=\"viewSent\">\n    <li *ngFor=\"let message of messages; index as i\" class=\"list-group-item d-flex justify-content-between align-items-center\" >\n      <p>{{i + 1 }}: </p>\n      <p>Sent To: {{message.SentTo_Alias}}</p>\n      <p>Solved: {{message.Solved}}</p>\n      <p *ngIf=\"!message.Solved\">Attempts: {{message.AttemptsRemaining}}</p>\n      <p *ngIf=\"message.Solved\">Score: {{message.MessageScore}}</p>\n      <button class=\"btn btn-outline-success btn-sm\" id=\"deleteBtn\" (click)=\"msgDelete(message._id)\">Delete</button><br>\n    </li>\n  </ul>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <h1>Messages</h1>\n\n  <div class=\"row\">\n    <div class=\"col-sm-6\">\n      <button class=\"btn btn-outline-success btn-sm inter\" (click)=\"msgsReceived()\">\n        Intercepted Messages\n      </button>\n    </div>\n    <div class=\"col-sm-6\">\n      <button class=\"btn btn-outline-success btn-sm inter1\" (click)=\"msgsSent()\">\n        Messages Transmitted\n      </button>\n    </div>\n  </div>\n\n  <!-- ng-repeat loops through data to build list -->\n  <ul *ngIf=\"viewRcvd\">\n    <li *ngFor=\"let message of messages; index as i\" class=\"list-group-item d-flex justify-content-between align-items-center\" >\n      <p>{{i + 1 }}: </p>\n      <p>From: {{message.ReceivedFrom_Alias}}</p>\n      <button class=\"btn btn-outline-success btn-sm\" id=\"solveBtn\" [routerLink]=\"['/solve', message._id]\">Solve</button><br>\n    </li>\n  </ul>\n  <ul *ngIf=\"viewSent\">\n    <li *ngFor=\"let message of messages; index as i\" class=\"list-group-item d-flex justify-content-between align-items-center\" >\n      <p>{{i + 1 }}: </p>\n      <p>Sent To: {{message.SentTo_Alias}}</p>\n      <p>Solved: {{message.Solved}}</p>\n      <p *ngIf=\"!message.Solved\">Attempts: {{message.AttemptsRemaining}}</p>\n      <p *ngIf=\"message.Solved\">Score: {{message.MessageScore}}</p>\n      <button class=\"btn btn-outline-success btn-sm\" id=\"deleteBtn\" (click)=\"msgDelete(message._id)\">Delete</button><br>\n    </li>\n  </ul>\n</div>\n"
 
 /***/ }),
 
@@ -1148,76 +1143,6 @@ var MsgSentSource = /** @class */ (function (_super) {
 
 /***/ }),
 
-/***/ "./src/app/navbar/navbar.component.css":
-/*!*********************************************!*\
-  !*** ./src/app/navbar/navbar.component.css ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL25hdmJhci9uYXZiYXIuY29tcG9uZW50LmNzcyJ9 */"
-
-/***/ }),
-
-/***/ "./src/app/navbar/navbar.component.html":
-/*!**********************************************!*\
-  !*** ./src/app/navbar/navbar.component.html ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <a class=\"navbar-brand\" href=\"#\">Test</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"!auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/login\">Login <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"!auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/register\">Register <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/messages\">Messages <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/challenge\">Challenges <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/leaderboard\">Leaderboard <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"!auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/profile\">Profile <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/profile\">{{ auth.getUserDetails()?.name }}<span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li *ngIf=\"auth.isLoggedIn()\" class=\"nav-item active\">\n        <a class=\"nav-link\" (click)=\"auth.logout()\" routerLink=\"/\"> Logout<span class=\"sr-only\">(current)</span></a>\n      </li>\n    </ul>\n\n  </div>\n</nav>\n"
-
-/***/ }),
-
-/***/ "./src/app/navbar/navbar.component.ts":
-/*!********************************************!*\
-  !*** ./src/app/navbar/navbar.component.ts ***!
-  \********************************************/
-/*! exports provided: NavbarComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NavbarComponent", function() { return NavbarComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../authentication.service */ "./src/app/authentication.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var NavbarComponent = /** @class */ (function () {
-    //constructor() { }
-    function NavbarComponent(auth, router) {
-        this.auth = auth;
-        this.router = router;
-    }
-    NavbarComponent.prototype.ngOnInit = function () {
-    };
-    NavbarComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-navbar',
-            template: __webpack_require__(/*! ./navbar.component.html */ "./src/app/navbar/navbar.component.html"),
-            styles: [__webpack_require__(/*! ./navbar.component.css */ "./src/app/navbar/navbar.component.css")]
-        }),
-        __metadata("design:paramtypes", [_authentication_service__WEBPACK_IMPORTED_MODULE_1__["AuthenticationService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
-    ], NavbarComponent);
-    return NavbarComponent;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/profile/profile.component.css":
 /*!***********************************************!*\
   !*** ./src/app/profile/profile.component.css ***!
@@ -1236,7 +1161,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; margin-left: -34px}\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n     <div class=\"col-md-12\">\n\n\n      <h1>dCrypt Profile</h1>\n\n\n      <div class=\"form-horizontal\">\n        <div class=\"form-group top\">\n          <label class=\"col-sm-3 control-label \">Name</label>\n            <input class=\"menu\">\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.name }}</p>\n        </div>\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Email</label>\n            <input class=\"menu\">\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.email }}</p>\n        </div>\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Alias</label>\n            <input class=\"menu\">\n          <p class=\"form-control-static\">{{ auth.getUserDetails()?.alias }}</p>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n     <div class=\"col-md-12\">\n\n      <h1>dCrypt Profile</h1>\n\n      <div class=\"form-horizontal\">\n        <div class=\"form-group top\">\n          <label class=\"col-sm-3 control-label \">Name</label>\n          <input class=\"menu\" value=\"{{auth.getUserDetails()?.name}}\">\n        </div>\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Email</label>\n          <input class=\"menu\" value=\"{{auth.getUserDetails()?.email}}\">\n        </div>\n        <div class=\"form-group\">\n          <label class=\"col-sm-3 control-label\">Alias</label>\n          <input class=\"menu\" value=\"{{auth.getUserDetails()?.alias}}\">\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1415,8 +1340,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
 
 
 var SolveComponent = /** @class */ (function () {
@@ -1653,8 +1576,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\miran\Desktop\Dcrypt\DCrypt\src\main.ts */"./src/main.ts");
-
+module.exports = __webpack_require__(/*! /Users/david/Documents/BootcampProjects/DCrypt/src/main.ts */"./src/main.ts");
 
 /***/ })
 
