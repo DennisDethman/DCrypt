@@ -32,9 +32,9 @@
 .info1:before{content:"Agent";}
 .info2:before{content:"Challenge";}
 .info3:before{content:"Messages";}
-.info4:before{content:"Rank";}
+.info4:before{content:"Rankings";}
 .info5:before{content:"Logout"}
-.info6:before{content:"Sound"}
+/* .info6:before{content:"Sound"} */
 /*.line2:before{content:"line2";}*/
 .tab-names{position:absolute;left:-40px;top:10px;}
 .tab-names li{list-style-type:none;text-align:right;padding:3.5px 0 3.5px 0;}
@@ -57,12 +57,11 @@ nav p{margin:-10px 0 0 0;height:25px;}
 .speaker:after{width:23px;height:5px;background:rgba(0,0,0,0.2);content:"";display:block;border-bottom:2px solid #978175;margin-left:-40px;border-radius:3px;}
 
 .wheel{width:45px;height:110px;background:#000;position:absolute;top:-2px;right:-10px;border-top-right-radius:20px;border-bottom-right-radius:20px;border-top:2px solid #aaaaa8;border-left:2px solid #392c24;}
-.wheel-shadow{width:48px;height:8px;background:#333;border-radius:100px;margin-left:3px;margin-top:11px;background: linear-gradient(#000,#222);border: 1px solid rgba(157, 170, 163, 0.61)
-}
+.wheel-shadow{width:48px;height:8px;background:#333;border-radius:100px;margin-left:3px;margin-top:11px;background: linear-gradient(#000,#222);border: 1px solid rgba(157, 170, 163, 0.61)}
 
 .wrapper{margin:auto;}
 
-.bottom-switch{}
+/* .bottom-switch{} */
 
 .power{width:32px;height:31px;background:#000;position:absolute;bottom:23px;right:65px;border-radius:150px;z-index:99;}
 .power:after{content:"";display:block;width:50px;height:15px;background:radial-gradient(white,yellow,orange,red);border-radius:150px;margin-left:23px;margin-top:-35px;animation: flicker; animation-duration: 3.2s;animation-iteration-count: infinite;}

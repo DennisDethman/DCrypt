@@ -20,27 +20,16 @@ export class SolveComponent implements OnInit {
   solved: boolean = false; 
   failed: boolean = false; 
   incorrect: boolean = null;
-  
-  greenSound(){
-    let greenAudio = new Audio;
-    greenAudio.src = "./././assets/audio/function.mp3";
-    greenAudio.load();
-    greenAudio.play();
-  }
+
   constructor (private activeRoute: ActivatedRoute,
                private auth: AuthenticationService,
                private router: Router,
                private api: ApiService) { }
 
   ngOnInit() {
-
-
     solution: '';
     msgScore: 0;
     gameScore: 0;
-    solved: false; 
-    failed: false; 
-
 
     this.activeRoute.params.subscribe(params => {
       this.id = params['id'];
@@ -58,6 +47,7 @@ export class SolveComponent implements OnInit {
       this.api.getSentMsg(this.message.SentMsg_id)
       .subscribe(res => {
         this.sentMessage = res;
+        console.log(this.sentMessage)
       });
 
       this.api.getUser(this.message.Receiver_id)
@@ -68,13 +58,10 @@ export class SolveComponent implements OnInit {
     });
   }
 
-  ngOnChanges() {
-
-  }
-
   onBack(): void {
     this.router.navigate(['messages']);
   }
+
   keySound(){
     let keyAudio = new Audio;
     keyAudio.src = "./././assets/audio/key.mp3";
@@ -82,24 +69,34 @@ export class SolveComponent implements OnInit {
     keyAudio.play();
   }
 
-  doCrypt(isDecrypt) {
+  greenSound(){
+    let greenAudio = new Audio;
+    greenAudio.src = "./././assets/audio/function.mp3";
+    greenAudio.load();
+    greenAudio.play();
+  }
+
+  doCrypt() {
     this.keySound();
     const chooseCypher = (<HTMLInputElement>document.getElementById("cypher")).value;
 
     if (chooseCypher === "cCrypt") {
-      this.cCrypt(isDecrypt);
+      this.cCrypt();
     }
+
     if (chooseCypher === "cCrypt2") {
-      this.cCrypt2(isDecrypt);
+      this.cCrypt2();
     }
 
     if (this.message.AttemptsRemaining < 1) {
       this.failed = true; 
     }
-    if(this.solution !== this.message.DecryptedMsg){
+
+    if (this.solution !== this.message.DecryptedMsg){
       this.incorrect = true; 
       this.greenSound();
     }
+
     if (this.solution === this.message.DecryptedMsg) {
       this.incorrect = false;
       this.message.Solved = true;
@@ -134,8 +131,7 @@ export class SolveComponent implements OnInit {
     .subscribe(res => {
     }, (err) => {
     console.log(err);
-    }
-  );
+    });
   }
 
   updateGameScore() {
@@ -147,21 +143,20 @@ export class SolveComponent implements OnInit {
     );
   }
   
-  cCrypt(isDecrypt) {
+  cCrypt() {
     var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
-    if (!/^-?\d+$/.test(shiftText)) {
-      alert("Shift is not an integer");
-      return;
-    }
+    // if (!/^-?\d+$/.test(shiftText)) {
+    //   alert("Shift is not an integer");
+    //   return;
+    // }
 
     var shift = parseInt(shiftText, 10);
-    if (shift < 0 || shift >= 26) {
-      alert("Shift is out of range");
-      return;
-    }
+    // if (shift < 0 || shift >= 26) {
+    //   alert("Shift is out of range");
+    //   return;
+    // }
 
-    if (isDecrypt)
-      shift = (26 + shift) % 26;
+    shift = (26 + shift) % 26;
     
     var textElem = (<HTMLElement>document.getElementById("message"));
     var encMessage = (<HTMLElement>document.getElementById("encMessage"));
@@ -169,21 +164,21 @@ export class SolveComponent implements OnInit {
     this.solution = this.caesarShift(encMessage.textContent, shift);
     //console.log("text element: " + textElem.textContent + "--> Encrypted Element: " + encMessage.textContent)
   }
-    
-  cCrypt2(isDecrypt) {
+
+  cCrypt2() {
     var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
-    if (!/^-?\d+$/.test(shiftText)) {
-      alert("Shift is not an integer");
-      return;
-    }
+    // if (!/^-?\d+$/.test(shiftText)) {
+    //   alert("Shift is not an integer");
+    //   return;
+    // }
 
     var shift = parseInt(shiftText, 10);
-    if (shift < 0 || shift >= 26) {
-      alert("Shift is out of range");
-      return;
-    }
-    if (isDecrypt)
-      shift = (26 - shift) % 26;
+    // if (shift < 0 || shift >= 26) {
+    //   alert("Shift is out of range");
+    //   return;
+    // }
+
+    shift = (26 - shift) % 26;
 
     var textElem = (<HTMLElement>document.getElementById("message"));
     var encMessage = (<HTMLElement>document.getElementById("encMessage"));

@@ -51,7 +51,7 @@
             </div>
              <br/>
              <ng-container *ngIf="!failed">
-                <button class="btn btn-outline-success btn-sm" id="runCrypt" (click)="doCrypt(true)">Decrypt</button>
+                <button class="btn btn-outline-success btn-sm" id="runCrypt" (click)="doCrypt()">Decrypt</button>
                 <h6>Solution: </h6>
                 <p id="message"></p>
              </ng-container>
@@ -63,7 +63,6 @@
             <ng-container *ngIf="incorrect">
                 <h6>(Incorrect Decryption)</h6>
             </ng-container>
-    
     </form>
 
 </ng-container >
