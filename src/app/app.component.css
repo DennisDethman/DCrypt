@@ -76,10 +76,12 @@ nav p{margin:-10px 0 0 0;height:25px;}
 /*RADIO BUTTONS********************************/
 .radios{margin-top: 0px; margin-left: 0px; content: "more"}
 /*#link:before{content: "link";margin-left: -20px;margin-top: -100px;}*/
-.audio{margin-left: -27px; margin-bottom: -5px; margin-top: 20px; color: darkorange;
+
+.audio{margin-left: -27px; margin-top: 10px; color: darkorange;
     text-shadow: 2px 2px 2px black, 0 0 1em darkorange, 0 0 0.2em darkorange; text-transform:uppercase;}
 
-.music1:before{content:"none"; margin-left: -54px; font-size: 9px; margin-top: -50px; color: darkorange;
+.music1:before{content:"none"; margin-left: -54px; font-size: 9px; margin-top: -30px; color: darkorange;
+
   text-shadow: 2px 2px 2px black, 0 0 1em darkorange, 0 0 0.2em darkorange; text-transform:uppercase;}
 
 .music2:before{content:"fallout"; margin-left: -54px; font-size: 9px; margin-top: -20px; color: darkorange;
