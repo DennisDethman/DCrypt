@@ -39,12 +39,12 @@
 /* .info6:before{content:"Sound"} */
 /*.line2:before{content:"line2";}*/
 .tab-names{position:absolute;left:-40px;top:10px;}
-.tab-names li{list-style-type:none;text-align:right;padding:3.5px 0 3.5px 0;}
+.tab-names li{list-style-type:none;text-align:center;padding:3.5px 0 3.5px 0;}
 /*LINKS***************************************/
 
 /*NAV***************************************/
-nav{height:35px;width:100%;position:absolute;top:0;left:0;border-bottom:1px solid #8df776;padding-left:10%;border-top-right-radius:20px;z-index:95;border-top-left-radius:20px; margin-top: 10px}
-nav span{color:#8df776;line-height:31px;font-size:10px;letter-spacing:0.3px;margin-left:20px;margin-top:500px;font-weight:300;}
+nav{height:35px;width:100%;position:absolute;top:0;left:0;border-bottom:1px solid #8df776;padding-left:0%;border-top-right-radius:20px;z-index:95;border-top-left-radius:20px; margin-top: 10px}
+nav span{text-align:center;color:#8df776;line-height:31px;font-size:10px;letter-spacing:0.3px;margin-left:15px;margin-top:500px;font-weight:300;}
 nav p{margin:-10px 0 0 0;height:25px;}
 .game-text{color:#8df776; z-index: 100;}
 /*NAV***************************************/
