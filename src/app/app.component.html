@@ -29,13 +29,6 @@
 
 
   <div class="wheel">
-    <!--<div class="tab-names">-->
-      <!--<li class="info1"></li>-->
-      <!--<li class="info2"></li>-->
-      <!--<li class="info3"></li>-->
-      <!--<li class="info4"></li>-->
-      <!--<li class="info5"></li>-->
-    <!--</div>-->
     <div class="wheel-shadow"></div>
     <div class="wheel-shadow"></div>
     <div class="wheel-shadow"></div>
@@ -51,11 +44,11 @@
     <div class="speaker"></div>
 
       <div class="radios">
-        <input id="link" type="radio" class="music1" checked (click)="noMusic()"/>
-        <input type="radio"  class="music2" (click)="bgMusic()"/>
-        <input type="radio"  class="music3" (click)="bgMusic2()"/>
-        <input type="radio"  class="music4" (click)="bgMusic3()" />
-        <input type="radio"  class="music5" (click)="bgMusic4()"/>
+        <input id="link" name="name" type="radio" class="music1" checked (click)="noMusic()"/>
+        <input type="radio"  name="name" class="music2" (click)="bgMusic()"/>
+        <input type="radio"  name="name" class="music3" (click)="bgMusic2()"/>
+        <input type="radio"  name="name" class="music4" (click)="bgMusic3()" />
+        <input type="radio"  name="name" class="music5" (click)="bgMusic4()"/>
         <img src="./assets/img/screw.png" id="stl"><img src="./assets/img/screw.png" id="str"><img src="./assets/img/screw.png" id="sbr"><img src="./assets/img/screw.png" id="sbl">
       </div>
       <!-- "start": "ng build && nodemon ./bin/www", -->
