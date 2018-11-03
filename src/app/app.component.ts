@@ -4,23 +4,39 @@ import { AuthenticationService } from './authentication.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'dcrypt';
+  accessEnabled: boolean = true;
   
   constructor(public auth: AuthenticationService) {}
+
+  ngOnInit(){
+    if (this.auth.isLoggedIn())
+      this.accessEnabled = true;
+    else 
+      this.accessEnabled = false;
+  }
+
+  ngAfterContentChecked() {
+    if (this.auth.isLoggedIn())
+      this.accessEnabled = true;
+    else 
+      this.accessEnabled = false;
+  }
+
   buttonSound(){
     let buttonAudio = new Audio;
     buttonAudio.src = "././assets/audio/buttonSound.mp3";
     buttonAudio.load();
     buttonAudio.play();
   }
-   bgAudio = new Audio();
-   bgAudio2 = new Audio();
-   bgAudio3 = new Audio();
-   bgAudio4 = new Audio();
+
+  bgAudio = new Audio();
+  bgAudio2 = new Audio();
+  bgAudio3 = new Audio();
+  bgAudio4 = new Audio();
 
   bgMusic(){
     this.bgAudio2.pause();
@@ -68,8 +84,4 @@ export class AppComponent {
     this.bgAudio4.pause();
     this.bgAudio.pause();
   }
- ngOnInit(){
-   
- }
-
 }

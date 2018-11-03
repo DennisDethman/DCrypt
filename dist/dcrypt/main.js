@@ -94,6 +94,12 @@ var ApiService = /** @class */ (function () {
     ApiService.prototype.getSentMsgs = function (id) {
         return this.http.get('/getmsgsapi/allforid/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
+    ApiService.prototype.deleteSentMsg = function (id) {
+        return this.http.delete('/getmsgsapi/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    };
+    ApiService.prototype.deleteRcvdMsg = function (id) {
+        return this.http.delete('/rcvdmsgsapi/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    };
     ApiService.prototype.getRecvdMsg = function (msg) {
         return this.http.get('/recvdmsgsapi/' + msg, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
@@ -162,7 +168,7 @@ module.exports = "\n/*MAIN CONSOLE**************************************/\n.cons
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"console\">\n  <div class=\"console-front\">\n    <div class=\"screen-border\">\n      <div class=\"screen-border-rim\">\n        <div class=\"screen\">\n          <div class=\"screen-reflection\"></div>\n          <div class=\"scan\"></div>\n\n          <nav>\n            <span class=\"info1\" (click)=\"buttonSound()\" routerLink=\"/profile\"></span>\n            <span class=\"info2\" (click)=\"buttonSound()\" routerLink=\"/challenge\"></span>\n            <span class=\"info3\" (click)=\"buttonSound()\" routerLink=\"/messages\"></span>\n            <span class=\"info4\" (click)=\"buttonSound()\" routerLink=\"/leaderboard\"></span>\n            <span class=\"info5\" (click)=\"buttonSound()\" routerLink=\"/login\"></span>\n            <span class=\" info6\" (click)=\"bgMusic()\"></span> \n          \n            <p>\n              <span class=\"line2\"></span>\n            </p>\n            <div class=\"game-text\">\n              <router-outlet></router-outlet>\n            </div>\n          </nav>\n\n        </div>\n      </div>\n    </div>\n  </div>\n\n\n  <div class=\"wheel\">\n    <!--<div class=\"tab-names\">-->\n      <!--<li class=\"info1\"></li>-->\n      <!--<li class=\"info2\"></li>-->\n      <!--<li class=\"info3\"></li>-->\n      <!--<li class=\"info4\"></li>-->\n      <!--<li class=\"info5\"></li>-->\n    <!--</div>-->\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-plug\"></div>\n  </div>\n\n  <div class=\"speakers\">\n    <div class=\"speaker\"></div>\n    <div class=\"speaker\"></div>\n    <div class=\"speaker\"></div>\n    <div class=\"speaker\"></div>\n\n      <div class=\"radios\">\n        <input id=\"link\" type=\"radio\" class=\"music1\" checked (click)=\"noMusic()\"/>\n        <input type=\"radio\"  class=\"music2\" (click)=\"bgMusic()\"/>\n        <input type=\"radio\"  class=\"music3\" (click)=\"bgMusic2()\"/>\n        <input type=\"radio\"  class=\"music4\" (click)=\"bgMusic3()\" />\n        <input type=\"radio\"  class=\"music5\" (click)=\"bgMusic4()\"/>\n        <img src=\"./assets/img/screw.png\" id=\"stl\"><img src=\"./assets/img/screw.png\" id=\"str\"><img src=\"./assets/img/screw.png\" id=\"sbr\"><img src=\"./assets/img/screw.png\" id=\"sbl\">\n      </div>\n      <!-- \"start\": \"ng build && nodemon ./bin/www\", -->\n    <!-- <div class=\"logo\">LOGO</div> -->\n  </div>\n  \n  <div class=\"bottom-button\"></div>\n  <div class=\"top-right\">\n    <div class=\"power\"></div>\n  </div>\n</div>\n<app-navbar></app-navbar>\n<script src=\"/src/app/app.component.js\"></script>\n\n\n"
+module.exports = "<div class=\"console\">\n  <div class=\"console-front\">\n    <div class=\"screen-border\">\n      <div class=\"screen-border-rim\">\n        <div class=\"screen\">\n          <div class=\"screen-reflection\"></div>\n          <div class=\"scan\"></div>\n\n          <nav>\n            <span class=\"info1\" (click)=\"buttonSound()\" [routerLink]=\"accessEnabled ? '/profile' : '/login'\"></span>\n            <span class=\"info2\" (click)=\"buttonSound()\" [routerLink]=\"accessEnabled ? '/challenge' : '/login'\"></span>\n            <span class=\"info3\" (click)=\"buttonSound()\" [routerLink]=\"accessEnabled ? '/messages' : '/login'\"></span>\n            <span class=\"info4\" (click)=\"buttonSound()\" [routerLink]=\"accessEnabled ? '/leaderboard' : '/login'\"></span>\n            <span *ngIf=\"auth.isLoggedIn()\" class=\"info5\" (click)=\"auth.logout()\"></span>\n            <span class=\"info6\" (click)=\"bgMusic()\"></span> \n          \n            <p>\n              <span class=\"line2\"></span>\n            </p>\n            <div class=\"game-text\">\n              <router-outlet></router-outlet>\n            </div>\n          </nav>\n\n        </div>\n      </div>\n    </div>\n  </div>\n\n\n  <div class=\"wheel\">\n    <!--<div class=\"tab-names\">-->\n      <!--<li class=\"info1\"></li>-->\n      <!--<li class=\"info2\"></li>-->\n      <!--<li class=\"info3\"></li>-->\n      <!--<li class=\"info4\"></li>-->\n      <!--<li class=\"info5\"></li>-->\n    <!--</div>-->\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-shadow\"></div>\n    <div class=\"wheel-plug\"></div>\n  </div>\n\n  <div class=\"speakers\">\n    <div class=\"speaker\"></div>\n    <div class=\"speaker\"></div>\n    <div class=\"speaker\"></div>\n    <div class=\"speaker\"></div>\n\n      <div class=\"radios\">\n        <input id=\"link\" type=\"radio\" class=\"music1\" checked (click)=\"noMusic()\"/>\n        <input type=\"radio\"  class=\"music2\" (click)=\"bgMusic()\"/>\n        <input type=\"radio\"  class=\"music3\" (click)=\"bgMusic2()\"/>\n        <input type=\"radio\"  class=\"music4\" (click)=\"bgMusic3()\" />\n        <input type=\"radio\"  class=\"music5\" (click)=\"bgMusic4()\"/>\n        <img src=\"./assets/img/screw.png\" id=\"stl\"><img src=\"./assets/img/screw.png\" id=\"str\"><img src=\"./assets/img/screw.png\" id=\"sbr\"><img src=\"./assets/img/screw.png\" id=\"sbl\">\n      </div>\n      <!-- \"start\": \"ng build && nodemon ./bin/www\", -->\n    <!-- <div class=\"logo\">LOGO</div> -->\n  </div>\n  \n  <div class=\"bottom-button\"></div>\n  <div class=\"top-right\">\n    <div class=\"power\"></div>\n  </div>\n</div>\n<app-navbar></app-navbar>\n<script src=\"/src/app/app.component.js\"></script>\n\n\n"
 
 /***/ }),
 
@@ -193,11 +199,24 @@ var AppComponent = /** @class */ (function () {
     function AppComponent(auth) {
         this.auth = auth;
         this.title = 'dcrypt';
+        this.accessEnabled = true;
         this.bgAudio = new Audio();
         this.bgAudio2 = new Audio();
         this.bgAudio3 = new Audio();
         this.bgAudio4 = new Audio();
     }
+    AppComponent.prototype.ngOnInit = function () {
+        if (this.auth.isLoggedIn())
+            this.accessEnabled = true;
+        else
+            this.accessEnabled = false;
+    };
+    AppComponent.prototype.ngAfterContentChecked = function () {
+        if (this.auth.isLoggedIn())
+            this.accessEnabled = true;
+        else
+            this.accessEnabled = false;
+    };
     AppComponent.prototype.buttonSound = function () {
         var buttonAudio = new Audio;
         buttonAudio.src = "././assets/audio/buttonSound.mp3";
@@ -246,13 +265,11 @@ var AppComponent = /** @class */ (function () {
         this.bgAudio4.pause();
         this.bgAudio.pause();
     };
-    AppComponent.prototype.ngOnInit = function () {
-    };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
-            styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")],
+            styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
         __metadata("design:paramtypes", [_authentication_service__WEBPACK_IMPORTED_MODULE_1__["AuthenticationService"]])
     ], AppComponent);
@@ -777,7 +794,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; }\n.container{margin-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  \n  <div class=\"title text-center\">\n    <h4>Welcome to dCrypt!</h4>\n  </div>\n  <hr>\n\n  <!-- <p>Please <a routerLink=\"/login\">sign in</a> or <a routerLink=\"/register\">register</a>?</p> -->\n\n  <div *ngIf=\"!auth.isLoggedIn()\" class=\"login-buttons text-center\">\n    <br>\n    <br>\n    <br>\n    <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\"  routerLink=\"/login\">Log-In</button>\n    <br>\n    <br>\n    <br>\n    <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\"  routerLink=\"/register\">Register</button>\n  </div> \n</div>\n"
+module.exports = "<div class=\"container\">\n  \n  <div class=\"title text-center\">\n    <h4>Welcome to dCrypt!</h4>\n  </div>\n  <hr>\n\n  <!-- <p>Please <a routerLink=\"/login\">sign in</a> or <a routerLink=\"/register\">register</a>?</p> -->\n\n  <div *ngIf=\"!auth.isLoggedIn()\" class=\"login-buttons text-center\">\n    <br>\n    <br>\n    <br>\n    <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" routerLink=\"/login\">Login</button>\n    <br>\n    <br>\n    <br>\n    <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" routerLink=\"/register\">Register</button>\n  </div> \n</div>\n"
 
 /***/ }),
 
@@ -843,7 +860,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; margin-left: -40px}\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Leaderboard</h1>\n  <br>\n  <!-- ng-repeat loops through data to build list -->\n  <div>\n    <h5>Ranking Special Agent:</h5>\n    <ul>\n      <li>\n        {{gameStats[0].alias}} : {{gameStats[0].gameScore}}\n      </li>\n    </ul>\n  </div>\n  <br>\n  <div>\n    <h5>Top Agent Listing:</h5>\n    <ul>\n      <li *ngFor=\"let stats of gameStats\">\n        {{stats.alias}} : {{stats.gameScore}}\n      </li>\n    </ul>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <h1>Agent Rankings</h1>\n  <br>\n  <!-- ng-repeat loops through data to build list -->\n  <div>\n    <h5>Ranking Special Agent:</h5>\n    <ul>\n      <li>\n        {{gameStats[0].alias}} : {{gameStats[0].gameScore}}\n      </li>\n    </ul>\n  </div>\n  <br>\n  <div>\n    <h5>Top Agent Listing:</h5>\n    <ul>\n      <li *ngFor=\"let stats of gameStats\">\n        {{stats.alias}} : {{stats.gameScore}}\n      </li>\n    </ul>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1060,6 +1077,7 @@ var MessagesComponent = /** @class */ (function () {
         this.rcvdSource.connect(this.usr._id)
             .subscribe(function (res) {
             _this.messages = res;
+            _this.msgRcvd_id = _this.messages.SentMsg_id;
         }, function (err) {
             console.log(err);
         });
@@ -1076,7 +1094,14 @@ var MessagesComponent = /** @class */ (function () {
         });
     };
     MessagesComponent.prototype.msgDelete = function (id) {
-        console.log(id);
+        this.api.deleteSentMsg(id)
+            .subscribe(function (res) {
+            console.log('delete sent messsage');
+        });
+        // this.api.deleteRcvdMsg(id)
+        // .subscribe(res => {
+        //   console.log('delete rcvd messsage')
+        // });
     };
     MessagesComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

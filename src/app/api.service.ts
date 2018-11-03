@@ -67,6 +67,18 @@ export class ApiService {
       catchError(this.handleError));
   }
 
+  deleteSentMsg(id: string): Observable<any> {
+    return this.http.delete('/getmsgsapi/'+id, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  deleteRcvdMsg(id: string): Observable<any> {
+    return this.http.delete('/rcvdmsgsapi/'+id, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
   getRecvdMsg(msg): Observable<any> {
     return this.http.get('/recvdmsgsapi/'+msg, httpOptions).pipe(
       map(this.extractData),
