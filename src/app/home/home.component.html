@@ -7,7 +7,7 @@
 
   <!-- <p>Please <a routerLink="/login">sign in</a> or <a routerLink="/register">register</a>?</p> -->
 
-  <div class="login-buttons text-center">
+  <div *ngIf="!auth.isLoggedIn()" class="login-buttons text-center">
     <br>
     <br>
     <br>
@@ -16,7 +16,5 @@
     <br>
     <br>
     <button class="btn btn-outline-success btn-sm" id="clearButton"  routerLink="/register">Register</button>
-
-  </div>
-  
+  </div> 
 </div>
