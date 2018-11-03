@@ -1,7 +1,7 @@
-li {color: green; font-size: 12px; background-color:black; border-color: silver; margin-top: 20px; }
+li {color: green; font-size: 12px; background-color:black; border-color: silver; margin-top: 20px;}
 h1 {font-size: 30px; text-align: center; margin-left: -41px}
 h2 {font-size: 20px}
-ul{max-width: 300px; max-height:300px; overflow: auto}
+ul{max-width: 300px; max-height:300px; overflow: auto;}
 #solveBtn{margin-left: 100px; margin-top: 0px; border-color: #9daaa3; color: #7ff12a; text-shadow: 2px 2px 2px black, 0 0 1em lightgreen, 0 0 0.2em lightgreen;}
 #deleteBtn{margin-left: 20px; margin-top: 0px; border-color: #9daaa3; color: #7ff12a; text-shadow: 2px 2px 2px black, 0 0 1em lightgreen, 0 0 0.2em lightgreen;}
 .d-flex{margin-left: -40px; max-width: 300px; max-height: 50px;}
@@ -9,4 +9,5 @@ p {font-size: 10px;}
 button {font-size: 14px;}
 .inter{margin-top: 30px; margin-left: -26px}
 .inter1{margin-top: 30px; margin-left: -13px}
+.container{padding-left:11%}
 

@@ -1,85 +1,88 @@
-<h5>Decrypt the Message</h5>
-<ng-container *ngIf="!solved && !failed">
-    <form>
-        <h6>Author: </h6>
-            <p>{{message.ReceivedFrom_Alias}}</p>
-        <h6>Encrypted Message:</h6>
-            <p id="encMessage">{{message.EncryptedMsg}}</p>
-            <div class="row">
-                <div class="col-sm-6">
-                    <h6>Choose Cipher</h6>
-                        <select class="menu" id="cypher">
-                            <option value="null">Select Cypher</option>
-                            <option value="cCrypt">Caesar Cipher</option>
-                            <option value="cCrypt2">Reverse Caesar</option>
-                        </select>
-                </div>
-                <div class="col-sm-6">
-                    <h6>Choose Key</h6>
-                        <select class="menu" id="encryptionKey">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                        </select>
+<h1>Decrypt the Message</h1>
+
+<div class="container">
+    <br>
+    <ng-container *ngIf="!solved && !failed">
+        <form>
+            <h6 class="mb-4">Author: {{message.ReceivedFrom_Alias}}</h6>
+
+            <h6>Encrypted Message:</h6>
+                <p class="mb-4" id="encMessage">{{message.EncryptedMsg}}</p>
+                <div class="row">
+                    <br><br>
+                    <div class="col-sm-6">
+                        <h6>Choose Cipher</h6>
+                            <select class="menu" id="cypher">
+                                <option value="null">Select Cypher</option>
+                                <option value="cCrypt">Caesar Cipher</option>
+                                <option value="cCrypt2">Reverse Caesar</option>
+                            </select>
                     </div>
-                <div class="col-sm-6">
-                    <h6>Attempts: {{message.AttemptsRemaining}}</h6>
+                    <div class="col-sm-6">
+                        <h6>Choose Key</h6>
+                            <select class="menu" id="encryptionKey">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                            </select>
+                        </div>
+                    <div class="mt-4 col-sm-12">
+                        <h6>Remaining Attempts: {{message.AttemptsRemaining}}</h6>
+                    </div>
                 </div>
-            </div>
-             <br/>
-             <ng-container *ngIf="!failed">
-                <button class="btn btn-outline-success btn-sm" id="runCrypt" (click)="doCrypt()">Decrypt</button>
-                <h6>Solution: </h6>
-                <p id="message"></p>
-             </ng-container>
-             <ng-container *ngIf="failed">
-                 <h6>This intel has been deprecated.</h6>
-                 <button class="btn btn-sm" (click)="onBack()">Back to Messages</button>
-             </ng-container>
-               
-            <ng-container *ngIf="incorrect">
-                <h6>(Incorrect Decryption)</h6>
-            </ng-container>
-    </form>
 
-</ng-container >
+                <ng-container *ngIf="!failed">
+                    <button class="mt-3 mb-4 btn btn-outline-success btn-sm" id="runCrypt" (click)="doCrypt()">Decrypt</button>
+                    <h6>Solution: </h6>
+                    <p id="message"></p>
+                </ng-container>
+             
+                <ng-container *ngIf="incorrect">
+                    <h6>(Incorrect Decryption)</h6>
+                </ng-container>
 
-<ng-container *ngIf="solved && !failed">
-    <h4>Congratulations! You solved it!</h4>
-    <button class="btn btn-outline-success btn-sm" (click)="onBack()">
-        Back to Messages
-    </button>
-</ng-container>
-<ng-container *ngIf="!solved && failed">
-    <h4>You have failed!</h4>
-    <button class="btn btn-outline-success btn-sm" (click)="onBack()">
-        Back to Messages
-    </button>
-</ng-container>
+                <ng-container *ngIf="failed">
+                    <h6>This intel has been deprecated.</h6>
+                    <button class="btn btn-sm" (click)="onBack()">Back to Messages</button>
+                </ng-container>
+        </form>
+    </ng-container>
 
 
-
-
+    <ng-container *ngIf="solved && !failed">
+        <h4 class='mb-1'>Congratulations!</h4>
+        <h4>You solved it!</h4>
+        <button class="mt-4 btn btn-outline-success btn-sm" (click)="onBack()">
+            Back to Messages
+        </button>
+    </ng-container>
+    <ng-container *ngIf="!solved && failed">
+        <h4>You have failed!</h4>
+        <button class="mt-4 btn btn-outline-success btn-sm" (click)="onBack()">
+            Back to Messages
+        </button>
+    </ng-container>
+</div>
