@@ -22,16 +22,6 @@
         </select>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Message</h2>
-      <input type="text" class="menu" id="message" [(ngModel)]="newMessage" (keyup)="doCrypt(true)" maxlength="20">
-      <!-- <p id="isEng">Valid English</p>
-      <p id="nonEng">Not Valid English</p> -->
-    </div>
-  </div>
-
   <div class="row">
     <div class="col-md-12">
         <h2>Encryption Key</h2>
@@ -66,6 +56,16 @@
         </select>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Message</h2>
+      <input type="text" class="menu" id="message" [(ngModel)]="newMessage" (keyup)="doCrypt(true)" maxlength="20">
+      <!-- <p id="isEng">Valid English</p>
+      <p id="nonEng">Not Valid English</p> -->
+    </div>
+  </div>
+
+  
  
   <div class="row">
     <div class="col-md-12">
