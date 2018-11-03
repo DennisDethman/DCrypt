@@ -2,25 +2,20 @@
   <div class="row">
      <div class="col-md-12">
 
-
       <h1>dCrypt Profile</h1>
-
 
       <div class="form-horizontal">
         <div class="form-group top">
           <label class="col-sm-3 control-label ">Name</label>
-            <input class="menu">
-          <p class="form-control-static">{{ auth.getUserDetails()?.name }}</p>
+          <input class="menu" value="{{auth.getUserDetails()?.name}}">
         </div>
         <div class="form-group">
           <label class="col-sm-3 control-label">Email</label>
-            <input class="menu">
-          <p class="form-control-static">{{ auth.getUserDetails()?.email }}</p>
+          <input class="menu" value="{{auth.getUserDetails()?.email}}">
         </div>
         <div class="form-group">
           <label class="col-sm-3 control-label">Alias</label>
-            <input class="menu">
-          <p class="form-control-static">{{ auth.getUserDetails()?.alias }}</p>
+          <input class="menu" value="{{auth.getUserDetails()?.alias}}">
         </div>
       </div>
 
