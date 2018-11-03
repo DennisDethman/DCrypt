@@ -3,9 +3,9 @@
   <div class="row">
     <div class="col-md-12">
 
-      <h1 class="form-signin-heading">Sign in</h1>
-      <p class="lead">Not a member? Please<a routerLink="/register" class="menu1"> register </a> instead.</p>
-
+      <h1 class="form-signin-heading">Login</h1>
+      <p class="lead">Not already a Registered Agent?</p>
+      <p class="lead">Please<a routerLink="/register" class="menu1"> register </a> instead.</p>
   
       <form (submit)="login()">
         <div class="form-group">
@@ -16,7 +16,7 @@
           <label for="password">Password</label>
           <input type="password" class="form-control menu" name="password" placeholder="Password" [(ngModel)]="credentials.password" required>
         </div>
-        <button type="submit" class="btn btn-outline-success btn-sm" id="clearButton">Sign in!</button>
+        <button type="submit" class="btn btn-outline-success btn-sm" id="clearButton">Login</button>
       </form>
 
     </div>
