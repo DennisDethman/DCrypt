@@ -15,6 +15,7 @@ export class MessagesComponent implements OnInit {
   messages: any;
   viewRcvd: boolean = true;
   viewSent: boolean = false;
+  msgRcvd_id : string;
   rcvdSource = new MsgRcvdSource(this.api);
   sentSource = new MsgSentSource(this.api);
 
@@ -32,6 +33,7 @@ export class MessagesComponent implements OnInit {
     this.rcvdSource.connect(this.usr._id)
     .subscribe(res => {
       this.messages = res;
+      this.msgRcvd_id = this.messages.SentMsg_id;
     }, err => {
       console.log(err);
     });
@@ -49,7 +51,15 @@ export class MessagesComponent implements OnInit {
   }
 
   msgDelete(id) {
-    console.log(id)
+    this.api.deleteSentMsg(id)
+    .subscribe(res => {
+      console.log('delete sent messsage')
+    });
+
+    // this.api.deleteRcvdMsg(id)
+    // .subscribe(res => {
+    //   console.log('delete rcvd messsage')
+    // });
   }
 }
 

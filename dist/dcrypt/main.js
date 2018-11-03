@@ -94,6 +94,12 @@ var ApiService = /** @class */ (function () {
     ApiService.prototype.getSentMsgs = function (id) {
         return this.http.get('/getmsgsapi/allforid/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
+    ApiService.prototype.deleteSentMsg = function (id) {
+        return this.http.delete('/getmsgsapi/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    };
+    ApiService.prototype.deleteRcvdMsg = function (id) {
+        return this.http.delete('/rcvdmsgsapi/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
+    };
     ApiService.prototype.getRecvdMsg = function (msg) {
         return this.http.get('/recvdmsgsapi/' + msg, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(this.extractData), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
@@ -193,11 +199,24 @@ var AppComponent = /** @class */ (function () {
     function AppComponent(auth) {
         this.auth = auth;
         this.title = 'dcrypt';
+        this.accessEnabled = true;
         this.bgAudio = new Audio();
         this.bgAudio2 = new Audio();
         this.bgAudio3 = new Audio();
         this.bgAudio4 = new Audio();
     }
+    AppComponent.prototype.ngOnInit = function () {
+        if (this.auth.isLoggedIn())
+            this.accessEnabled = true;
+        else
+            this.accessEnabled = false;
+    };
+    AppComponent.prototype.ngAfterContentChecked = function () {
+        if (this.auth.isLoggedIn())
+            this.accessEnabled = true;
+        else
+            this.accessEnabled = false;
+    };
     AppComponent.prototype.buttonSound = function () {
         var buttonAudio = new Audio;
         buttonAudio.src = "././assets/audio/buttonSound.mp3";
@@ -246,13 +265,11 @@ var AppComponent = /** @class */ (function () {
         this.bgAudio4.pause();
         this.bgAudio.pause();
     };
-    AppComponent.prototype.ngOnInit = function () {
-    };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
-            styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")],
+            styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
         __metadata("design:paramtypes", [_authentication_service__WEBPACK_IMPORTED_MODULE_1__["AuthenticationService"]])
     ], AppComponent);
@@ -777,7 +794,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; }\n.container{margin-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  \n  <div class=\"title text-center\">\n    <h4>Welcome to dCrypt!</h4>\n  </div>\n  <hr>\n\n  <!-- <p>Please <a routerLink=\"/login\">sign in</a> or <a routerLink=\"/register\">register</a>?</p> -->\n\n  <div *ngIf=\"!auth.isLoggedIn()\" class=\"login-buttons text-center\">\n    <br>\n    <br>\n    <br>\n    <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\"  routerLink=\"/login\">Log-In</button>\n    <br>\n    <br>\n    <br>\n    <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\"  routerLink=\"/register\">Register</button>\n  </div> \n</div>\n"
+module.exports = "<div class=\"container\">\n  \n  <div class=\"title text-center\">\n    <h4>Welcome to dCrypt!</h4>\n  </div>\n  <hr>\n\n  <!-- <p>Please <a routerLink=\"/login\">sign in</a> or <a routerLink=\"/register\">register</a>?</p> -->\n\n  <div *ngIf=\"!auth.isLoggedIn()\" class=\"login-buttons text-center\">\n    <br>\n    <br>\n    <br>\n    <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" routerLink=\"/login\">Login</button>\n    <br>\n    <br>\n    <br>\n    <button class=\"btn btn-outline-success btn-sm\" id=\"clearButton\" routerLink=\"/register\">Register</button>\n  </div> \n</div>\n"
 
 /***/ }),
 
@@ -1060,6 +1077,7 @@ var MessagesComponent = /** @class */ (function () {
         this.rcvdSource.connect(this.usr._id)
             .subscribe(function (res) {
             _this.messages = res;
+            _this.msgRcvd_id = _this.messages.SentMsg_id;
         }, function (err) {
             console.log(err);
         });
@@ -1076,7 +1094,14 @@ var MessagesComponent = /** @class */ (function () {
         });
     };
     MessagesComponent.prototype.msgDelete = function (id) {
-        console.log(id);
+        this.api.deleteSentMsg(id)
+            .subscribe(function (res) {
+            console.log('delete sent messsage');
+        });
+        // this.api.deleteRcvdMsg(id)
+        // .subscribe(res => {
+        //   console.log('delete rcvd messsage')
+        // });
     };
     MessagesComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
