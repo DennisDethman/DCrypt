@@ -48,8 +48,6 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-
-
 var httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' })
 };
@@ -1344,8 +1342,6 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-
-
 var SolveComponent = /** @class */ (function () {
     function SolveComponent(activeRoute, auth, router, api) {
         this.activeRoute = activeRoute;
@@ -1581,7 +1577,6 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! /Users/david/Documents/BootcampProjects/DCrypt/src/main.ts */"./src/main.ts");
-
 
 /***/ })
 

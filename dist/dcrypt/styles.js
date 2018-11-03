@@ -641,7 +641,6 @@ __webpack_require__(/*! /Users/david/Documents/BootcampProjects/DCrypt/node_modu
 __webpack_require__(/*! /Users/david/Documents/BootcampProjects/DCrypt/src/styles.css */"./src/styles.css");
 module.exports = __webpack_require__(/*! /Users/david/Documents/BootcampProjects/DCrypt/node_modules/bootstrap/dist/css/bootstrap.css */"./node_modules/bootstrap/dist/css/bootstrap.css");
 
-
 /***/ })
 
 },[[2,"runtime"]]]);
