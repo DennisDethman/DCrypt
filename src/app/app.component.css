@@ -76,10 +76,10 @@ nav p{margin:-10px 0 0 0;height:25px;}
 /*RADIO BUTTONS********************************/
 .radios{margin-top: 0px; margin-left: 0px; content: "more"}
 /*#link:before{content: "link";margin-left: -20px;margin-top: -100px;}*/
-.audio{margin-left: -27px; margin-top: 10px; color: darkorange;
+.audio{margin-left: -27px; margin-bottom: -5px; margin-top: 20px; color: darkorange;
     text-shadow: 2px 2px 2px black, 0 0 1em darkorange, 0 0 0.2em darkorange; text-transform:uppercase;}
 
-.music1:before{content:"none"; margin-left: -54px; font-size: 9px; margin-top: -30px; color: darkorange;
+.music1:before{content:"none"; margin-left: -54px; font-size: 9px; margin-top: -50px; color: darkorange;
   text-shadow: 2px 2px 2px black, 0 0 1em darkorange, 0 0 0.2em darkorange; text-transform:uppercase;}
 
 .music2:before{content:"fallout"; margin-left: -54px; font-size: 9px; margin-top: -20px; color: darkorange;
@@ -95,7 +95,7 @@ nav p{margin:-10px 0 0 0;height:25px;}
   text-shadow: 2px 2px 2px black, 0 0 1em darkorange, 0 0 0.2em darkorange; text-transform:uppercase;}
 
 input {
-  -webkit-appearance: none; /* remove default */display: block;margin: 20px;width: 14px;height: 30px;border-radius: 12px;cursor: pointer;vertical-align: middle;
+  -webkit-appearance: none; /* remove default */display: block;margin: 16px;width: 14px;height: 30px;border-radius: 12px;cursor: pointer;vertical-align: middle;
   box-shadow: hsla(0,0%,100%,.15) 0 1px 1px, inset hsla(0,0%,0%,.5) 0 0 0 1px;
   background-color: hsla(0,0%,0%,.2);
   background-image: -webkit-radial-gradient( hsla(200,100%,90%,1) 0%, hsla(200,100%,70%,1) 15%, hsla(200,100%,60%,.3) 28%, hsla(200,100%,30%,0) 70% );
@@ -129,10 +129,10 @@ input:checked ~ input:active {
 /*RADIO BUTTONS********************************/
 
 /*SCREWS***************************************/
-#stl{margin-left: -583px; margin-top: -480px;position: absolute;}
-#str{margin-left: -30px; margin-top: -480px;position: absolute;}
-#sbr{margin-left: -30px; margin-top: 40px;position: absolute;}
-#sbl{margin-left: -570px; margin-top: 40px;position: absolute;}
+#stl{margin-left: -583px; margin-top: -460px;position: absolute;}
+#str{margin-left: -30px; margin-top: -460px;position: absolute;}
+#sbr{margin-left: -30px; margin-top: 70px;position: absolute;}
+#sbl{margin-left: -570px; margin-top: 70px;position: absolute;}
 /*SCREWS***************************************/
 
 /*DESIGN***************************************/
