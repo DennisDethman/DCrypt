@@ -7,8 +7,8 @@
       <p class="lead">Not already a Registered Agent?</p>
       <p class="lead">Please<a routerLink="/register" class="menu1"> register </a> instead.</p>
       <br>
-      
-      <form (submit)="login()">
+
+      <form ngNativeValidate (submit)="login()">
         <div class="form-group">
           <label for="email">Email address</label>
           <input autofocus type="email" class="form-control menu" name="email" placeholder="Enter email" [(ngModel)]="credentials.email" required>
@@ -17,9 +17,9 @@
           <label for="password">Password</label>
           <input type="password" class="form-control menu" name="password" placeholder="Password" [(ngModel)]="credentials.password" required>
         </div>
+        {{loginErrResponse}}
         <button type="submit" class="btn btn-outline-success btn-sm" id="clearButton">Login</button>
       </form>
-
     </div>
   </div>
 </div>

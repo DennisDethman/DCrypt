@@ -15,10 +15,13 @@ export class RegisterComponent {
     alias: ''
   };
 
+  regErrResponse: string;
+
   constructor(private auth: AuthenticationService, private router: Router) {}
 
   register() {
-    this.auth.register(this.credentials).subscribe(() => {
+    this.auth.register(this.credentials).subscribe((res) => {
+      console.log(res)
       this.router.navigateByUrl('/profile');
     }, (err) => {
       console.error(err);

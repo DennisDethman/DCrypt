@@ -929,7 +929,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; margin-bottom: 30px; 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n\n      <h1 class=\"form-signin-heading\">Login</h1>\n      <p class=\"lead\">Not already a Registered Agent?</p>\n      <p class=\"lead\">Please<a routerLink=\"/register\" class=\"menu1\"> register </a> instead.</p>\n  \n      <form (submit)=\"login()\">\n        <div class=\"form-group\">\n          <label for=\"email\">Email address</label>\n          <input autofocus type=\"email\" class=\"form-control menu\" name=\"email\" placeholder=\"Enter email\" [(ngModel)]=\"credentials.email\" required>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"password\">Password</label>\n          <input type=\"password\" class=\"form-control menu\" name=\"password\" placeholder=\"Password\" [(ngModel)]=\"credentials.password\" required>\n        </div>\n        <button type=\"submit\" class=\"btn btn-outline-success btn-sm\" id=\"clearButton\">Login</button>\n      </form>\n\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n\n      <h1 class=\"form-signin-heading\">Login</h1>\n      <p class=\"lead\">Not already a Registered Agent?</p>\n      <p class=\"lead\">Please<a routerLink=\"/register\" class=\"menu1\"> register </a> instead.</p>\n      <br>\n\n      \n      <form ngNativeValidate (submit)=\"login()\">\n        <div class=\"form-group\">\n          <label for=\"email\">Email address</label>\n          <input autofocus type=\"email\" class=\"form-control menu\" name=\"email\" placeholder=\"Enter email\" [(ngModel)]=\"credentials.email\" required>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"password\">Password</label>\n          <input type=\"password\" class=\"form-control menu\" name=\"password\" placeholder=\"Password\" [(ngModel)]=\"credentials.password\" required>\n        </div>\n        {{loginErrResponse}}\n        <button type=\"submit\" class=\"btn btn-outline-success btn-sm\" id=\"clearButton\">Login</button>\n      </form>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -972,6 +972,7 @@ var LoginComponent = /** @class */ (function () {
         this.auth.login(this.credentials).subscribe(function () {
             _this.router.navigateByUrl('/profile');
         }, function (err) {
+            _this.loginErrResponse = err.error.message + "!";
             console.error(err);
         });
     };
@@ -1234,7 +1235,7 @@ module.exports = "h1 {font-size: 30px; text-align: center; margin-bottom: 30px}\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h1>Register</h1>\n      <p class=\"lead\">Already a Registered Agent?</p>\n      <p class=\"lead\">Please <a routerLink=\"/login\" class=\"menu1\"> &nbsp;Login </a> &nbsp;instead.</p>\n      <br>\n      <form (submit)=\"register()\" class=\"row\">\n        <div class=\"form-group col-6\">\n          <label for=\"name\">Name</label>\n          <input autofocus type=\"text\" class=\"form-control menu1\" name=\"name\" placeholder=\"Enter your Name\" [(ngModel)]=\"credentials.name\" required>\n        </div>\n        <div class=\"form-group col-6\">\n          <label for=\"alias\">Alias</label>\n          <input type=\"text\" class=\"form-control menu2\" name=\"alias\" placeholder=\"Enter your Alias\" [(ngModel)]=\"credentials.alias\" required>\n        </div>\n        <div class=\"form-group col-12\">\n          <label for=\"email\">Email address</label>\n          <input type=\"email\" class=\"form-control menu\" name=\"email\" placeholder=\"Enter Email\" [(ngModel)]=\"credentials.email\" required>\n        </div>\n        <div class=\"form-group col-12\">\n          <label for=\"password\">Password</label>\n          <input type=\"password\" class=\"form-control menu\" name=\"password\" placeholder=\"Password\" [(ngModel)]=\"credentials.password\" required>\n        </div>\n        <button type=\"submit\" class=\"btn btn-outline-success btn-sm\" id=\"clearButton\">Register</button>\n      </form>\n    </div>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"container\">\n\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <h1>Register</h1>\n      <p class=\"lead\">Already a Registered Agent?</p>\n      <p class=\"lead\">Please <a routerLink=\"/login\" class=\"menu1\"> &nbsp;Login </a> &nbsp;instead.</p>\n      <br>\n      <form ngNativeValidate (submit)=\"register()\" class=\"row\">\n        <div class=\"form-group col-6\">\n          <label for=\"name\">Name</label>\n          <input autofocus type=\"text\" class=\"form-control menu1\" name=\"name\" placeholder=\"Enter your Name\" [(ngModel)]=\"credentials.name\" required>\n        </div>\n        <div class=\"form-group col-6\">\n          <label for=\"alias\">Alias</label>\n          <input type=\"text\" class=\"form-control menu2\" name=\"alias\" placeholder=\"Enter your Alias\" [(ngModel)]=\"credentials.alias\" required>\n        </div>\n        <div class=\"form-group col-12\">\n          <label for=\"email\">Email address</label>\n          <input type=\"email\" class=\"form-control menu\" name=\"email\" placeholder=\"Enter Email\" [(ngModel)]=\"credentials.email\" required>\n        </div>\n        <div class=\"form-group col-12\">\n          <label for=\"password\">Password</label>\n          <input type=\"password\" class=\"form-control menu\" name=\"password\" placeholder=\"Password\" [(ngModel)]=\"credentials.password\" required>\n        </div>\n        <button type=\"submit\" class=\"btn btn-outline-success btn-sm\" id=\"clearButton\">Register</button>\n      </form>\n    </div>\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -1276,7 +1277,8 @@ var RegisterComponent = /** @class */ (function () {
     }
     RegisterComponent.prototype.register = function () {
         var _this = this;
-        this.auth.register(this.credentials).subscribe(function () {
+        this.auth.register(this.credentials).subscribe(function (res) {
+            console.log(res);
             _this.router.navigateByUrl('/profile');
         }, function (err) {
             console.error(err);
