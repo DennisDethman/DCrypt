@@ -30,6 +30,7 @@
 .music5:before{content:"Track4";} */
 /*Music Buttons*******************************/
 /*LINKS***************************************/
+.info0:before{content:"Home";}
 .info1:before{content:"Agent";}
 .info2:before{content:"Challenge";}
 .info3:before{content:"Messages";}

@@ -7,6 +7,7 @@
           <div class="scan"></div>
 
           <nav>
+            <span class="info0" (click)="buttonSound()" [routerLink]="accessEnabled ? '/home' : '/login'"></span>
             <span class="info1" (click)="buttonSound()" [routerLink]="accessEnabled ? '/profile' : '/login'"></span>
             <span class="info2" (click)="buttonSound()" [routerLink]="accessEnabled ? '/challenge' : '/login'"></span>
             <span class="info3" (click)="buttonSound()" [routerLink]="accessEnabled ? '/messages' : '/login'"></span>
