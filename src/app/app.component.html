@@ -13,7 +13,6 @@
             <span class="info3" (click)="buttonSound()" routerLink="/messages"></span>
             <span class="info4" (click)="buttonSound()" routerLink="/leaderboard"></span>
             <span class="info5" (click)="buttonSound()" routerLink="/login"></span>
-            <span class=" info6" (click)="bgMusic()"></span> 
           
             <p>
               <span class="line2"></span>
@@ -52,11 +51,11 @@
     <div class="speaker"></div>
 
       <div class="radios">
-        <input id="link" type="radio" class="music1" checked (click)="noMusic()"/>
-        <input type="radio"  class="music2" (click)="bgMusic()"/>
-        <input type="radio"  class="music3" (click)="bgMusic2()"/>
-        <input type="radio"  class="music4" (click)="bgMusic3()" />
-        <input type="radio"  class="music5" (click)="bgMusic4()"/>
+        <input id="link" name="name" type="radio" class="music1" checked (click)="noMusic()"/>
+        <input type="radio" name="name" class="music2" (click)="bgMusic()"/>
+        <input type="radio" name="name" class="music3" (click)="bgMusic2()"/>
+        <input type="radio" name="name" class="music4" (click)="bgMusic3()" />
+        <input type="radio" name="name" class="music5" (click)="bgMusic4()"/>
         <img src="./assets/img/screw.png" id="stl"><img src="./assets/img/screw.png" id="str"><img src="./assets/img/screw.png" id="sbr"><img src="./assets/img/screw.png" id="sbl">
       </div>
       <!-- "start": "ng build && nodemon ./bin/www", -->

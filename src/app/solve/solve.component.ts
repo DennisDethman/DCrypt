@@ -82,15 +82,15 @@ export class SolveComponent implements OnInit {
     keyAudio.play();
   }
 
-  doCrypt(isDecrypt) {
+  doCrypt() {
     this.keySound();
     const chooseCypher = (<HTMLInputElement>document.getElementById("cypher")).value;
 
     if (chooseCypher === "cCrypt") {
-      this.cCrypt(isDecrypt);
+      this.cCrypt();
     }
     if (chooseCypher === "cCrypt2") {
-      this.cCrypt2(isDecrypt);
+      this.cCrypt2();
     }
 
     if (this.message.AttemptsRemaining < 1) {
@@ -100,6 +100,7 @@ export class SolveComponent implements OnInit {
       this.incorrect = true; 
       this.greenSound();
     }
+
     if (this.solution === this.message.DecryptedMsg) {
       this.incorrect = false;
       this.message.Solved = true;
@@ -118,6 +119,8 @@ export class SolveComponent implements OnInit {
       this.updateGameScore();
       //this.message.AttemptsRemaining = 1;
       //this.sentMessage.AttemptsRemaining = 1;
+
+      
     }
 
     this.message.AttemptsRemaining--;
@@ -147,20 +150,20 @@ export class SolveComponent implements OnInit {
     );
   }
   
-  cCrypt(isDecrypt) {
+  cCrypt() {
     var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
-    if (!/^-?\d+$/.test(shiftText)) {
-      alert("Shift is not an integer");
-      return;
-    }
+    // if (!/^-?\d+$/.test(shiftText)) {
+    //   alert("Shift is not an integer");
+    //   return;
+    // }
 
     var shift = parseInt(shiftText, 10);
-    if (shift < 0 || shift >= 26) {
-      alert("Shift is out of range");
-      return;
-    }
+    // if (shift < 0 || shift >= 26) {
+    //   alert("Shift is out of range");
+    //   return;
+    // }
 
-    if (isDecrypt)
+    // if (isDecrypt)
       shift = (26 + shift) % 26;
     
     var textElem = (<HTMLElement>document.getElementById("message"));
@@ -170,7 +173,7 @@ export class SolveComponent implements OnInit {
     //console.log("text element: " + textElem.textContent + "--> Encrypted Element: " + encMessage.textContent)
   }
     
-  cCrypt2(isDecrypt) {
+  cCrypt2() {
     var shiftText = (<HTMLInputElement>document.getElementById("encryptionKey")).value;
     if (!/^-?\d+$/.test(shiftText)) {
       alert("Shift is not an integer");
@@ -182,7 +185,7 @@ export class SolveComponent implements OnInit {
       alert("Shift is out of range");
       return;
     }
-    if (isDecrypt)
+    
       shift = (26 - shift) % 26;
 
     var textElem = (<HTMLElement>document.getElementById("message"));
