@@ -1,11 +1,19 @@
 <div class="container">
   <h1>Messages</h1>
-  <button class="btn btn-outline-success btn-sm" (click)="msgsReceived()">
-    Messages Received
-  </button>
-  <button class="btn btn-outline-success btn-sm" (click)="msgsSent()">
-    Messages Sent
-  </button>
+  <div class="row">
+    <div class="col-sm-6">
+      <button class="btn btn-outline-success btn-sm" (click)="msgsReceived()">
+        Intercepted Messages
+      </button>
+    </div>
+    <div class="col-sm-6">
+      <button class="btn btn-outline-success btn-sm" (click)="msgsSent()">
+        Messages Intercepted
+      </button>
+    </div>
+  </div>
+  
+
   <!-- ng-repeat loops through data to build list -->
   <ul *ngIf="viewRcvd">
     <li *ngFor="let message of messages; index as i" class="list-group-item d-flex justify-content-between align-items-center" >
